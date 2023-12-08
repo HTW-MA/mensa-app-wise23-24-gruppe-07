@@ -1,4 +1,5 @@
 .welcome-page {
+    min-height: 100vh;
     text-align: center;
     background-color: #fffdf3;
 }
