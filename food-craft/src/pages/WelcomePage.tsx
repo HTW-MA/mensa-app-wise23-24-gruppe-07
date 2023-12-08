@@ -1,6 +1,6 @@
 import {ReactElement} from "react";
 import "./WelcomePage.css";
-import logo from "./FoodCraft_icon.svg";
+import logo from "../../ressources/FoodCraft_icon.svg";
 import DropdownBox from "../components/DropdownBox";
 
 function WelcomePage(): ReactElement {
