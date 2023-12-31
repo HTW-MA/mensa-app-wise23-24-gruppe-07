@@ -1,0 +1,24 @@
+.google-maps-search-icon {
+    height: 7vmin;
+    padding-top: 9px;
+}
+
+.middle-paragraph {
+    padding-bottom: 3px;
+}
+
+.dropdown-box-div {
+    padding-bottom: 10px;
+}
+
+.continue-button {
+    width: 300px;
+    height: 50px;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: #f77958;
+}

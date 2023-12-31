@@ -1,0 +1,22 @@
+.page {
+    min-height: 100vh;
+    text-align: center;
+    background-color: #fffdf3;
+}
+
+.food-craft-icon {
+    height: 9vmin;
+    padding-top: 50px;
+    margin-bottom: -20px;
+}
+
+.heading {
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: -10px;
+}
+
+.sub-heading {
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
