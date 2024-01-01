@@ -27,8 +27,10 @@ function WelcomePage(): ReactElement {
             <div>
                 <img src={googleMapsSearchIcon} className="google-maps-search-icon" alt="( )"/>
             </div>
-            <p className="middle-paragraph">or</p>
-            <div className="dropdown-box-div">
+            <div>
+                <p className="or-paragraph">or</p>
+            </div>
+            <div className="dropdown-box">
                 <DropdownBox
                     name="cars"
                     options={roles}
@@ -36,8 +38,9 @@ function WelcomePage(): ReactElement {
                     label="University"
                 />
             </div>
-            <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
-
+            <div>
+                <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
+            </div>
         </div>
     );
 }

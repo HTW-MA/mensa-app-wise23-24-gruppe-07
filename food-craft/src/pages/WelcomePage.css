@@ -6,23 +6,13 @@
 .welcome-paragraph p {
     display: inline-block;
     text-align: left;
-    padding-top: 5px;
-    padding-bottom: 25px;
+    margin-top: 40px;
+    margin-bottom: 50px;
     font-family: 'Poppins', sans-serif;
 }
 
-.dropdown-box-div {
-    padding-bottom: 40px;
-}
-
-.continue-button {
-    width: 300px;
-    height: 50px;
-    border-radius: 8px;
-    border-width: 0;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    background-color: #f77958;
+.dropdown-box {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
 }

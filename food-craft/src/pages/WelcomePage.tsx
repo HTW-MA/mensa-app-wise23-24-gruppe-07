@@ -26,13 +26,13 @@ function WelcomePage(): ReactElement {
                 <h2 className="sub-heading">Welcome</h2>
             </header>
             <div className="welcome-paragraph">
-                <p className="welcome-paragraph">
+                <p>
                     <u><b>New here?</b></u><br/>
-                    Give us some information about you so<br/>
-                    that we can tailor the app to you.
+                    Give us some information about you<br/>
+                    so that we can tailor the app to you.
                 </p>
             </div>
-            <div className="dropdown-box-div">
+            <div className="dropdown-box">
                 <DropdownBox
                     name="cars"
                     options={roles}
@@ -40,8 +40,9 @@ function WelcomePage(): ReactElement {
                     label="Role"
                 />
             </div>
-            <button className="continue-button" onClick={navigateToUniversitySelection}>Continue</button>
-
+            <div>
+                <button className="continue-button" onClick={navigateToUniversitySelection}>Continue</button>
+            </div>
         </div>
     );
 }
