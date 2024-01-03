@@ -1,23 +1,33 @@
-import React, {ReactElement} from "react";
+import React, {ReactElement, useState} from "react";
 import "../styles/GeneralStylesheet.css";
 import "../styles/UniversitySelectionPage.css"
-import logo from "../ressources/FoodCraft-Icon-transparent.png";
-import googleMapsSearchIcon from "../ressources/GoogleMaps-search-Icon.png";
+import logo from "../resources/FoodCraft-Icon-transparent.png";
+import googleMapsSearchIcon from "../resources/GoogleMaps-search-Icon.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
 
 export default function WelcomePage(): ReactElement {
-    const roles = [
-        { label: "HTW Berlin", value: 'htw-berlin'}
-    ]
-
     const navigate = useNavigate();
-
     const navigateToCampusSelection = () => {
-        navigate('/campus-selection');
+        console.log(selectedUniversity)
+        navigate('/campus-selection', {state: {university: selectedUniversity}});
     };
     const navigateToHome = () => {
         navigate('/');
+    };
+
+    const universities = [
+        { label: "HTW", value: 'HTW'},
+        { label: "FU", value: 'FU'},
+        { label: "HU", value: 'HU'},
+        { label: "BHT", value: 'BHT'},
+        { label: "HWR", value: 'HWR'}
+    ]
+
+    const [selectedUniversity, setSelectedUniversity] = useState('HTW');
+
+    const handleUniversityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedUniversity(event.target.value);
     };
 
     return (
@@ -36,9 +46,10 @@ export default function WelcomePage(): ReactElement {
             <div className="dropdown-box">
                 <DropdownBox
                     name="cars"
-                    options={roles}
+                    options={universities}
                     defaultValue="student"
                     label="University"
+                    onChange={handleUniversityChange}
                 />
             </div>
             <div className="navigation-buttons">

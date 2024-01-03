@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 import "../styles/GeneralStylesheet.css";
 import "../styles/WelcomePage.css";
-import logo from "../ressources/FoodCraft-Icon-transparent.png";
+import logo from "../resources/FoodCraft-Icon-transparent.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
 

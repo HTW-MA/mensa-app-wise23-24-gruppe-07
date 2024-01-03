@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom
 import WelcomePage from "./pages/WelcomePage";
 import UniversitySelectionPage from "./pages/UniversitySelectionPage";
 import CampusSelectionPage from "./pages/CampusSelectionPage";
+import Homepage from "./pages/Homepage";
 
 export default function App() {
   let pathOfFirstPage = "/";
@@ -13,6 +14,7 @@ export default function App() {
             <Route path="/" element={<WelcomePage />} />
             <Route path="/university-selection" element={<UniversitySelectionPage />} />
             <Route path="/campus-selection" element={<CampusSelectionPage />} />
+            <Route path="/homepage" element={<Homepage />} />
         </Routes>
       </Router>
   );
