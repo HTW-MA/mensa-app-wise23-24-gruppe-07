@@ -1,6 +1,6 @@
 import {ReactElement} from "react";
-import "./GeneralStylesheet.css";
-import "./UniversitySelectionPage.css"
+import "../styles/GeneralStylesheet.css";
+import "../styles/UniversitySelectionPage.css"
 import logo from "../ressources/FoodCraft-Icon-transparent.png";
 import googleMapsSearchIcon from "../ressources/GoogleMaps-search-Icon.png";
 import DropdownBox from "../components/DropdownBox";
