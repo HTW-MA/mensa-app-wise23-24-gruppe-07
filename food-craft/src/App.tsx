@@ -3,7 +3,7 @@ import WelcomePage from "./pages/WelcomePage";
 import UniversitySelectionPage from "./pages/UniversitySelectionPage";
 import CampusSelectionPage from "./pages/CampusSelectionPage";
 
-function App() {
+export default function App() {
   let pathOfFirstPage = "/";
 
   return (
@@ -18,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+

@@ -1,11 +1,11 @@
-import {ReactElement} from "react";
+import React, {ReactElement} from "react";
 import "../styles/GeneralStylesheet.css";
 import "../styles/WelcomePage.css";
 import logo from "../ressources/FoodCraft-Icon-transparent.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
 
-function WelcomePage(): ReactElement {
+export default function WelcomePage(): ReactElement {
     const roles = [
         { label: "Student", value: 'student'},
         { label: "Academic", value: 'academic'},
@@ -40,11 +40,9 @@ function WelcomePage(): ReactElement {
                     label="Role"
                 />
             </div>
-            <div>
-                <button className="continue-button" onClick={navigateToUniversitySelection}>Continue</button>
+            <div className="navigation-buttons">
+                <button className="continue-button" onClick={navigateToUniversitySelection}>Continue &gt;</button>
             </div>
         </div>
     );
 }
-
-export default WelcomePage;

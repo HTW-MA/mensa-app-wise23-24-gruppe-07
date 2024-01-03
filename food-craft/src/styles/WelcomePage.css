@@ -16,3 +16,17 @@
     text-align: left;
     margin-bottom: 20px;
 }
+.continue-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: #f77958;
+}
+.navigation-buttons{
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-import {ReactElement} from "react";
+import React, {ReactElement} from "react";
 import "../styles/GeneralStylesheet.css";
 import "../styles/UniversitySelectionPage.css"
 import logo from "../ressources/FoodCraft-Icon-transparent.png";
@@ -6,7 +6,7 @@ import googleMapsSearchIcon from "../ressources/GoogleMaps-search-Icon.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
 
-function WelcomePage(): ReactElement {
+export default function WelcomePage(): ReactElement {
     const roles = [
         { label: "HTW Berlin", value: 'htw-berlin'}
     ]
@@ -16,13 +16,16 @@ function WelcomePage(): ReactElement {
     const navigateToCampusSelection = () => {
         navigate('/campus-selection');
     };
+    const navigateToHome = () => {
+        navigate('/');
+    };
 
     return (
         <div className="page">
             <header>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
-                <h2 className="sub-heading">Find Canteen</h2>
+                <h2 className="sub-heading">Select University</h2>
             </header>
             <div>
                 <img src={googleMapsSearchIcon} className="google-maps-search-icon" alt="( )"/>
@@ -38,11 +41,10 @@ function WelcomePage(): ReactElement {
                     label="University"
                 />
             </div>
-            <div>
-                <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
+            <div className="navigation-buttons">
+                <button className="back-button" onClick={navigateToHome}>&lt; home</button>
+                <button className="continue-button" onClick={navigateToCampusSelection}>Continue &gt;</button>
             </div>
         </div>
     );
 }
-
-export default WelcomePage;

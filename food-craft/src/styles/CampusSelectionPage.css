@@ -15,12 +15,13 @@
     flex-direction: column;
     row-gap: 10px;
     width: 90%;
-    max-height: 400px;
+    max-height: 300px;
     overflow-y: auto;
-    margin: 50px 0 100px 0;
+    margin: 50px 0 40px 0;
 }
 .navigation-buttons{
     display: flex;
+    width: 80%;
 }
 .back-button{
     width: 50%;
