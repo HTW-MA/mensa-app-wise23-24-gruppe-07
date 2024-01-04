@@ -39,10 +39,10 @@ export default function Homepage(): ReactElement {
 
     function getDate(): string {
         let currentDate = new Date();
-        const twoPM = 18; // 2 PM in 24-hour format
+        const sixPM = 18; // 2 PM in 24-hour format
 
         // Check if current time is past 2 PM
-        if (currentDate.getHours() >= twoPM) {
+        if (currentDate.getHours() >= sixPM) {
             // Increment the date by one day
             currentDate.setDate(currentDate.getDate() + 1);
         }
