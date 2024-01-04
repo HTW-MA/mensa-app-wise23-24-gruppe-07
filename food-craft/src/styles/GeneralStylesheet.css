@@ -51,4 +51,6 @@ body{
     color: black;
     background-color: white;
     margin-right: 20px;
+    border-style: solid;
+    border-color: black;
 }

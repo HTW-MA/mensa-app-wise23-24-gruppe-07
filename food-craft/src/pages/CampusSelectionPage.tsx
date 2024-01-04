@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect} from "react";
+import React, {ReactElement, useEffect, useState} from "react";
 import "../styles/CampusSelectionPage.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import {useNavigate} from "react-router-dom";
@@ -38,7 +38,15 @@ export default function CampusSelectionPage(): ReactElement {
     };
 
     const navigateToHomepage = () => {
-        navigate('/homepage');
+        navigate('/homepage', {state: {canteenId: selectedCanteen, canteenName: selectedCanteenName}});
+    };
+
+    const [selectedCanteen, setSelectedCanteen] = useState('');
+    const [selectedCanteenName, setSelectedCanteenName] = useState('');
+
+    const handleCanteenSelect = (canteen:any) => {
+        setSelectedCanteen(canteen.id);
+        setSelectedCanteenName(canteen.name);
     };
 
     useEffect( () => {
@@ -65,6 +73,7 @@ export default function CampusSelectionPage(): ReactElement {
                     <button
                         key={canteen.id}
                         className="canteen-button"
+                        onClick={() => handleCanteenSelect(canteen)}
                     >
                         <h3>{canteen.name}</h3>
                         <p>{`${canteen.address.street}, ${canteen.address.city}, ${canteen.address.zipcode}, ${canteen.address.district}`}</p>
