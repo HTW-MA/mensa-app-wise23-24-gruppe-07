@@ -1,6 +1,8 @@
 body{
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
+
 .page {
     min-height: 100vh;
     text-align: center;
@@ -8,18 +10,45 @@ body{
 }
 
 .food-craft-icon {
-    height: 9vmin;
+    height: 18vmin;
     padding-top: 50px;
     margin-bottom: -20px;
 }
 
+.google-maps-search-icon {
+    height: 15vmin;
+    margin-top: 26px;
+    margin-bottom: 10px;
+}
+
 .heading {
     font-size: 40px;
-    font-family: 'Poppins', sans-serif;
     margin-bottom: -10px;
 }
 
 .sub-heading {
     font-size: 20px;
-    font-family: 'Poppins', sans-serif;
+}
+
+.continue-button {
+    width: 50%;
+    height: 50px;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #f77958;
+}
+
+.back-button{
+    width: 50%;
+    height: 50px;
+    border-radius: 8px;
+    border-width: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    margin-right: 20px;
 }

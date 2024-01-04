@@ -73,8 +73,8 @@ export default function CampusSelectionPage(): ReactElement {
             </div>
 
             <div className="navigation-buttons">
-                <button className="back-button" onClick={navigateToUniversitySelection}>&lt; select university</button>
-                <button className="continue-button" onClick={navigateToHomepage}>Continue &gt;</button>
+                <button className="back-button" onClick={navigateToUniversitySelection}>select university</button>
+                <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
             </div>
 
         </div>

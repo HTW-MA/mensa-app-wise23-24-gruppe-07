@@ -9,6 +9,7 @@
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 .canteen-list{
     display: flex;
@@ -22,19 +23,4 @@
 .navigation-buttons{
     display: flex;
     width: 80%;
-}
-.back-button{
-    width: 50%;
-    height: 50px;
-    border-radius: 8px;
-    border-width: 2px;
-    font-size: 13px;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    color: black;
-    background-color: white;
-    margin-right: 20px;
-}
-.continue-button{
-    width: 50%;
 }

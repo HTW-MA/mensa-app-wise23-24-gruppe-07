@@ -41,7 +41,7 @@ export default function WelcomePage(): ReactElement {
                 />
             </div>
             <div className="navigation-buttons">
-                <button className="continue-button" onClick={navigateToUniversitySelection}>Continue &gt;</button>
+                <button className="continue-button-welcome-page" onClick={navigateToUniversitySelection}>Continue</button>
             </div>
         </div>
     );
