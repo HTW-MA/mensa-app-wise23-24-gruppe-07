@@ -25,3 +25,7 @@
     display: flex;
     width: 80%;
 }
+.canteen-button-active {
+    color: white;
+    background-color: rgb(120, 174, 86);
+}

@@ -72,7 +72,7 @@ export default function CampusSelectionPage(): ReactElement {
                 {canteens.map((canteen) => (
                     <button
                         key={canteen.id}
-                        className="canteen-button"
+                        className={`canteen-button ${selectedCanteen === canteen.id ? 'canteen-button-active' : ''}`}
                         onClick={() => handleCanteenSelect(canteen)}
                     >
                         <h3>{canteen.name}</h3>
