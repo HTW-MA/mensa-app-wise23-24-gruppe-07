@@ -11,7 +11,7 @@ body{
 
 .food-craft-icon {
     height: 18vmin;
-    padding-top: 50px;
+    padding-top: 60px;
     margin-bottom: -20px;
 }
 
@@ -30,8 +30,13 @@ body{
     font-size: 20px;
 }
 
+footer {
+    width: 80%;
+    padding-bottom: 50px;
+}
+
 .continue-button {
-    width: 50%;
+    width: 100%;
     height: 50px;
     border-radius: 8px;
     border-width: 0;
@@ -41,16 +46,13 @@ body{
     background-color: #f77958;
 }
 
-.back-button{
-    width: 50%;
-    height: 50px;
-    border-radius: 8px;
-    border-width: 2px;
-    font-size: 14px;
+.back-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
     font-weight: bold;
-    color: black;
-    background-color: white;
-    margin-right: 20px;
-    border-style: solid;
-    border-color: black;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 20px;
+    top: 50px;
 }

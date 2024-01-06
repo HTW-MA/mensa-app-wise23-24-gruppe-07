@@ -63,6 +63,7 @@ export default function CampusSelectionPage(): ReactElement {
     return (
         <div className="page">
             <header>
+                <button className="back-button" onClick={navigateToUniversitySelection}>&#60;   Back</button>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Select Canteen</h2>
@@ -80,12 +81,9 @@ export default function CampusSelectionPage(): ReactElement {
                     </button>
                 ))}
             </div>
-
-            <div className="navigation-buttons">
-                <button className="back-button" onClick={navigateToUniversitySelection}>select university</button>
+            <footer>
                 <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
-            </div>
-
+            </footer>
         </div>
     );
 }

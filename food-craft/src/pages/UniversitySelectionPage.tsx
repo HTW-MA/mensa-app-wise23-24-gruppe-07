@@ -33,6 +33,7 @@ export default function WelcomePage(): ReactElement {
     return (
         <div className="page">
             <header>
+                <button className="back-button" onClick={navigateToHome}>&#60;   Back</button>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Select University</h2>
@@ -52,10 +53,9 @@ export default function WelcomePage(): ReactElement {
                     onChange={handleUniversityChange}
                 />
             </div>
-            <div className="navigation-buttons">
-                <button className="back-button" onClick={navigateToHome}>home</button>
+            <footer>
                 <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
-            </div>
+            </footer>
         </div>
     );
 }
