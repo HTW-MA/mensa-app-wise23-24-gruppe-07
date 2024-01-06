@@ -40,9 +40,9 @@ export default function WelcomePage(): ReactElement {
                     label="Role"
                 />
             </div>
-            <footer>
+            <div className="button-container">
                 <button className="continue-button" onClick={navigateToUniversitySelection}>Continue</button>
-            </footer>
+            </div>
         </div>
     );
 }

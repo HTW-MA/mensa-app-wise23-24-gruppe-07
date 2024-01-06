@@ -32,7 +32,8 @@ body{
 
 footer {
     width: 80%;
-    padding-bottom: 50px;
+    padding-bottom: 8vh;
+    margin-top: auto;
 }
 
 .continue-button {
