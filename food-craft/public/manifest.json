@@ -1,6 +1,7 @@
 {
   "name": "MealCraft",
   "short_name": "MealCraft",
+  "description": "MealCraft is a canteen App for University meal plans.",
   "icons": [
     {
       "src": "mealcraft_favicon.ico",
