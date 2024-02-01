@@ -7,14 +7,34 @@
       "sizes": "64x64 32x32 24x24 16x16"
     },
     {
-      "src": "mealcraft192.png",
+      "src": "mealcraft58.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "58x58"
     },
     {
-      "src": "mealcraft512.png",
+      "src": "mealcraft76.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "76x76"
+    },
+    {
+      "src": "mealcraft80.png",
+      "type": "image/png",
+      "sizes": "80x80"
+    },
+    {
+      "src": "mealcraft120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "mealcraft152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "mealcraft167.png",
+      "type": "image/png",
+      "sizes": "167x167"
     }
   ],
   "start_url": "/",
