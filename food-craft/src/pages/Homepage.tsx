@@ -1,6 +1,7 @@
 import React, {ReactElement, useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/Homepage.css";
+import "../styles/MealButtonStyles.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import axios from "axios";
 
