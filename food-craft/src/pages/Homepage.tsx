@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect} from "react";
+import React, {ReactElement, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/Homepage.css";
 import "../styles/MealButtonStyles.css";
@@ -6,15 +6,8 @@ import logo from "../resources/FoodCraft-Icon-transparent.png";
 import axios from "axios";
 
 export default function Homepage(): ReactElement {
-
-    const navigate = useNavigate();
-
     const location = useLocation();
     const { canteenId, canteenName } = location.state || {};
-
-    console.log("Selected CanteenID: " + canteenId)
-    console.log("Selected Canteen Name: " + canteenName)
-
 
     interface Price {
         priceType: string;
@@ -81,10 +74,9 @@ export default function Homepage(): ReactElement {
     }
 
     const date = getDate();
-
     const parts = date.split("-");
-
     const reformattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+    const [total, setTotal] = useState(0.00);
 
     useEffect( () => {
         axios
@@ -137,7 +129,7 @@ export default function Homepage(): ReactElement {
                 </div>
             </div>
             <div className="footer">
-                <p className="gesamtpreis">0,00€</p>
+                <p className="gesamtpreis">{total}€</p>
             </div>
         </div>
     );

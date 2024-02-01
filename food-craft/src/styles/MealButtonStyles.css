@@ -15,8 +15,12 @@
     border-style: solid;
 }
 .mealPrice{
-    margin-left: 10px;
+    margin-left: 18px;
     font-family: 'Poppins', sans-serif;
+}
+.mealButton-active{
+    background-color: rgb(120, 174, 86);
+    color: white;
 }
 /*
 .mealButton{
