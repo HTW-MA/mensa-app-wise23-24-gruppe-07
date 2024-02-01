@@ -22,17 +22,31 @@ export default function Homepage(): ReactElement {
 
     interface Meal {
         id: string;
-        category: string;
         name: string;
+        prices: Price[];
+        category: string;
+        additives: Additive[];
+        badges: Badge[];
         waterBilanz: number;
         co2Bilanz: number;
-        price: Price;
     }
 
     interface Menue {
         date: string;
         canteenId: string;
         meals: Meal[];
+    }
+
+    interface Additive {
+        ID: string;
+        text: string;
+        referenceid: string;
+    }
+
+    interface Badge {
+        ID: string;
+        name: string;
+        description: string;
     }
 
     const [menue, setMenue] = React.useState<Menue[]>([]);
@@ -67,6 +81,10 @@ export default function Homepage(): ReactElement {
 
     const date = getDate();
 
+    const parts = date.split("-");
+
+    const reformattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+
     useEffect( () => {
         axios
             .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteenId + "&startdate=" + date+ "&enddate="+date, {
@@ -85,33 +103,41 @@ export default function Homepage(): ReactElement {
             <header className="header">
                 <div className="header-tags">
                     <p className="speiseplan-tag">Speiseplan</p>
-                    <div className="date-selector">
-                        <button>&lt;</button>
-                        <p className="datum">04.12.2023 - 08.12.2023</p>
-                        <button>&gt;</button>
-                    </div>
                 </div>
                 <img src={logo} className="logo" alt="logo"/>
             </header>
-
-
-            <div className="nameDiv">
-                <p className="canteenName">{canteenName}</p>
-                <p className="date">{date}</p>
-            </div>
             <div className="homebody">
-            <div className="meal-list">
+                <div className="nameDiv">
+                    <p className="canteenName">{canteenName}</p>
+                    <p className="date">{reformattedDate}</p>
+                </div>
+                <div className="meal-list">
                     {menue.map((menueItem) => (
-                        menueItem.meals.map((meal) =>
-                            <button className="mealButton">{meal.name}</button>
-                        )
+                        menueItem.meals
+                            .filter((meal) => meal.category === "Essen")
+                            .map((meal) =>{
+                                const badgeName = meal.badges[1].name;
+                                const iconSrc = badgeName === "Vegan"
+                                    ? `${process.env.PUBLIC_URL}/vegan.png`
+                                    : badgeName === "Vegetarisch"
+                                        ? `${process.env.PUBLIC_URL}/vegetarisch.png`
+                                        : badgeName === "Nachhaltige Fischerei"
+                                    ? `${process.env.PUBLIC_URL}/fish.png`
+                                : "";
+
+                                return (<button className="mealButton" key={meal.id}>
+                                    <img className="veganIcon" src={iconSrc} alt="vegan"/>
+                                    <span className="mealName">{meal.name}</span>
+                                    <span className="mealPrice">{meal.prices[0].price}€</span>
+                                </button>)
+                                }
+                            )
                     ))}
                 </div>
-                <div className="footer">
-                    <p className="gesamtpreis">0,00€</p>
-                </div>
             </div>
-
+            <div className="footer">
+                <p className="gesamtpreis">0,00€</p>
+            </div>
         </div>
     );
 }
