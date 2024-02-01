@@ -81,9 +81,9 @@ export default function CampusSelectionPage(): ReactElement {
                     </button>
                 ))}
             </div>
-            <footer>
-                <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
-            </footer>
+
+            <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
+
         </div>
     );
 }

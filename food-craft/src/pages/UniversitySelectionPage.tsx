@@ -53,9 +53,9 @@ export default function WelcomePage(): ReactElement {
                     onChange={handleUniversityChange}
                 />
             </div>
-            <footer>
-                <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
-            </footer>
+
+            <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
+
         </div>
     );
 }

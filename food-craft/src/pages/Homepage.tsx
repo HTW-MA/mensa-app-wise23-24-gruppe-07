@@ -9,6 +9,8 @@ export default function Homepage(): ReactElement {
     const location = useLocation();
     const { canteenId, canteenName } = location.state || {};
 
+    const navigate = useNavigate();
+
     interface Price {
         priceType: string;
         price: number;
@@ -128,9 +130,21 @@ export default function Homepage(): ReactElement {
                     ))}
                 </div>
             </div>
-            <div className="footer">
+            <div className="total-div">
                 <p className="gesamtpreis">{total}€</p>
             </div>
+            <footer>
+                <div className="footer-div">
+                    <button className="footer-button">
+                        <img className="uniIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
+                        <p>Settings</p>
+                    </button>
+                    <button className="footer-button">
+                        <img className="uniIcon" src={`${process.env.PUBLIC_URL}/bookmark.png`} alt="bookmarkIcon"/>
+                        <p>Saved Meals</p>
+                    </button>
+                </div>
+            </footer>
         </div>
     );
 }
