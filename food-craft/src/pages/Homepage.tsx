@@ -96,9 +96,7 @@ export default function Homepage(): ReactElement {
     return (
         <div className="homepage">
             <header className="header">
-                <div className="header-tags">
-                    <p className="speiseplan-tag">Speiseplan</p>
-                </div>
+                <p className="speiseplan-tag">Speiseplan</p>
                 <img src={logo} className="logo" alt="logo"/>
             </header>
             <div className="homebody">

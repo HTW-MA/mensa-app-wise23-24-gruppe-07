@@ -17,10 +17,11 @@
 .header{
     font-family: 'Poppins', sans-serif;
     background-color: #9FCA85;
-    height: 14vh;
+    height: 16vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
 }
 .header button{
     font-family: 'Poppins', sans-serif;
@@ -35,7 +36,6 @@
 }
 .logo{
     height: 70px;
-    margin-left: 40px;
 }
 .header-tags{
     margin-left: 30px;
