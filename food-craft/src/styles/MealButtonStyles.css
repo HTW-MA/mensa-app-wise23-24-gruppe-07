@@ -5,7 +5,6 @@
     margin-left: 16px;
 }
 .mealButton{
-    -webkit-appearance: none;
     display: flex;
     align-items: center;
     justify-content: center;
