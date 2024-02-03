@@ -14,7 +14,7 @@
     border-radius: 4px;
     border-style: solid;
     color: black;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', Verdana, -apple-system, system-ui;
     border-color: black;
 }
 .mealPrice{
@@ -27,6 +27,7 @@
 }
 button{
     -webkit-appearance: none;
+    -webkit-font: none;
 }
 /*
 .mealButton{
