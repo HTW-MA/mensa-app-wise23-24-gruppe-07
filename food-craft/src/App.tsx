@@ -3,7 +3,6 @@ import WelcomePage from "./pages/WelcomePage";
 import UniversitySelectionPage from "./pages/UniversitySelectionPage";
 import CampusSelectionPage from "./pages/CampusSelectionPage";
 import Homepage from "./pages/Homepage";
-import "/styles/App.css";
 
 export default function App() {
   let pathOfFirstPage = "/";
