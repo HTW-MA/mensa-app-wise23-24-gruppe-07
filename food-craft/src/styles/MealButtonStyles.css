@@ -1,5 +1,5 @@
 .mealName{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', system-ui;
     font-weight: bold;
     font-size: 14px;
     margin-left: 16px;
@@ -19,7 +19,7 @@
 }
 .mealPrice{
     margin-left: 18px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', system-ui;
 }
 .mealButton-active{
     background-color: rgb(120, 174, 86);
