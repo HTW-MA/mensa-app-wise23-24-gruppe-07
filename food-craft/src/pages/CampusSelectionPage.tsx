@@ -76,8 +76,8 @@ export default function CampusSelectionPage(): ReactElement {
                         className={`canteen-button ${selectedCanteen === canteen.id ? 'canteen-button-active' : ''}`}
                         onClick={() => handleCanteenSelect(canteen)}
                     >
-                        <h3>{canteen.name}</h3>
-                        <p>{`${canteen.address.street}, ${canteen.address.city}, ${canteen.address.zipcode}, ${canteen.address.district}`}</p>
+                        <h3 className="canteenName-Button">{canteen.name}</h3>
+                        <p className="canteenStreet">{`${canteen.address.street}, ${canteen.address.city}, ${canteen.address.zipcode}, ${canteen.address.district}`}</p>
                     </button>
                 ))}
             </div>
