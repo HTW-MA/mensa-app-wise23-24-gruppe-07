@@ -110,13 +110,16 @@ export default function Homepage(): ReactElement {
                             .filter((meal) => meal.category === "Essen")
                             .map((meal) =>{
                                 const badgeName = meal.badges[1].name;
+                                console.log(badgeName);
                                 const iconSrc = badgeName === "Vegan"
                                     ? `${process.env.PUBLIC_URL}/vegan.png`
                                     : badgeName === "Vegetarisch"
                                         ? `${process.env.PUBLIC_URL}/vegetarisch.png`
                                         : badgeName === "Nachhaltige Fischerei"
                                     ? `${process.env.PUBLIC_URL}/fish.png`
-                                : "";
+                                : badgeName === "CO2_bewertung_C"
+                                                ? `${process.env.PUBLIC_URL}/fleisch.png`
+                                :"";
 
                                 return (<button className="mealButton" key={meal.id}>
                                     <img className="veganIcon" src={iconSrc} alt="vegan"/>
