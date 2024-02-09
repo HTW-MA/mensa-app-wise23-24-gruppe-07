@@ -62,9 +62,13 @@ export default function Homepage(): ReactElement {
         const month = currentDate.getMonth() + 1; // Add 1 because months are zero-based
         const day = currentDate.getDate();
 
-        // Ensure month and day are two digits
+        console.log("Year: " + year + " Month: " + month + " Day: " + day);
+
+        // Ensure month and day are two digits (von 2024-2-9 zu 2024-02-09)
         const formattedMonth = month.toString().padStart(2, '0');
         const formattedDay = day.toString().padStart(2, '0');
+
+        console.log("Year: " + year + " Month: " + formattedMonth + " Day: " + formattedDay);
 
         return `${year}-${formattedMonth}-${formattedDay}`;
     }
