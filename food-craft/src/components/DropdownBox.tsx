@@ -29,7 +29,7 @@ function DropdownBox(properties: DropdownBoxProperties) {
                 onChange={onChange}
                 defaultValue={defaultValue}>
                 {options.map(option => (
-                    <option value={option.value}>
+                    <option key={option.value} value={option.value}>
                         {option.label}
                     </option>
                 ))}
