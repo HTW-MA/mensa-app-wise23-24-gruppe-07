@@ -65,7 +65,7 @@ export default function Homepage(): ReactElement {
         console.log("Year: " + year + " Month: " + month + " Day: " + day);
 
         // Ensure month and day are two digits (von 2024-2-9 zu 2024-02-09)
-        const formattedMonth = month.toString().padStart(2, '0');
+        const formattedMonth = month.toString().padStart(2, '0'); // padStart fügt 0 vorne an, wenn die Länge des Strings kleiner als 2 ist
         const formattedDay = day.toString().padStart(2, '0');
 
         console.log("Year: " + year + " Month: " + formattedMonth + " Day: " + formattedDay);
