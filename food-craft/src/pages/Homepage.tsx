@@ -48,6 +48,9 @@ export default function Homepage(): ReactElement {
     const [total, setTotal] = useState(0.00);
     const navigate = useNavigate();
     const [menue, setMenue] = React.useState<Menue[]>([]);
+    const currentWeek = getWeekdaysforCurrentWeek();
+    const firstDayOfTheWeek = currentWeek[0];
+    const lastDayOfTheWeek = currentWeek.slice(-1);
 
     function getDate(): string {
         let currentDate = new Date();
@@ -62,16 +65,32 @@ export default function Homepage(): ReactElement {
         const month = currentDate.getMonth() + 1; // Add 1 because months are zero-based
         const day = currentDate.getDate();
 
-        console.log("Year: " + year + " Month: " + month + " Day: " + day);
-
         // Ensure month and day are two digits (von 2024-2-9 zu 2024-02-09)
         const formattedMonth = month.toString().padStart(2, '0'); // padStart fügt 0 vorne an, wenn die Länge des Strings kleiner als 2 ist
         const formattedDay = day.toString().padStart(2, '0');
 
-        console.log("Year: " + year + " Month: " + formattedMonth + " Day: " + formattedDay);
-
         return `${year}-${formattedMonth}-${formattedDay}`;
     }
+
+    function getWeekdaysforCurrentWeek() {
+        const adjustedDate = new Date(getDate());
+        const dayOfWeek = adjustedDate.getDay();
+        const offset = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Assuming getDate never returns a weekend date, but keeping logic for safety.
+        const monday = new Date(adjustedDate.setDate(adjustedDate.getDate() - offset));
+
+        const weekdays = [];
+        for (let i = 0; i < 5; i++) { // Iterate from Monday to Friday
+            const nextDay = new Date(monday);
+            nextDay.setDate(monday.getDate() + i);
+            weekdays.push(nextDay.toISOString().substring(0, 10)); // toISOString returns a string in the format "YYYY-MM-DDTHH:MM:SS.sssZ"
+        }
+
+        return weekdays;
+    }
+
+    console.log(currentWeek);
+    console.log("first day of the week: " + firstDayOfTheWeek);
+    console.log("last day of the week: " + lastDayOfTheWeek);
 
     useEffect( () => {
         axios
