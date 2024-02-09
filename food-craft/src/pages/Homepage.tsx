@@ -136,12 +136,16 @@ export default function Homepage(): ReactElement {
             </div>
             <footer>
                 <div className="footer-div">
+                    <button className="footer-button selected">
+                        <img className="uniIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
+                        <p>Homepage</p>
+                    </button>
                     <button className="footer-button">
                         <img className="uniIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
                         <p>Settings</p>
                     </button>
                     <button className="footer-button">
-                        <img className="uniIcon" src={`${process.env.PUBLIC_URL}/bookmark.png`} alt="bookmarkIcon"/>
+                        <img className="uniIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`} alt="bookmarkIcon"/>
                         <p>Saved Meals</p>
                     </button>
                 </div>
