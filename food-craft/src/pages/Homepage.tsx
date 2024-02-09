@@ -6,11 +6,6 @@ import logo from "../resources/FoodCraft-Icon-transparent.png";
 import axios from "axios";
 
 export default function Homepage(): ReactElement {
-    const location = useLocation();
-    const { canteenId, canteenName } = location.state || {};
-
-    const navigate = useNavigate();
-
     interface Price {
         priceType: string;
         price: number;
@@ -45,23 +40,22 @@ export default function Homepage(): ReactElement {
         description: string;
     }
 
+    const location = useLocation();
+    const { canteenId, canteenName } = location.state || {};
+    const date = getDate();
+    const parts = date.split("-");
+    const reformattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
+    const [total, setTotal] = useState(0.00);
+    const navigate = useNavigate();
     const [menue, setMenue] = React.useState<Menue[]>([]);
 
     function getDate(): string {
         let currentDate = new Date();
-        const sixPM = 18; // 2 PM in 24-hour format
+        // ist es nach 18 Uhr? Wenn Ja, dann Datum um 1 erhöhen
+        if (currentDate.getHours() >= 18) currentDate.setDate(currentDate.getDate() + 1);
 
-        // Check if current time is past 2 PM
-        if (currentDate.getHours() >= sixPM) {
-            // Increment the date by one day
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-
-        // Check if the date falls on a weekend
-        while (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
-            // Increment the date by one day until it's Monday
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
+        // ist es Samstag oder Sonntag? Dann Datum immer um 1 erhöhen bis Montag
+        while (currentDate.getDay() === 0 || currentDate.getDay() === 6) currentDate.setDate(currentDate.getDate() + 1);
 
         // Format the date as YYYY-MM-DD
         const year = currentDate.getFullYear();
@@ -74,11 +68,6 @@ export default function Homepage(): ReactElement {
 
         return `${year}-${formattedMonth}-${formattedDay}`;
     }
-
-    const date = getDate();
-    const parts = date.split("-");
-    const reformattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
-    const [total, setTotal] = useState(0.00);
 
     useEffect( () => {
         axios
