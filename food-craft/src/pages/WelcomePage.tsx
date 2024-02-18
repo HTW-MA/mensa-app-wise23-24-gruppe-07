@@ -14,9 +14,7 @@ export default function WelcomePage(): ReactElement {
 
     const navigate = useNavigate();
 
-    const navigateToUniversitySelection = () => {
-        navigate('/university-selection');
-    };
+    const navigateToUniversitySelection = () => { navigate('/university-selection'); };
 
     return (
         <div className="page">

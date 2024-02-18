@@ -1,64 +1,36 @@
 import React, {ReactElement, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import "../styles/Homepage.css";
+import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import axios from "axios";
+import "../pages/CanteenSelectionPage.tsx"
+import {Canteen, Menu} from "./Interfaces";
 
-export default function Homepage(): ReactElement {
-    interface Price {
-        priceType: string;
-        price: number;
-    }
-
-    interface Meal {
-        id: string;
-        name: string;
-        prices: Price[];
-        category: string;
-        additives: Additive[];
-        badges: Badge[];
-        waterBilanz: number;
-        co2Bilanz: number;
-    }
-
-    interface Menue {
-        date: string;
-        canteenId: string;
-        meals: Meal[];
-    }
-
-    interface Additive {
-        ID: string;
-        text: string;
-        referenceid: string;
-    }
-
-    interface Badge {
-        ID: string;
-        name: string;
-        description: string;
-    }
-
+export default function HomePage(): ReactElement {
     const location = useLocation();
-    const { canteenId, canteenName } = location.state || {};
-    const date = getDate();
-    const parts = date.split("-");
-    const reformattedDate = `${parts[2]}.${parts[1]}.${parts[0]}`;
-    const [total, setTotal] = useState(0.00);
+    const { canteen } = location.state as {canteen: Canteen };
+
     const navigate = useNavigate();
-    const [menue, setMenue] = React.useState<Menue[]>([]);
-    const currentWeek = getWeekdaysforCurrentWeek();
+
+    const [menu, setMenu] = React.useState<Menu[]>([]);
+    const [total, setTotal] = useState(0.00);
+
+    const date = getDate();
+    const currentWeek = getWeekdaysForCurrentWeek();
     const firstDayOfTheWeek = currentWeek[0];
     const lastDayOfTheWeek = currentWeek.slice(-1);
 
     function getDate(): string {
         let currentDate = new Date();
-        // ist es nach 18 Uhr? Wenn Ja, dann Datum um 1 erhöhen
-        if (currentDate.getHours() >= 18) currentDate.setDate(currentDate.getDate() + 1);
+        let hourOfCanteenClosure = 18
 
-        // ist es Samstag oder Sonntag? Dann Datum immer um 1 erhöhen bis Montag
+        if (currentDate.getHours() >= hourOfCanteenClosure) currentDate.setDate(currentDate.getDate() + 1);
+
+        // Skip Saturdays and Sundays
         while (currentDate.getDay() === 0 || currentDate.getDay() === 6) currentDate.setDate(currentDate.getDate() + 1);
+
+        console.log(currentDate.toDateString());
 
         // Format the date as YYYY-MM-DD
         const year = currentDate.getFullYear();
@@ -69,10 +41,17 @@ export default function Homepage(): ReactElement {
         const formattedMonth = month.toString().padStart(2, '0'); // padStart fügt 0 vorne an, wenn die Länge des Strings kleiner als 2 ist
         const formattedDay = day.toString().padStart(2, '0');
 
+        console.log(`${year}-${formattedMonth}-${formattedDay}`);
+
         return `${year}-${formattedMonth}-${formattedDay}`;
     }
 
-    function getWeekdaysforCurrentWeek() {
+    function getReformattedDate(date: string) {
+        const parts = date.split("-");
+        return `${parts[2]}.${parts[1]}.${parts[0]}`;
+    }
+
+    function getWeekdaysForCurrentWeek() {
         const adjustedDate = new Date(getDate());
         const dayOfWeek = adjustedDate.getDay();
         const offset = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Assuming getDate never returns a weekend date, but keeping logic for safety.
@@ -94,13 +73,13 @@ export default function Homepage(): ReactElement {
 
     useEffect( () => {
         axios
-            .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteenId + "&startdate=" + date+ "&enddate="+date, {
+            .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date + "&enddate=" + date, {
                 headers: {
                     "X-API-KEY": process.env.REACT_APP_API_KEY
                 }
             })
             .then(response => {
-                setMenue(response.data);
+                setMenu(response.data);
                 console.log(response.data);
             });
     }, [])
@@ -113,12 +92,12 @@ export default function Homepage(): ReactElement {
             </header>
             <div className="homebody">
                 <div className="nameDiv">
-                    <p className="canteenName">{canteenName}</p>
-                    <p className="date">{reformattedDate}</p>
+                    <p className="canteenName">{canteen.name}</p>
+                    <p className="date">{getReformattedDate(date)}</p>
                 </div>
                 <div className="meal-list">
-                    {menue.map((menueItem) => (
-                        menueItem.meals
+                    {menu.map((menuItem) => (
+                        menuItem.meals
                             .filter((meal) => meal.category === "Essen")
                             .map((meal) =>{
                                 const badgeName = meal.badges[1].name;

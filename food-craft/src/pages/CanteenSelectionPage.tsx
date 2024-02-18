@@ -1,65 +1,39 @@
 import React, {ReactElement, useEffect, useState} from "react";
-import "../styles/CampusSelectionPage.css";
+import "../styles/CanteenSelectionPage.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import {Canteen} from "./Interfaces";
 
-export default function CampusSelectionPage(): ReactElement {
-    interface Address {
-        street: string;
-        city: string;
-        zipcode: string;
-        district: string;
-        geoLocation: {
-            longitude: number;
-            latitude: number;
-        };
-    }
-
-    interface Canteen {
-        name: string;
-        address: Address;
-        id: string;
-    }
+export default function CanteenSelectionPage(): ReactElement {
+    const location = useLocation();
+    const { university } = location.state as { university: string};
 
     const [canteens, setCanteens] = React.useState<Canteen[]>([]);
-    const location = useLocation();
-    const { university } = location.state || {};
-
-    const roles = [
-        { label: "HTW Berlin", value: 'htw-berlin'}
-    ]
 
     const navigate = useNavigate();
-
     const navigateToUniversitySelection = () => {
         navigate('/university-selection');
     };
-
     const navigateToHomepage = () => {
-        navigate('/homepage', {state: {canteenId: selectedCanteen, canteenName: selectedCanteenName}});
+        if (selectedCanteen == null) return;
+        navigate('/homepage', {state: {canteen: selectedCanteen}});
     };
 
-    const [selectedCanteen, setSelectedCanteen] = useState('');
-    const [selectedCanteenName, setSelectedCanteenName] = useState('');
-
-    const handleCanteenSelect = (canteen:any) => {
-        setSelectedCanteen(canteen.id);
-        setSelectedCanteenName(canteen.name);
-    };
+    const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
 
     useEffect( () => {
         axios
-            .get("https://mensa.gregorflachs.de/api/v1/canteen?name=" +university, {
+            .get("https://mensa.gregorflachs.de/api/v1/canteen?name=" + university, {
                 headers: {
-                    "X-API-KEY": "pzVf9YIu2KOTssG0dsLtU9/G6F6CWhocOK+TjmMkB7RVtCpEDVJ46aZzoe544nHRQlcaF8tSSnOTkuIPhIa22TwSdGzST7JCPMUwMsn0B6C3VwG9W98Y6at5EwfePtfflKmIEFgGc1c1lGI2JZzjPy4LsR4GmkdrJaCTrdYcVksJWMinf6fuzdnpx0i+Yx8ah9eZOKw8/DONX2GXLguKSP+N9/MA7CrdChsNIIbGyJqR/hZXMBOCcbU1c0CxPM64Hd7QTImeAxjkFw6UpGE1xvxBvSYOA5e23ep1f+5DNyazNVt+ofztgYQcn/jcLXCUae674NA8m54U2vQBBBxI6w=="
-                }
+                    "X-API-KEY": "pzVf9YIu2KOTssG0dsLtU9/G6F6CWhocOK+TjmMkB7RVtCpEDVJ46aZzoe544nHRQlcaF8tSSnOTkuIPhIa22TwSdGzST7JCPMUwMsn0B6C3VwG9W98Y6at5EwfePtfflKmIEFgGc1c1lGI2JZzjPy4LsR4GmkdrJaCTrdYcVksJWMinf6fuzdnpx0i+Yx8ah9eZOKw8/DONX2GXLguKSP+N9/MA7CrdChsNIIbGyJqR/hZXMBOCcbU1c0CxPM64Hd7QTImeAxjkFw6UpGE1xvxBvSYOA5e23ep1f+5DNyazNVt+ofztgYQcn/jcLXCUae674NA8m54U2vQBBBxI6w=="}
             })
             .then(response => {
                 setCanteens(response.data);
             });
     }, [])
+
     return (
         <div className="page">
             <header>
@@ -73,8 +47,8 @@ export default function CampusSelectionPage(): ReactElement {
                 {canteens.map((canteen) => (
                     <button
                         key={canteen.id}
-                        className={`canteen-button ${selectedCanteen === canteen.id ? 'canteen-button-active' : ''}`}
-                        onClick={() => handleCanteenSelect(canteen)}
+                        className={`canteen-button ${selectedCanteen != null && selectedCanteen.id === canteen.id ? 'canteen-button-active' : ''}`}
+                        onClick={() => setSelectedCanteen(canteen)}
                     >
                         <h3 className="canteenName-Button">{canteen.name}</h3>
                         <p className="canteenStreet">{`${canteen.address.street}, ${canteen.address.city}, ${canteen.address.zipcode}, ${canteen.address.district}`}</p>
