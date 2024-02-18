@@ -16,7 +16,7 @@ export default function HomePage(): ReactElement {
     const [menu, setMenu] = React.useState<Menu[]>([]);
     const [total, setTotal] = useState(0.00);
 
-    const date = getDate();
+    const date = "2024-01-10" // getDate(); --> just for testing
     const week = getWeekdaysForCurrentWeek();
     const firstDayOfTheWeek = week[0];
     const lastDayOfTheWeek = week.slice(-1);
@@ -48,7 +48,7 @@ export default function HomePage(): ReactElement {
     }
 
     function getWeekdaysForCurrentWeek() {
-        const adjustedDate = new Date(getDate());
+        const adjustedDate = new Date(date);
         const dayOfWeek = adjustedDate.getDay();
         const offset = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Assuming getDate never returns a weekend date, but keeping logic for safety.
         const monday = new Date(adjustedDate.setDate(adjustedDate.getDate() - offset));
@@ -63,23 +63,20 @@ export default function HomePage(): ReactElement {
     }
 
     console.log("week: " + week);
+    console.log("date: " + date);
     console.log("first day of the week: " + firstDayOfTheWeek);
     console.log("last day of the week: " + lastDayOfTheWeek);
 
     useEffect( () => {
         axios
-            .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date, {
-                headers: {
-                    "X-API-KEY": process.env.REACT_APP_API_KEY
-                }
-            })
+            .get(
+                "https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date + "&enddate=" + date,
+                {headers: { "X-API-KEY": process.env.REACT_APP_API_KEY }}
+            )
             .then(response => {
                 setMenu(response.data);
-                console.log("response data: " + response.data);
             });
     }, [])
-
-
 
     return (
         <div className="homepage">
