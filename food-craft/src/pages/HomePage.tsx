@@ -17,9 +17,9 @@ export default function HomePage(): ReactElement {
     const [total, setTotal] = useState(0.00);
 
     const date = getDate();
-    const currentWeek = getWeekdaysForCurrentWeek();
-    const firstDayOfTheWeek = currentWeek[0];
-    const lastDayOfTheWeek = currentWeek.slice(-1);
+    const week = getWeekdaysForCurrentWeek();
+    const firstDayOfTheWeek = week[0];
+    const lastDayOfTheWeek = week.slice(-1);
 
     function getDate(): string {
         let currentDate = new Date();
@@ -30,8 +30,6 @@ export default function HomePage(): ReactElement {
         // Skip Saturdays and Sundays
         while (currentDate.getDay() === 0 || currentDate.getDay() === 6) currentDate.setDate(currentDate.getDate() + 1);
 
-        console.log(currentDate.toDateString());
-
         // Format the date as YYYY-MM-DD
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth() + 1; // Add 1 because months are zero-based
@@ -40,8 +38,6 @@ export default function HomePage(): ReactElement {
         // Ensure month and day are two digits (von 2024-2-9 zu 2024-02-09)
         const formattedMonth = month.toString().padStart(2, '0'); // padStart fügt 0 vorne an, wenn die Länge des Strings kleiner als 2 ist
         const formattedDay = day.toString().padStart(2, '0');
-
-        console.log(`${year}-${formattedMonth}-${formattedDay}`);
 
         return `${year}-${formattedMonth}-${formattedDay}`;
     }
@@ -63,13 +59,14 @@ export default function HomePage(): ReactElement {
             nextDay.setDate(monday.getDate() + i);
             weekdays.push(nextDay.toISOString().substring(0, 10)); // toISOString returns a string in the format "YYYY-MM-DDTHH:MM:SS.sssZ"
         }
-
         return weekdays;
     }
 
-    console.log(currentWeek);
+    console.log("week: " + week);
     console.log("first day of the week: " + firstDayOfTheWeek);
     console.log("last day of the week: " + lastDayOfTheWeek);
+
+    console.log(canteen.id)
 
     useEffect( () => {
         axios
