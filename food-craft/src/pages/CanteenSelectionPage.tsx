@@ -11,6 +11,7 @@ export default function CanteenSelectionPage(): ReactElement {
     const { university } = location.state as { university: string};
 
     const [canteens, setCanteens] = React.useState<Canteen[]>([]);
+    const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
 
     const navigate = useNavigate();
     const navigateToUniversitySelection = () => {
@@ -20,10 +21,6 @@ export default function CanteenSelectionPage(): ReactElement {
         if (selectedCanteen == null) return;
         navigate('/homepage', {state: {canteen: selectedCanteen}});
     };
-
-    const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
-
-    console.log("key: " + process.env.REACT_APP_API_KEY);
 
     useEffect( () => {
         axios
@@ -57,9 +54,7 @@ export default function CanteenSelectionPage(): ReactElement {
                     </button>
                 ))}
             </div>
-
             <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
-
         </div>
     );
 }

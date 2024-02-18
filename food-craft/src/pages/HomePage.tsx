@@ -66,20 +66,20 @@ export default function HomePage(): ReactElement {
     console.log("first day of the week: " + firstDayOfTheWeek);
     console.log("last day of the week: " + lastDayOfTheWeek);
 
-    console.log(canteen.id)
-
     useEffect( () => {
         axios
-            .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date + "&enddate=" + date, {
+            .get("https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date, {
                 headers: {
                     "X-API-KEY": process.env.REACT_APP_API_KEY
                 }
             })
             .then(response => {
                 setMenu(response.data);
-                console.log(response.data);
+                console.log("response data: " + response.data);
             });
     }, [])
+
+
 
     return (
         <div className="homepage">
@@ -98,22 +98,22 @@ export default function HomePage(): ReactElement {
                             .filter((meal) => meal.category === "Essen")
                             .map((meal) =>{
                                 const badgeName = meal.badges[1].name;
-                                console.log(badgeName);
+                                console.log("badge-name: " + badgeName);
                                 const iconSrc = badgeName === "Vegan"
                                     ? `${process.env.PUBLIC_URL}/vegan.png`
                                     : badgeName === "Vegetarisch"
                                         ? `${process.env.PUBLIC_URL}/vegetarisch.png`
                                         : badgeName === "Nachhaltige Fischerei"
-                                    ? `${process.env.PUBLIC_URL}/fish.png`
-                                : badgeName === "CO2_bewertung_C"
+                                            ? `${process.env.PUBLIC_URL}/fish.png`
+                                            : badgeName === "CO2_bewertung_C"
                                                 ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                :"";
-
-                                return (<button className="mealButton" key={meal.id}>
-                                    <img className="veganIcon" src={iconSrc} alt="vegan"/>
-                                    <span className="mealName">{meal.name}</span>
-                                    <span className="mealPrice">{meal.prices[0].price}€</span>
-                                </button>)
+                                                :"";
+                                return (
+                                    <button className="mealButton" key={meal.id}>
+                                        <img className="veganIcon" src={iconSrc} alt="vegan"/>
+                                        <span className="mealName">{meal.name}</span>
+                                        <span className="mealPrice">{meal.prices[0].price}€</span>
+                                    </button>)
                                 }
                             )
                     ))}
