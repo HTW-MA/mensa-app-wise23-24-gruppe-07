@@ -13,15 +13,46 @@ export default function HomePage(): ReactElement {
 
     const navigate = useNavigate();
 
+    const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
+    const [week, setWeek] = useState(getWeekdaysFor(new Date(date)));
+    const [firstDayOfTheWeek, setFirstDayOfTheWeek] = useState(week[0]);
+    const [lastDayOfTheWeek, setLastDayOfTheWeek] = useState(week[6]);
+
     const [menu, setMenu] = React.useState<Menu[]>([]);
     const [total, setTotal] = useState(0.00);
 
-    const date = "2024-01-10" // getDate(); --> just for testing
-    const week = getWeekdaysForCurrentWeek();
-    const firstDayOfTheWeek = week[0];
-    const lastDayOfTheWeek = week.slice(-1);
+    const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
 
-    function getDate(): string {
+    useEffect( () => {
+        axios
+            .get(
+                "https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date + "&enddate=" + date,
+                {headers: { "X-API-KEY": process.env.REACT_APP_API_KEY }}
+            )
+            .then(response => {
+                setMenu(response.data);
+            });
+    }, [useEffectHookTrigger])
+
+    const loadPreviousWeek = () => {
+        offsetWeekBy(-1);
+        console.log("offset week");
+    };
+
+    function offsetWeekBy(offset: number) { // offset: -1 = previous week, 1 = next week etc.
+        let offsetDate = new Date(date); // copy to not change provided date
+
+        offsetDate.setDate(offsetDate.getDate() + offset * 7);
+
+        setDate(convertDateToString(offsetDate));
+        setWeek(getWeekdaysFor(offsetDate));
+        setFirstDayOfTheWeek(week[0]);
+        setLastDayOfTheWeek(week[6]);
+
+        setUseEffectHookTrigger(prev => prev + 1);
+    }
+
+    function getCurrentlyValidDate(): Date {
         let currentDate = new Date();
         let hourOfCanteenClosure = 18
 
@@ -30,10 +61,14 @@ export default function HomePage(): ReactElement {
         // Skip Saturdays and Sundays
         while (currentDate.getDay() === 0 || currentDate.getDay() === 6) currentDate.setDate(currentDate.getDate() + 1);
 
+        return currentDate;
+    }
+
+    function convertDateToString(date: Date): string {
         // Format the date as YYYY-MM-DD
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1; // Add 1 because months are zero-based
-        const day = currentDate.getDate();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // Add 1 because months are zero-based
+        const day = date.getDate();
 
         // Ensure month and day are two digits (von 2024-2-9 zu 2024-02-09)
         const formattedMonth = month.toString().padStart(2, '0'); // padStart fügt 0 vorne an, wenn die Länge des Strings kleiner als 2 ist
@@ -47,11 +82,10 @@ export default function HomePage(): ReactElement {
         return `${parts[2]}.${parts[1]}.${parts[0]}`;
     }
 
-    function getWeekdaysForCurrentWeek() {
-        const adjustedDate = new Date(date);
-        const dayOfWeek = adjustedDate.getDay();
+    function getWeekdaysFor(date: Date) {
+        const dayOfWeek = date.getDay();
         const offset = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Assuming getDate never returns a weekend date, but keeping logic for safety.
-        const monday = new Date(adjustedDate.setDate(adjustedDate.getDate() - offset));
+        const monday = new Date(date.setDate(date.getDate() - offset));
 
         const weekdays = [];
         for (let i = 0; i < 5; i++) { // Iterate from Monday to Friday
@@ -61,22 +95,6 @@ export default function HomePage(): ReactElement {
         }
         return weekdays;
     }
-
-    console.log("week: " + week);
-    console.log("date: " + date);
-    console.log("first day of the week: " + firstDayOfTheWeek);
-    console.log("last day of the week: " + lastDayOfTheWeek);
-
-    useEffect( () => {
-        axios
-            .get(
-                "https://mensa.gregorflachs.de/api/v1/menue?canteenId=" + canteen.id + "&startdate=" + date + "&enddate=" + date,
-                {headers: { "X-API-KEY": process.env.REACT_APP_API_KEY }}
-            )
-            .then(response => {
-                setMenu(response.data);
-            });
-    }, [])
 
     return (
         <div className="homepage">
@@ -121,7 +139,7 @@ export default function HomePage(): ReactElement {
             </div>
             <footer>
                 <div className="footer-div">
-                    <button className="footer-button selected">
+                    <button className="footer-button selected" onClick={loadPreviousWeek}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
                         <p>Homepage</p>
                     </button>
