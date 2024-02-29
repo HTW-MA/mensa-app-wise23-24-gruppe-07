@@ -118,7 +118,6 @@ export default function HomePage(): ReactElement {
             <header className="header">
                 <div className="speiseplan-div">
                     <p className="speiseplan-tag">Meal Plan</p>
-                    <img src={logo} className="logo" alt="logo"/>
                 </div>
                 <div className="weekDisplay">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
