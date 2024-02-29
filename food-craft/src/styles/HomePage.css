@@ -17,11 +17,30 @@
 .header{
     font-family: 'Poppins', sans-serif;
     background-color: #9FCA85;
-    height: 6vh;
+    height: 14vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding: 20px 20px 0 20px;
+}
+.speiseplan-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.weekDisplay{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+.weekDisplay p{
+    margin: 0;
+}
+.arrow{
+    height: 16px;
+    margin: 0
+
 }
 .header button{
     font-family: 'Poppins', sans-serif;
@@ -31,11 +50,8 @@
     font-size: 20px;
     padding: 0;
 }
-.date-selector{
-    display: flex;
-}
 .logo{
-    height: 70px;
+    height: 60px;
 }
 .header-tags{
     margin-left: 30px;

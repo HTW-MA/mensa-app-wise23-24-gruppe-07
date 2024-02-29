@@ -3,6 +3,8 @@ import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
+import rightArrow from "../resources/right-arrow.png";
+import leftArrow from "../resources/left-arrow.png";
 import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
@@ -111,16 +113,22 @@ export default function HomePage(): ReactElement {
     return (
         <div className="homepage">
             <header className="header">
-                <p className="speiseplan-tag">Speiseplan</p>
-                <img src={logo} className="logo" alt="logo"/>
+                <div className="speiseplan-div">
+                    <p className="speiseplan-tag">Speiseplan</p>
+                    <img src={logo} className="logo" alt="logo"/>
+                </div>
+                <div className="weekDisplay">
+                    <button onClick={loadPreviousWeek}>
+                        <img className="arrow" src={leftArrow} alt="arrow"/>
+                    </button>
+                    <p className="week-date-left">{getReformattedDate(currentWeek[0])}</p>
+                    <p className="week-date-connector">-</p>
+                    <p className="week-date-right">{getReformattedDate(currentWeek[4])}</p>
+                    <button onClick={loadNextWeek}>
+                        <img className="arrow" src={rightArrow} alt="arrow"/>
+                    </button>
+                </div>
             </header>
-            <div className="header">
-                <button onClick={loadPreviousWeek}>&lt;</button>
-                <p className="week-date-left">{getReformattedDate(currentWeek[0])}</p>
-                <p className="week-date-connector">-</p>
-                <p className="week-date-right">{getReformattedDate(currentWeek[4])}</p>
-                <button onClick={loadNextWeek}>&gt;</button>
-            </div>
             <div className="homebody">
                 <div className="nameDiv">
                     <p className="canteenName">{canteen.name}</p>
