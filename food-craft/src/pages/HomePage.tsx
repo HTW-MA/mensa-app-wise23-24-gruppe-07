@@ -117,19 +117,36 @@ export default function HomePage(): ReactElement {
         <div className="homepage">
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Speiseplan</p>
+                    <p className="speiseplan-tag">Meal Plan</p>
                     <img src={logo} className="logo" alt="logo"/>
                 </div>
                 <div className="weekDisplay">
-                    <button onClick={loadPreviousWeek}>
+                    <button onClick={loadPreviousWeek} className="changeWeekButton">
                         <img className="arrow" src={leftArrow} alt="arrow"/>
                     </button>
                     <p className="week-date-left">{getReformattedDate(currentWeek[0])}</p>
                     <p className="week-date-connector">-</p>
                     <p className="week-date-right">{getReformattedDate(currentWeek[4])}</p>
-                    <button onClick={loadNextWeek}>
+                    <button onClick={loadNextWeek} className="changeWeekButton">
                         <img className="arrow" src={rightArrow} alt="arrow"/>
                     </button>
+                </div>
+                <div className="weekdays-buttons">
+                    {currentWeek.map((day, index) => (
+                        <button
+                            key={index}
+                            className={`weekday-button ${date === day ? 'selected' : ''}`}
+                            onClick={() => {
+                                setDate(day);
+                                console.log("weekday button clicked: " + day);
+                                setUseEffectHookTrigger(prev => prev + 1);
+                            }}
+                        >
+                            {new Date(day).toLocaleDateString('de-DE', {
+                                weekday: 'short'
+                            })}
+                        </button>
+                    ))}
                 </div>
             </header>
             <div className="homebody">

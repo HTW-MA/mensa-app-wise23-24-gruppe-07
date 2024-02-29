@@ -17,9 +17,10 @@
 .header{
     font-family: 'Poppins', sans-serif;
     background-color: #9FCA85;
-    height: 14vh;
+    height: 17vh;
     display: flex;
     flex-direction: column;
+    gap: 4px;
     justify-content: space-between;
     padding: 20px 20px 0 20px;
 }
@@ -32,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px 0;
+    margin: 4px 0 4px 0;
 }
 .weekDisplay p{
     margin: 0;
@@ -40,15 +41,6 @@
 .arrow{
     height: 16px;
     margin: 0
-
-}
-.header button{
-    font-family: 'Poppins', sans-serif;
-    background-color: transparent;
-    color: white;
-    border: none;
-    font-size: 20px;
-    padding: 0;
 }
 .logo{
     height: 60px;
@@ -130,6 +122,27 @@
 }
 .selected{
     background-color: #014227;
+}
+.weekdays-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px 10px 10px;
+}
+.weekday-button {
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 0 10px 0 10px;
+    border-radius: 4px;
+}
+.weekday-button.selected {
+    background-color: #126343;
+}
+.changeWeekButton{
+    background-color: transparent;
+    border: none;
 }
 footer{
     position: fixed;

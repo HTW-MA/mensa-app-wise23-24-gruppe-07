@@ -19,7 +19,7 @@ export default function SettingsPage(): ReactElement {
         <div className="homepage">
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Einstellungen</p>
+                    <p className="speiseplan-tag">Settings</p>
                     <img src={logo} className="logo" alt="logo"/>
                 </div>
             </header>
