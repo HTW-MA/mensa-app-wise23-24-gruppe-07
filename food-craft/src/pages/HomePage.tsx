@@ -123,9 +123,9 @@ export default function HomePage(): ReactElement {
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
                         <img className="arrow" src={leftArrow} alt="arrow"/>
                     </button>
-                    <p className="week-date-left">{getReformattedDate(currentWeek[0])}</p>
-                    <p className="week-date-connector">-</p>
-                    <p className="week-date-right">{getReformattedDate(currentWeek[4])}</p>
+                    <p className="week-date">{getReformattedDate(currentWeek[0])}</p>
+                    <p>-</p>
+                    <p className="week-date">{getReformattedDate(currentWeek[4])}</p>
                     <button onClick={loadNextWeek} className="changeWeekButton">
                         <img className="arrow" src={rightArrow} alt="arrow"/>
                     </button>
