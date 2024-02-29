@@ -16,7 +16,7 @@ export default function HomePage(): ReactElement {
     const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
     const [week, setWeek] = useState(getWeekdaysFor(new Date(date)));
     const [firstDayOfTheWeek, setFirstDayOfTheWeek] = useState(week[0]);
-    const [lastDayOfTheWeek, setLastDayOfTheWeek] = useState(week[6]);
+    const [lastDayOfTheWeek, setLastDayOfTheWeek] = useState(week[4]);
 
     const [menu, setMenu] = React.useState<Menu[]>([]);
     const [total, setTotal] = useState(0.00);
@@ -39,6 +39,11 @@ export default function HomePage(): ReactElement {
         console.log("offset week");
     };
 
+    const loadNextWeek = () => {
+        offsetWeekBy(1);
+        console.log("offset week");
+    };
+
     function offsetWeekBy(offset: number) { // offset: -1 = previous week, 1 = next week etc.
         let offsetDate = new Date(date); // copy to not change provided date
 
@@ -47,7 +52,7 @@ export default function HomePage(): ReactElement {
         setDate(convertDateToString(offsetDate));
         setWeek(getWeekdaysFor(offsetDate));
         setFirstDayOfTheWeek(week[0]);
-        setLastDayOfTheWeek(week[6]);
+        setLastDayOfTheWeek(week[4]);
 
         setUseEffectHookTrigger(prev => prev + 1);
     }
@@ -102,6 +107,13 @@ export default function HomePage(): ReactElement {
                 <p className="speiseplan-tag">Speiseplan</p>
                 <img src={logo} className="logo" alt="logo"/>
             </header>
+            <div className="header">
+                <button onClick={loadPreviousWeek}>&lt;</button>
+                <p className="week-date-left">{getReformattedDate(firstDayOfTheWeek)}</p>
+                <p className="week-date-connector">-</p>
+                <p className="week-date-right">{getReformattedDate(lastDayOfTheWeek)}</p>
+                <button onClick={loadNextWeek}>&gt;</button>
+            </div>
             <div className="homebody">
                 <div className="nameDiv">
                     <p className="canteenName">{canteen.name}</p>
@@ -111,24 +123,24 @@ export default function HomePage(): ReactElement {
                     {menu.map((menuItem) => (
                         menuItem.meals
                             .filter((meal) => meal.category === "Essen")
-                            .map((meal) =>{
-                                const badgeName = meal.badges[1].name;
-                                console.log("badge-name: " + badgeName);
-                                const iconSrc = badgeName === "Vegan"
-                                    ? `${process.env.PUBLIC_URL}/vegan.png`
-                                    : badgeName === "Vegetarisch"
-                                        ? `${process.env.PUBLIC_URL}/vegetarisch.png`
-                                        : badgeName === "Nachhaltige Fischerei"
-                                            ? `${process.env.PUBLIC_URL}/fish.png`
-                                            : badgeName === "CO2_bewertung_C"
-                                                ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                :"";
-                                return (
-                                    <button className="mealButton" key={meal.id}>
-                                        <img className="veganIcon" src={iconSrc} alt="vegan"/>
-                                        <span className="mealName">{meal.name}</span>
-                                        <span className="mealPrice">{meal.prices[0].price}€</span>
-                                    </button>)
+                            .map((meal) => {
+                                    const badgeName = meal.badges[1].name;
+                                    console.log("badge-name: " + badgeName);
+                                    const iconSrc = badgeName === "Vegan"
+                                        ? `${process.env.PUBLIC_URL}/vegan.png`
+                                        : badgeName === "Vegetarisch"
+                                            ? `${process.env.PUBLIC_URL}/vegetarisch.png`
+                                            : badgeName === "Nachhaltige Fischerei"
+                                                ? `${process.env.PUBLIC_URL}/fish.png`
+                                                : badgeName === "CO2_bewertung_C"
+                                                    ? `${process.env.PUBLIC_URL}/fleisch.png`
+                                                    : "";
+                                    return (
+                                        <button className="mealButton" key={meal.id}>
+                                            <img className="veganIcon" src={iconSrc} alt="vegan"/>
+                                            <span className="mealName">{meal.name}</span>
+                                            <span className="mealPrice">{meal.prices[0].price}€</span>
+                                        </button>)
                                 }
                             )
                     ))}
@@ -139,7 +151,7 @@ export default function HomePage(): ReactElement {
             </div>
             <footer>
                 <div className="footer-div">
-                    <button className="footer-button selected" onClick={loadPreviousWeek}>
+                    <button className="footer-button selected">
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
                         <p>Homepage</p>
                     </button>
@@ -148,7 +160,8 @@ export default function HomePage(): ReactElement {
                         <p>Settings</p>
                     </button>
                     <button className="footer-button">
-                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`} alt="bookmarkIcon"/>
+                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
+                             alt="bookmarkIcon"/>
                         <p>Saved Meals</p>
                     </button>
                 </div>
