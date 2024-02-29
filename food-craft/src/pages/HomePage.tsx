@@ -154,30 +154,38 @@ export default function HomePage(): ReactElement {
                     <p className="date">{getReformattedDate(date)}</p>
                 </div>
                 <div className="meal-list">
-                    {menu.map((menuItem) => (
-                        menuItem.meals
-                            .filter((meal) => meal.category === "Essen")
-                            .map((meal) => {
-                                    const badgeName = meal.badges[1].name;
-                                    console.log("badge-name: " + badgeName);
-                                    const iconSrc = badgeName === "Vegan"
-                                        ? `${process.env.PUBLIC_URL}/vegan.png`
-                                        : badgeName === "Vegetarisch"
-                                            ? `${process.env.PUBLIC_URL}/vegetarisch.png`
-                                            : badgeName === "Nachhaltige Fischerei"
-                                                ? `${process.env.PUBLIC_URL}/fish.png`
-                                                : badgeName === "CO2_bewertung_C"
-                                                    ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                    : "";
-                                    return (
-                                        <button className="mealButton" key={meal.id}>
-                                            <img className="veganIcon" src={iconSrc} alt="vegan"/>
-                                            <span className="mealName">{meal.name}</span>
-                                            <span className="mealPrice">{meal.prices[0].price}€</span>
-                                        </button>)
-                                }
-                            )
-                    ))}
+                    {menu.length > 0 ? (
+                        menu.map((menuItem) => (
+                            menuItem.meals
+                                .filter((meal) => meal.category === "Essen")
+                                .map((meal) => {
+                                        const badgeName = meal.badges[1].name;
+                                        const iconSrc = badgeName === "Vegan"
+                                            ? `${process.env.PUBLIC_URL}/vegan.png`
+                                            : badgeName === "Vegetarisch"
+                                                ? `${process.env.PUBLIC_URL}/vegetarisch.png`
+                                                : badgeName === "Nachhaltige Fischerei"
+                                                    ? `${process.env.PUBLIC_URL}/fish.png`
+                                                    : badgeName === "CO2_bewertung_C"
+                                                        ? `${process.env.PUBLIC_URL}/fleisch.png`
+                                                        : badgeName === "H2O_bewertung_B"
+                                                            ? `${process.env.PUBLIC_URL}/fleisch.png`
+                                                            : "";
+                                        return (
+                                            <button className="mealButton" key={meal.id}>
+                                                <img className="veganIcon" src={iconSrc} alt={badgeName}/>
+                                                <span className="mealName">{meal.name}</span>
+                                                <span className="mealPrice">{meal.prices[0].price}€</span>
+                                            </button>)
+                                    }
+                                )
+                        ))
+                    ) : (
+                        <div className="no-menu-div">
+                            <img src={`${process.env.PUBLIC_URL}/no-menu.png`} alt="noMenuIcon" className="no-menu-icon"/>
+                            <p className="no-menu-message">No menu for this day</p>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="total-div">
