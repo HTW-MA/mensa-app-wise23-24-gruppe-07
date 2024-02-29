@@ -20,6 +20,7 @@ export default function HomePage(): ReactElement {
 
     const [menu, setMenu] = React.useState<Menu[]>([]);
     const [total, setTotal] = useState(0.00);
+    let currentWeek:string[] = getWeekdaysFor(new Date(date));
 
     const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
 
@@ -35,26 +36,32 @@ export default function HomePage(): ReactElement {
     }, [useEffectHookTrigger])
 
     const loadPreviousWeek = () => {
-        offsetWeekBy(-1);
-        console.log("offset week");
+        currentWeek = offsetWeekBy(-1);
+        console.log("current Week: with offset " +  "-1:" + currentWeek);
     };
 
     const loadNextWeek = () => {
-        offsetWeekBy(1);
-        console.log("offset week");
+        currentWeek = offsetWeekBy(1);
+        console.log("current Week: " +  "+1:" + currentWeek);
     };
 
-    function offsetWeekBy(offset: number) { // offset: -1 = previous week, 1 = next week etc.
+    function offsetWeekBy(offset: number): string[] { // offset: -1 = previous week, 1 = next week etc.
         let offsetDate = new Date(date); // copy to not change provided date
 
         offsetDate.setDate(offsetDate.getDate() + offset * 7);
+        console.log("offsetDate: " + convertDateToString(offsetDate));
 
         setDate(convertDateToString(offsetDate));
+        console.log("date: " + date);
         setWeek(getWeekdaysFor(offsetDate));
         setFirstDayOfTheWeek(week[0]);
         setLastDayOfTheWeek(week[4]);
 
         setUseEffectHookTrigger(prev => prev + 1);
+
+        console.log("offset: " + offset);
+        console.log("new week with offset " + offset + ": " + week);
+        return getWeekdaysFor(offsetDate);
     }
 
     function getCurrentlyValidDate(): Date {
@@ -109,9 +116,9 @@ export default function HomePage(): ReactElement {
             </header>
             <div className="header">
                 <button onClick={loadPreviousWeek}>&lt;</button>
-                <p className="week-date-left">{getReformattedDate(firstDayOfTheWeek)}</p>
+                <p className="week-date-left">{getReformattedDate(currentWeek[0])}</p>
                 <p className="week-date-connector">-</p>
-                <p className="week-date-right">{getReformattedDate(lastDayOfTheWeek)}</p>
+                <p className="week-date-right">{getReformattedDate(currentWeek[4])}</p>
                 <button onClick={loadNextWeek}>&gt;</button>
             </div>
             <div className="homebody">
