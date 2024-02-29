@@ -3,6 +3,7 @@ import WelcomePage from "./pages/WelcomePage";
 import UniversitySelectionPage from "./pages/UniversitySelectionPage";
 import CanteenSelectionPage from "./pages/CanteenSelectionPage";
 import HomePage from "./pages/HomePage";
+import SettingsPage from "./pages/SettingsPage";
 
 export default function App() {
   let pathOfFirstPage = "/";
@@ -15,6 +16,7 @@ export default function App() {
             <Route path="/university-selection" element={<UniversitySelectionPage />} />
             <Route path="/campus-selection" element={<CanteenSelectionPage />} />
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </Router>
   );

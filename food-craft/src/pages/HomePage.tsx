@@ -14,6 +14,9 @@ export default function HomePage(): ReactElement {
     const { canteen } = location.state as {canteen: Canteen };
 
     const navigate = useNavigate();
+    const navigateToSettingsPage = () => {
+        navigate('/settings', {state: {canteen: canteen}});
+    };
 
     const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
     const [week, setWeek] = useState(getWeekdaysFor(new Date(date)));
@@ -170,7 +173,7 @@ export default function HomePage(): ReactElement {
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
                         <p>Homepage</p>
                     </button>
-                    <button className="footer-button">
+                    <button className="footer-button" onClick={navigateToSettingsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
                         <p>Settings</p>
                     </button>
