@@ -2,7 +2,6 @@ import React, {ReactElement, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
-import logo from "../resources/FoodCraft-Icon-transparent.png";
 import rightArrow from "../resources/right-arrow.png";
 import leftArrow from "../resources/left-arrow.png";
 import axios from "axios";
@@ -37,35 +36,30 @@ export default function HomePage(): ReactElement {
             )
             .then(response => {
                 setMenu(response.data);
+                console.log(response.data);
             });
-    }, [useEffectHookTrigger])
+    }, [useEffectHookTrigger, date, canteen.id]);
 
     const loadPreviousWeek = () => {
-        currentWeek = offsetWeekBy(-1);
-        console.log("current Week: with offset " +  "-1:" + currentWeek);
-    };
+        currentWeek = offsetWeekBy(-1)
+        console.log("current Week: with offset " +  "-1:" + currentWeek)
+    }
 
     const loadNextWeek = () => {
-        currentWeek = offsetWeekBy(1);
-        console.log("current Week: " +  "+1:" + currentWeek);
-    };
+        currentWeek = offsetWeekBy(1)
+        console.log("current Week: " +  "+1:" + currentWeek)
+    }
 
     function offsetWeekBy(offset: number): string[] { // offset: -1 = previous week, 1 = next week etc.
         let offsetDate = new Date(date); // copy to not change provided date
 
         offsetDate.setDate(offsetDate.getDate() + offset * 7);
-        console.log("offsetDate: " + convertDateToString(offsetDate));
-
         setDate(convertDateToString(offsetDate));
-        console.log("date: " + date);
         setWeek(getWeekdaysFor(offsetDate));
         setFirstDayOfTheWeek(week[0]);
         setLastDayOfTheWeek(week[4]);
 
         setUseEffectHookTrigger(prev => prev + 1);
-
-        console.log("offset: " + offset);
-        console.log("new week with offset " + offset + ": " + week);
         return getWeekdaysFor(offsetDate);
     }
 
