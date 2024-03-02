@@ -1,4 +1,4 @@
-![plot](food-craft/public/mealcraft167.png)
+![plot](mealcraft/public/mealcraft167.png)
 # MealCraft
 
 A canteen App developed by:
