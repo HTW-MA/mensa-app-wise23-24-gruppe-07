@@ -107,6 +107,16 @@ export default function HomePage(): ReactElement {
         return weekdays;
     }
 
+    interface BadgeIconMapping {
+        [key: string]: string;
+    }
+
+    const badgeIconMapping: BadgeIconMapping = {
+        Vegan: 'vegan.png',
+        Vegetarisch: 'vegetarisch.png',
+        'Nachhaltige Fischerei': 'fish.png',
+    };
+
     return (
         <div className="homepage">
             <header className="header">
@@ -153,21 +163,11 @@ export default function HomePage(): ReactElement {
                             menuItem.meals
                                 .filter((meal) => meal.category === "Essen")
                                 .map((meal) => {
-                                        const badgeName = meal.badges[1].name;
-                                        const iconSrc = badgeName === "Vegan"
-                                            ? `${process.env.PUBLIC_URL}/vegan.png`
-                                            : badgeName === "Vegetarisch"
-                                                ? `${process.env.PUBLIC_URL}/vegetarisch.png`
-                                                : badgeName === "Nachhaltige Fischerei"
-                                                    ? `${process.env.PUBLIC_URL}/fish.png`
-                                                    : badgeName === "CO2_bewertung_C"
-                                                        ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                        : badgeName === "H2O_bewertung_B"
-                                                            ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                            : badgeName === "H2O_bewertung_A"
-                                                                ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                                : "";
-                                        return (
+                                    const badgeName = meal.badges[1].name;
+                                    const iconFileName = badgeIconMapping[badgeName];
+                                    const iconSrc = iconFileName ? `${process.env.PUBLIC_URL}/${iconFileName}` : `${process.env.PUBLIC_URL}/fleisch.png`;
+
+                                    return (
                                             <button className="mealButton" key={meal.id}>
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                                                 <span className="mealName">{meal.name}</span>
