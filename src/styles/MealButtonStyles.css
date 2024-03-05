@@ -1,3 +1,5 @@
+@import url('Colors.css');
+
 .mealName{
     font-family: 'Poppins', system-ui;
     font-weight: bold;
@@ -15,7 +17,7 @@
     border-style: solid;
     color: black;
     font-family: 'Poppins', system-ui;
-    border-color: black;
+    border-color: var(--green-medium);
 }
 .mealPrice{
     margin-left: 18px;
