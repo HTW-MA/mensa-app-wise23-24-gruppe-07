@@ -164,7 +164,9 @@ export default function HomePage(): ReactElement {
                                                         ? `${process.env.PUBLIC_URL}/fleisch.png`
                                                         : badgeName === "H2O_bewertung_B"
                                                             ? `${process.env.PUBLIC_URL}/fleisch.png`
-                                                            : "";
+                                                            : badgeName === "H2O_bewertung_A"
+                                                                ? `${process.env.PUBLIC_URL}/fleisch.png`
+                                                                : "";
                                         return (
                                             <button className="mealButton" key={meal.id}>
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
