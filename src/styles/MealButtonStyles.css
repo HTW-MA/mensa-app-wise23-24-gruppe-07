@@ -22,7 +22,7 @@
     font-family: 'Poppins', system-ui;
 }
 .mealButton-active{
-    background-color: rgb(120, 174, 86);
+    background-color: var(--green-light);
     color: white;
 }
 button{

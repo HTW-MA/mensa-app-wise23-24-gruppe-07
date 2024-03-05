@@ -1,6 +1,8 @@
+@import url('Colors.css');
+
 .homepage{
     min-height: 100vh;
-    background-color: #fffdf3;
+    background-color: var(--rose-one);
 }
 .speiseplan-tag{
     margin: 0;
@@ -16,7 +18,7 @@
 }
 .header{
     font-family: 'Poppins', sans-serif;
-    background-color: #9FCA85;
+    background-color: var(--green-light);
     height: 14vh;
     display: flex;
     flex-direction: column;
@@ -62,7 +64,7 @@
 }
 .total-div{
     width: 100%;
-    background-color: #9fca85;
+    background-color: var(--green-light);
     position: fixed;
     bottom: 12vh;
 }
@@ -114,7 +116,7 @@
     margin: 0;
 }
 .selected{
-    background-color: #014227;
+    background-color: var(--green-dark);
 }
 .weekdays-buttons{
     display: flex;
@@ -131,13 +133,10 @@
     border-radius: 4px;
 }
 .weekday-button.current-day {
-    background-color: #439172;
+    background-color: var(--green-medium);
 }
 .weekday-button.selected {
-    background-color: #126343;
-}
-.weekday-button.selected {
-    background-color: #126343;
+    background-color: var(--green-dark);
 }
 .changeWeekButton{
     background-color: transparent;
@@ -163,7 +162,7 @@ footer{
     bottom: 0;
     width: 100%;
     height: 12vh;
-    background-color: #126343;
+    background-color: var(--green-dark);
     display: flex;
     justify-content: center;
     z-index: 1;

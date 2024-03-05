@@ -1,3 +1,5 @@
+@import url('Colors.css');
+
 body{
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -6,7 +8,7 @@ body{
 .page {
     min-height: 100vh;
     text-align: center;
-    background-color: #fffdf3;
+    background-color: var(--rose-one);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -45,7 +47,7 @@ footer {
     font-size: 18px;
     font-weight: bold;
     color: white;
-    background-color: #f77958;
+    background-color: var(--rose-five);
 }
 
 .back-button {
