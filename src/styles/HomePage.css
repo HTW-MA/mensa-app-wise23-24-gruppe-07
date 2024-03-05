@@ -6,7 +6,7 @@
     margin: 0;
     color: white;
     font-size: 40px;
-    font-weight: 500;
+    font-weight: 200;
 }
 .datum{
     color: white;
@@ -129,6 +129,12 @@
     font-size: 20px;
     padding: 0 10px 0 10px;
     border-radius: 4px;
+}
+.weekday-button.current-day {
+    background-color: #439172;
+}
+.weekday-button.selected {
+    background-color: #126343;
 }
 .weekday-button.selected {
     background-color: #126343;

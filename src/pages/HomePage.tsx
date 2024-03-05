@@ -9,6 +9,8 @@ import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
 
 export default function HomePage(): ReactElement {
+    const [weekOffset, setWeekOffset] = useState<number>(0);
+
     const location = useLocation();
     const { canteen } = location.state as {canteen: Canteen };
 
@@ -38,13 +40,13 @@ export default function HomePage(): ReactElement {
     }, [useEffectHookTrigger, date, canteen.id]);
 
     const loadPreviousWeek = () => {
+        if (weekOffset == 0) return
         currentWeek = offsetWeekBy(-1)
-        console.log("current Week: with offset -1:" + currentWeek)
     }
 
     const loadNextWeek = () => {
+        if (weekOffset == 1) return
         currentWeek = offsetWeekBy(1)
-        console.log("current Week: +1:" + currentWeek)
     }
 
     function offsetWeekBy(offset: number): string[] { // offset: -1 = previous week, 1 = next week etc.
@@ -54,6 +56,7 @@ export default function HomePage(): ReactElement {
         setDate(convertDateToString(offsetDate));
 
         setUseEffectHookTrigger(prev => prev + 1);
+        setWeekOffset(weekOffset + offset)
         return getWeekdaysFor(offsetDate);
     }
 
@@ -117,22 +120,14 @@ export default function HomePage(): ReactElement {
                 <div className="speiseplan-div">
                     <p className="speiseplan-tag">Meal Plan</p>
                 </div>
-                <div className="weekDisplay">
+                <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
                         <img className="arrow" src={leftArrow} alt="arrow"/>
                     </button>
-                    <p className="week-date">{getReformattedDate(currentWeek[0])}</p>
-                    <p>-</p>
-                    <p className="week-date">{getReformattedDate(currentWeek[4])}</p>
-                    <button onClick={loadNextWeek} className="changeWeekButton">
-                        <img className="arrow" src={rightArrow} alt="arrow"/>
-                    </button>
-                </div>
-                <div className="weekdays-buttons">
                     {currentWeek.map((day, index) => (
                         <button
                             key={index}
-                            className={`weekday-button ${date === day ? 'selected' : ''}`}
+                            className={`weekday-button ${date === day ? 'selected' : (day == convertDateToString(new Date()) ? 'current-day' : '')}`}
                             onClick={() => {
                                 setDate(day);
                                 console.log("weekday button clicked: " + day);
@@ -144,6 +139,9 @@ export default function HomePage(): ReactElement {
                             })}
                         </button>
                     ))}
+                    <button onClick={loadNextWeek} className="changeWeekButton">
+                        <img className="arrow" src={rightArrow} alt="arrow"/>
+                    </button>
                 </div>
             </header>
             <div className="homebody">
