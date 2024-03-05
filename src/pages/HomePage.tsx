@@ -4,6 +4,8 @@ import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import rightArrow from "../resources/right-arrow.png";
 import leftArrow from "../resources/left-arrow.png";
+import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
+import deactivatedRightArrow from "../resources/right-arrow-deactivated.png";
 import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
@@ -122,7 +124,7 @@ export default function HomePage(): ReactElement {
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
-                        <img className="arrow" src={leftArrow} alt="arrow"/>
+                        <img className="arrow" src={weekOffset === 0 ? deactivatedLeftArrow : leftArrow} alt="arrow"/>
                     </button>
                     {currentWeek.map((day, index) => (
                         <button
@@ -140,7 +142,7 @@ export default function HomePage(): ReactElement {
                         </button>
                     ))}
                     <button onClick={loadNextWeek} className="changeWeekButton">
-                        <img className="arrow" src={rightArrow} alt="arrow"/>
+                        <img className="arrow" src={weekOffset === 1 ? deactivatedRightArrow : rightArrow}  alt="arrow"/>
                     </button>
                 </div>
             </header>
