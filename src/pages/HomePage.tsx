@@ -178,9 +178,6 @@ export default function HomePage(): ReactElement {
                     )}
                 </div>
             </div>
-            <div className="total-div">
-                <p className="gesamtpreis">{total}€</p>
-            </div>
             <footer>
                 <div className="footer-div">
                     <button className="footer-button selected">
