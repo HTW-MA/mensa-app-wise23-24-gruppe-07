@@ -18,6 +18,7 @@ export default function WelcomePage(): ReactElement {
 
     return (
         <div className="page">
+            <div className="welcome-page-top-margin"></div>
             <header>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>

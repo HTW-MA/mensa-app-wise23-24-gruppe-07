@@ -34,12 +34,13 @@ export default function WelcomePage(): ReactElement {
         <div className="page">
             <header>
                 <button className="back-button" onClick={navigateToHome}>&#60;   Back</button>
+                <div className="university-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Select University</h2>
             </header>
             <div>
-                <img src={googleMapsSearchIcon} className="google-maps-search-icon" alt="( )"/>
+            <img src={googleMapsSearchIcon} className="google-maps-search-icon" alt="( )"/>
             </div>
             <div>
                 <p className="or-paragraph">or</p>
