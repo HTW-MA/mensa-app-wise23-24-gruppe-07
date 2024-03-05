@@ -18,9 +18,6 @@ export default function HomePage(): ReactElement {
     };
 
     const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
-    const [week, setWeek] = useState(getWeekdaysFor(new Date(date)));
-    const [firstDayOfTheWeek, setFirstDayOfTheWeek] = useState(week[0]);
-    const [lastDayOfTheWeek, setLastDayOfTheWeek] = useState(week[4]);
 
     const [menu, setMenu] = React.useState<Menu[]>([]);
     const [total, setTotal] = useState(0.00);
@@ -42,12 +39,12 @@ export default function HomePage(): ReactElement {
 
     const loadPreviousWeek = () => {
         currentWeek = offsetWeekBy(-1)
-        console.log("current Week: with offset " +  "-1:" + currentWeek)
+        console.log("current Week: with offset -1:" + currentWeek)
     }
 
     const loadNextWeek = () => {
         currentWeek = offsetWeekBy(1)
-        console.log("current Week: " +  "+1:" + currentWeek)
+        console.log("current Week: +1:" + currentWeek)
     }
 
     function offsetWeekBy(offset: number): string[] { // offset: -1 = previous week, 1 = next week etc.
@@ -55,9 +52,6 @@ export default function HomePage(): ReactElement {
 
         offsetDate.setDate(offsetDate.getDate() + offset * 7);
         setDate(convertDateToString(offsetDate));
-        setWeek(getWeekdaysFor(offsetDate));
-        setFirstDayOfTheWeek(week[0]);
-        setLastDayOfTheWeek(week[4]);
 
         setUseEffectHookTrigger(prev => prev + 1);
         return getWeekdaysFor(offsetDate);
