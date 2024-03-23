@@ -12,21 +12,17 @@ import {Canteen, Menu} from "./Interfaces";
 
 export default function HomePage(): ReactElement {
     const [weekOffset, setWeekOffset] = useState<number>(0);
-
+    const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
     const location = useLocation();
     const { canteen } = location.state as {canteen: Canteen };
-
     const navigate = useNavigate();
+    const [menu, setMenu] = React.useState<Menu[]>([]);
+    let currentWeek:string[] = getWeekdaysFor(new Date(date));
+    const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
+
     const navigateToSettingsPage = () => {
         navigate('/settings', {state: {canteen: canteen}});
     };
-
-    const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
-
-    const [menu, setMenu] = React.useState<Menu[]>([]);
-    let currentWeek:string[] = getWeekdaysFor(new Date(date));
-
-    const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
 
     useEffect( () => {
         axios
