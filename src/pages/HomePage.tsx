@@ -9,8 +9,17 @@ import deactivatedRightArrow from "../resources/right-arrow-deactivated.png";
 import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
+import DropdownBox from "../components/DropdownBox";
 
 export default function HomePage(): ReactElement {
+    const mealTypes = [
+        { label: "Essen", value: 'Essen'},
+        { label: "Suppen", value: 'Suppen'},
+        { label: "Salate", value: 'Salate'},
+        { label: "Beilagen", value: 'Beilagen'},
+        { label: "Desserts", value: 'Desserts'}
+    ]
+
     const [weekOffset, setWeekOffset] = useState<number>(0);
 
     const location = useLocation();
@@ -19,6 +28,12 @@ export default function HomePage(): ReactElement {
     const navigate = useNavigate();
     const navigateToSettingsPage = () => {
         navigate('/settings', {state: {canteen: canteen}});
+    };
+
+    const [mealType, setMealType] = useState("Essen");
+
+    const handleMealTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setMealType(event.target.value);
     };
 
     const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
@@ -150,21 +165,35 @@ export default function HomePage(): ReactElement {
                     <p className="canteenName">{canteen.name}</p>
                     <p className="date">{getReformattedDate(date)}</p>
                 </div>
+                <div className="meal-type-selection">
+                    <DropdownBox
+                        name="Art"
+                        options={mealTypes}
+                        defaultValue="Essen"
+                        label="Art"
+                        onChange={handleMealTypeChange}
+                    />
+                </div>
                 <div className="meal-list">
                     {menu.length > 0 && menu.some(menuItem => menuItem.meals.length > 0) ? (
                         menu.map((menuItem) => (
                             menuItem.meals
-                                .filter((meal) => meal.category === "Essen")
+                                .filter((meal) => meal.category === mealType)
                                 .map((meal) => {
                                     const badgeName = meal.badges[1].name;
                                     const iconFileName = badgeIconMapping[badgeName];
                                     const iconSrc = iconFileName ? `${process.env.PUBLIC_URL}/${iconFileName}` : `${process.env.PUBLIC_URL}/fleisch.png`;
+                                    let price = "";
+
+                                    try {
+                                        price = meal.prices[0].price + "€";
+                                    } catch (error) { }
 
                                     return (
                                             <button className="mealButton" key={meal.id}>
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                                                 <span className="mealName">{meal.name}</span>
-                                                <span className="mealPrice">{meal.prices[0].price}€</span>
+                                                <span className="mealPrice">{price}</span>
                                             </button>)
                                     }
                                 )
