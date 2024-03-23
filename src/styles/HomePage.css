@@ -142,6 +142,11 @@
     background-color: transparent;
     border: none;
 }
+.meal-type-selection {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
 .no-menu-icon{
     height: 30px;
     margin: 0 10px 0 10px;
