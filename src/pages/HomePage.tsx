@@ -24,7 +24,6 @@ export default function HomePage(): ReactElement {
     const [date, setDate] = useState(convertDateToString(getCurrentlyValidDate()));
 
     const [menu, setMenu] = React.useState<Menu[]>([]);
-    const [total, setTotal] = useState(0.00);
     let currentWeek:string[] = getWeekdaysFor(new Date(date));
 
     const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
@@ -42,12 +41,12 @@ export default function HomePage(): ReactElement {
     }, [useEffectHookTrigger, date, canteen.id]);
 
     const loadPreviousWeek = () => {
-        if (weekOffset == 0) return
+        if (weekOffset === 0) return
         currentWeek = offsetWeekBy(-1)
     }
 
     const loadNextWeek = () => {
-        if (weekOffset == 1) return
+        if (weekOffset === 1) return
         currentWeek = offsetWeekBy(1)
     }
 
@@ -129,7 +128,7 @@ export default function HomePage(): ReactElement {
                     {currentWeek.map((day, index) => (
                         <button
                             key={index}
-                            className={`weekday-button ${date === day ? 'selected' : (day == convertDateToString(new Date()) ? 'current-day' : '')}`}
+                            className={`weekday-button ${date === day ? 'selected' : (day === convertDateToString(new Date()) ? 'current-day' : '')}`}
                             onClick={() => {
                                 setDate(day);
                                 console.log("weekday button clicked: " + day);
@@ -152,7 +151,7 @@ export default function HomePage(): ReactElement {
                     <p className="date">{getReformattedDate(date)}</p>
                 </div>
                 <div className="meal-list">
-                    {menu.length > 0 ? (
+                    {menu.length > 0 && menu.some(menuItem => menuItem.meals.length > 0) ? (
                         menu.map((menuItem) => (
                             menuItem.meals
                                 .filter((meal) => meal.category === "Essen")
