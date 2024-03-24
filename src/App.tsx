@@ -4,6 +4,7 @@ import UniversitySelectionPage from "./pages/UniversitySelectionPage";
 import CanteenSelectionPage from "./pages/CanteenSelectionPage";
 import HomePage from "./pages/HomePage";
 import SettingsPage from "./pages/SettingsPage";
+import SavedMealsPage from "./pages/SavedMealsPage";
 
 export default function App() {
   let pathOfFirstPage = "/";
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/campus-selection" element={<CanteenSelectionPage />} />
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/saved-meals" element={<SavedMealsPage />} />
         </Routes>
       </Router>
   );

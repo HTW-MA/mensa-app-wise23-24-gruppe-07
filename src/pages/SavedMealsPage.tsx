@@ -5,7 +5,7 @@ import "../styles/MealButtonStyles.css";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
 
-export default function SettingsPage(): ReactElement {
+export default function SavedMealsPage(): ReactElement {
 
     const location = useLocation();
     const { canteen } = location.state as {canteen: Canteen };
@@ -13,15 +13,15 @@ export default function SettingsPage(): ReactElement {
     const navigateToHomePage = () => {
         navigate('/homepage', {state: {canteen: canteen}});
     };
-    const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {canteen: canteen}});
+    const navigateToSettingsPage = () => {
+        navigate('/settings', {state: {canteen: canteen}});
     }
 
     return (
         <div className="homepage">
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Settings</p>
+                    <p className="speiseplan-tag">Saved Meals</p>
                 </div>
             </header>
             <div className="homebody">
@@ -32,11 +32,11 @@ export default function SettingsPage(): ReactElement {
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
                         <p>Homepage</p>
                     </button>
-                    <button className="footer-button selected">
+                    <button className="footer-button" onClick={navigateToSettingsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
                         <p>Settings</p>
                     </button>
-                    <button className="footer-button" onClick={navigateToSavedMealsPage}>
+                    <button className="footer-button selected">
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
                              alt="bookmarkIcon"/>
                         <p>Saved Meals</p>

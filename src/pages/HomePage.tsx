@@ -29,6 +29,9 @@ export default function HomePage(): ReactElement {
     const navigateToSettingsPage = () => {
         navigate('/settings', {state: {canteen: canteen}});
     };
+    const navigateToSavedMealsPage = () => {
+        navigate('/saved-meals', {state: {canteen: canteen}});
+    }
 
     const [mealType, setMealType] = useState("Essen");
 
@@ -216,7 +219,7 @@ export default function HomePage(): ReactElement {
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
                         <p>Settings</p>
                     </button>
-                    <button className="footer-button">
+                    <button className="footer-button" onClick={navigateToSavedMealsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
                              alt="bookmarkIcon"/>
                         <p>Saved Meals</p>
