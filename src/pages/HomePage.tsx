@@ -169,8 +169,8 @@ export default function HomePage(): ReactElement {
                     <DropdownBox
                         name="Art"
                         options={mealTypes}
-                        defaultValue="Essen"
                         label="Art"
+                        defaultValue="Essen"
                         onChange={handleMealTypeChange}
                     />
                 </div>

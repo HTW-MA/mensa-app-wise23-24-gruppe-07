@@ -42,7 +42,7 @@
     align-items: center;
     column-gap: 40px;
 }
-.desktop-modal button {
+.continue-desktop-button {
     background-color: #f77958;
     color: white;
     border: none;
@@ -51,6 +51,9 @@
     cursor: pointer;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+}
+.continue-desktop-button:hover {
+    background-color: #ef4e26;
 }
 .qrCodeImg{
     width: 250px;

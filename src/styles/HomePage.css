@@ -116,7 +116,7 @@
     margin: 0;
 }
 .selected{
-    background-color: var(--green-dark);
+    background-color: var(--green-selected);
 }
 .weekdays-buttons{
     display: flex;

@@ -35,7 +35,7 @@ export default function WelcomePage(): ReactElement {
         <div className="desktop-modal">
             <div>
                 <p>For the best user experience <br/> please visit MealCraft on a mobile device.</p>
-                <button onClick={() => setShowModal(false)}>Continue with Desktop Browser</button>
+                <button className="continue-desktop-button" onClick={() => setShowModal(false)}>Continue with Desktop Browser</button>
             </div>
             <img className="qrCodeImg" src={qrCode} alt="qrCode"/>
         </div>

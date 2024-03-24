@@ -2,7 +2,6 @@ import React, {ReactElement, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
-import logo from "../resources/FoodCraft-Icon-transparent.png";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
 
@@ -23,9 +22,6 @@ export default function SettingsPage(): ReactElement {
                 </div>
             </header>
             <div className="homebody">
-            </div>
-            <div className="total-div">
-                <p className="gesamtpreis">0€</p>
             </div>
             <footer>
                 <div className="footer-div">
