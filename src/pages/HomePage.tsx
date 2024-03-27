@@ -186,14 +186,21 @@ export default function HomePage(): ReactElement {
                                     const badgeName = meal.badges[1].name;
                                     const iconFileName = badgeIconMapping[badgeName];
                                     const iconSrc = iconFileName ? `${process.env.PUBLIC_URL}/${iconFileName}` : `${process.env.PUBLIC_URL}/fleisch.png`;
-                                    let co2Src:string = `${process.env.PUBLIC_URL}/`;
 
+                                    //filename for co2 badge
+                                    let co2Src:string = `${process.env.PUBLIC_URL}/`;
+                                    //is there a CO2 badge?
                                     const foundCO2 = meal.badges.find(badge => badge.name === "CO2_bewertung_A" || badge.name === "CO2_bewertung_B" || badge.name === "CO2_bewertung_C");
-                                    if (foundCO2) {
-                                        co2Src += foundCO2.name + ".png";
-                                    } else {
-                                        co2Src += "whiteBackground.jpg";
-                                    }
+                                    //if yes, add the filename to the path
+                                    if (foundCO2) co2Src += foundCO2.name + ".png";
+                                    //if no, add the path to the white background badge
+                                    else co2Src += "whiteBackground.jpg";
+
+                                    let h2oSrc:string = `${process.env.PUBLIC_URL}/`;
+                                    const foundH2O = meal.badges.find(badge => badge.name === "H2O_bewertung_A" || badge.name === "H2O_bewertung_B" || badge.name === "H2O_bewertung_C");
+                                    if (foundH2O) h2oSrc += foundH2O.name + ".png";
+                                    else h2oSrc += "whiteBackground.jpg";
+
 
                                     let price = "";
 
@@ -206,7 +213,10 @@ export default function HomePage(): ReactElement {
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                                                 <div className="mealNameCo2Div">
                                                     <span className="mealName">{meal.name}</span>
-                                                    <img className="co2Img" src={co2Src} alt="CO2_bewertung"></img>
+                                                        <div className="badgeDiv">
+                                                            <img className="badgeImg" src={co2Src} alt="CO2_bewertung"></img>
+                                                            <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
+                                                        </div>
                                                 </div>
                                                 <span className="mealPrice">{price}</span>
                                             </button>)
