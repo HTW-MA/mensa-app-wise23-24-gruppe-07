@@ -4,7 +4,7 @@
     font-family: 'Poppins', system-ui;
     font-weight: bold;
     font-size: 14px;
-    margin-left: 16px;
+
 }
 .mealButton{
     display: flex;
@@ -27,9 +27,20 @@
     background-color: var(--green-light);
     color: white;
 }
+.mealNameCo2Div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 16px;
+}
+.co2Img{
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+}
 button{
     -webkit-appearance: none;
-    -webkit-font: none;
 }
 /*
 .mealButton{

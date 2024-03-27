@@ -186,6 +186,15 @@ export default function HomePage(): ReactElement {
                                     const badgeName = meal.badges[1].name;
                                     const iconFileName = badgeIconMapping[badgeName];
                                     const iconSrc = iconFileName ? `${process.env.PUBLIC_URL}/${iconFileName}` : `${process.env.PUBLIC_URL}/fleisch.png`;
+                                    let co2Src:string = `${process.env.PUBLIC_URL}/`;
+
+                                    const foundCO2 = meal.badges.find(badge => badge.name === "CO2_bewertung_A" || badge.name === "CO2_bewertung_B" || badge.name === "CO2_bewertung_C");
+                                    if (foundCO2) {
+                                        co2Src += foundCO2.name + ".png";
+                                    } else {
+                                        co2Src += "whiteBackground.jpg";
+                                    }
+
                                     let price = "";
 
                                     try {
@@ -195,7 +204,10 @@ export default function HomePage(): ReactElement {
                                     return (
                                             <button className="mealButton" key={meal.id}>
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
-                                                <span className="mealName">{meal.name}</span>
+                                                <div className="mealNameCo2Div">
+                                                    <span className="mealName">{meal.name}</span>
+                                                    <img className="co2Img" src={co2Src} alt="CO2_bewertung"></img>
+                                                </div>
                                                 <span className="mealPrice">{price}</span>
                                             </button>)
                                     }
