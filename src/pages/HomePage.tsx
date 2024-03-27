@@ -172,7 +172,7 @@ export default function HomePage(): ReactElement {
                     <DropdownBox
                         name="Art"
                         options={mealTypes}
-                        label="Art"
+                        label="Category"
                         defaultValue="Essen"
                         onChange={handleMealTypeChange}
                     />
