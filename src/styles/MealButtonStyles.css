@@ -9,7 +9,7 @@
 .mealButton{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     text-align: left;
     padding: 10px 20px 10px 20px;
     background-color: white;
@@ -33,6 +33,7 @@
     align-items: flex-start;
     justify-content: center;
     margin-left: 16px;
+    margin-right: 16px;
 }
 .badgeImg{
     width: 20px;
