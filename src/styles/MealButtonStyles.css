@@ -20,7 +20,6 @@
     border-color: var(--green-medium);
 }
 .mealPrice{
-    margin-left: 18px;
     font-family: 'Poppins', system-ui;
 }
 .mealButton-active{

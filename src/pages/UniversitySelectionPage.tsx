@@ -5,6 +5,8 @@ import logo from "../resources/FoodCraft-Icon-transparent.png";
 import googleMapsSearchIcon from "../resources/GoogleMaps-search-Icon.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
+import leftArrow from "../resources/left-arrow2.png";
+import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
 
 export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
@@ -33,18 +35,12 @@ export default function WelcomePage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToHome}>&#60;   Back</button>
+                <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/> Back</button>
                 <div className="university-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Select University</h2>
             </header>
-            <div>
-            <img src={googleMapsSearchIcon} className="google-maps-search-icon" alt="( )"/>
-            </div>
-            <div>
-                <p className="or-paragraph">or</p>
-            </div>
             <div className="dropdown-box">
                 <DropdownBox
                     name="cars"

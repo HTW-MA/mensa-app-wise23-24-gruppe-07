@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import {Canteen} from "./Interfaces";
+import leftArrow from "../resources/left-arrow2.png";
 
 export default function CanteenSelectionPage(): ReactElement {
     const location = useLocation();
@@ -36,13 +37,13 @@ export default function CanteenSelectionPage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToUniversitySelection}>&#60;   Back</button>
+                <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/> Back</button>
                 <div className="canteen-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Select Canteen</h2>
             </header>
-            <h3>Selected University: {university}</h3>
+            <p>Selected University: <span className="university">{university}</span></p>
             <div className="canteen-list">
                 {canteens.map((canteen) => (
                     <button
