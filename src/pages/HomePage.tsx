@@ -139,7 +139,7 @@ export default function HomePage(): ReactElement {
             <header className="header">
                 <div className="speiseplan-div">
                     <p className="speiseplan-tag">Meal Plan</p>
-                    <img src={infoIcon} className="infoIcon"></img>
+                    <button className="infoButton"><img src={infoIcon} className="infoIcon"></img></button>
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">

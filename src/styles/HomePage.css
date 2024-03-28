@@ -143,6 +143,7 @@
 .changeWeekButton{
     background-color: transparent;
     border: none;
+    padding: 0;
 }
 .meal-type-selection {
     margin-left: 20px;
@@ -166,7 +167,13 @@
 }
 .infoIcon{
     height: 30px;
-    margin: 0 10px 0 10px;
+    margin: 0;
+}
+.infoButton{
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    margin: 0;
 }
 footer{
     position: fixed;
