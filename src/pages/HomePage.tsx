@@ -201,6 +201,11 @@ export default function HomePage(): ReactElement {
                                     if (foundH2O) h2oSrc += foundH2O.name + ".png";
                                     else h2oSrc += "whiteBackground.jpg";
 
+                                    let climateIconSrc = `${process.env.PUBLIC_URL}/`;
+                                    const foundClimateIcon = meal.badges.find(badge => badge.name === "Klimaessen");
+                                    if (foundClimateIcon) climateIconSrc += foundClimateIcon.name + ".png";
+                                    else climateIconSrc += "whiteBackground.jpg";
+
 
                                     let price = "";
 
@@ -216,6 +221,7 @@ export default function HomePage(): ReactElement {
                                                         <div className="badgeDiv">
                                                             <img className="badgeImg" src={co2Src} alt="CO2_bewertung"></img>
                                                             <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
+                                                            <img className="badgeImg" src={climateIconSrc} alt="Klimaessen"></img>
                                                         </div>
                                                 </div>
                                                 <span className="mealPrice">{price}</span>
