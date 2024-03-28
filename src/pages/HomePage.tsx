@@ -134,12 +134,50 @@ export default function HomePage(): ReactElement {
         'Nachhaltige Fischerei': 'fish.png',
     };
 
+    const [showInfoModal, setShowInfoModal] = useState(false);
+
+    const climateIcon = `${process.env.PUBLIC_URL}/Klimaessen.png`;
+    const co2AIcon = `${process.env.PUBLIC_URL}/CO2_bewertung_A.png`;
+    const co2BIcon = `${process.env.PUBLIC_URL}/CO2_bewertung_B.png`;
+    const co2CIcon = `${process.env.PUBLIC_URL}/CO2_bewertung_C.png`;
+    const h2oAIcon = `${process.env.PUBLIC_URL}/H2O_bewertung_A.png`;
+    const h2oBIcon = `${process.env.PUBLIC_URL}/H2O_bewertung_B.png`;
+    const h2oCIcon = `${process.env.PUBLIC_URL}/H2O_bewertung_C.png`;
+    const vegetarianIcon = `${process.env.PUBLIC_URL}/vegetarisch.png`;
+    const veganIcon = `${process.env.PUBLIC_URL}/vegan.png`;
+    const meatIcon = `${process.env.PUBLIC_URL}/fleisch.png`;
+
+    const infoModal = () => {
+        return (
+            <div className="infoModal">
+                <div className="infoModalContent">
+                    <h2>Informationen</h2>
+                    <p>Nach 18 Uhr wird dir automatisch der Speiseplan für morgen angezeigt.</p>
+                    <div>
+                        <img src={climateIcon} alt="Klimaessen" className="badgeImg"/>
+                        <img src={co2AIcon} alt="co2A" className="badgeImg"/>
+                        <img src={co2BIcon} alt="co2B" className="badgeImg"/>
+                        <img src={co2CIcon} alt="co2C" className="badgeImg"/>
+                        <img src={h2oAIcon} alt="h2oA" className="badgeImg"/>
+                        <img src={h2oBIcon} alt="h2oB" className="badgeImg"/>
+                        <img src={h2oCIcon} alt="h2oC" className="badgeImg"/>
+                        <img src={vegetarianIcon} alt="h2oC" className="badgeImg"/>
+                        <img src={veganIcon} alt="h2oC" className="badgeImg"/>
+                        <img src={meatIcon} alt="h2oC" className="badgeImg"/>
+                    </div>
+                    <button onClick={() => setShowInfoModal(false)}>Schließen</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="homepage">
+            {showInfoModal && infoModal()}
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Meal Plan</p>
-                    <button className="infoButton"><img src={infoIcon} className="infoIcon"></img></button>
+                    <p className="speiseplan-tag">Speiseplan</p>
+                    <button className="infoButton" onClick={() => setShowInfoModal(true)}><img src={infoIcon} className="infoIcon" alt="infoIcon"></img></button>
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
@@ -174,7 +212,7 @@ export default function HomePage(): ReactElement {
                     <DropdownBox
                         name="Art"
                         options={mealTypes}
-                        label="Category"
+                        label="Kategorie"
                         defaultValue="Essen"
                         onChange={handleMealTypeChange}
                     />
@@ -222,11 +260,14 @@ export default function HomePage(): ReactElement {
                                                 <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                                                 <div className="mealNameCo2Div">
                                                     <span className="mealName">{meal.name}</span>
-                                                        <div className="badgeDiv">
-                                                            <img className="badgeImg" src={co2Src} alt="CO2_bewertung"></img>
-                                                            <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
-                                                            <img className="badgeImg" src={climateIconSrc} alt="Klimaessen"></img>
-                                                        </div>
+                                                    <div className="badgeDiv">
+                                                        <img className="badgeImg" src={co2Src}
+                                                             alt="CO2_bewertung"></img>
+                                                        <img className="badgeImg" src={h2oSrc}
+                                                             alt="H2O_bewertung"></img>
+                                                        <img className="badgeImg" src={climateIconSrc}
+                                                             alt="Klimaessen"></img>
+                                                    </div>
                                                 </div>
                                                 <span className="mealPrice">{price}</span>
                                             </button>)
@@ -245,16 +286,16 @@ export default function HomePage(): ReactElement {
                 <div className="footer-div">
                     <button className="footer-button selected">
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
-                        <p>Homepage</p>
+                        <p>Startseite</p>
                     </button>
                     <button className="footer-button" onClick={navigateToSettingsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
-                        <p>Settings</p>
+                        <p>Einstellungen</p>
                     </button>
                     <button className="footer-button" onClick={navigateToSavedMealsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
                              alt="bookmarkIcon"/>
-                        <p>Saved Meals</p>
+                        <p>Gespeichert</p>
                     </button>
                 </div>
             </footer>
