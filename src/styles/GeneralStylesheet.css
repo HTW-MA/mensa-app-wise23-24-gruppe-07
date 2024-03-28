@@ -46,12 +46,13 @@ footer {
     border-radius: 8px;
     border-width: 0;
     font-size: 18px;
-    font-weight: bold;
     color: white;
     background-color: var(--rose-five);
     position: fixed;
     bottom: 13vh;
     left: 10%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 .back-button {

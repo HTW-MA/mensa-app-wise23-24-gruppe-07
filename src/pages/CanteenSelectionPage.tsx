@@ -37,13 +37,13 @@ export default function CanteenSelectionPage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/> Back</button>
+                <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
                 <div className="canteen-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
-                <h2 className="sub-heading">Select Canteen</h2>
+                <h2 className="sub-heading">Mensa auswählen</h2>
             </header>
-            <p>Selected University: <span className="university">{university}</span></p>
+            <p>Ausgewählte Uni: <span className="university">{university}</span></p>
             <div className="canteen-list">
                 {canteens.map((canteen) => (
                     <button
@@ -56,7 +56,7 @@ export default function CanteenSelectionPage(): ReactElement {
                     </button>
                 ))}
             </div>
-            <button className="continue-button" onClick={navigateToHomepage}>Continue</button>
+            <button className="continue-button" onClick={navigateToHomepage}>Weiter</button>
         </div>
     );
 }

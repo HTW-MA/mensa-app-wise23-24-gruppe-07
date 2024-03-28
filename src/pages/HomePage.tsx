@@ -299,7 +299,7 @@ export default function HomePage(): ReactElement {
                 <div className="footer-div">
                     <button className="footer-button selected">
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
-                        <p>Startseite</p>
+                        <p>Speiseplan</p>
                     </button>
                     <button className="footer-button" onClick={navigateToSettingsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>

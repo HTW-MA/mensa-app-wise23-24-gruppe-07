@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 export default function WelcomePage(): ReactElement {
     const roles = [
         { label: "Student", value: 'student' },
-        { label: "Academic", value: 'academic' },
-        { label: "Guest", value: 'guest' }
+        { label: "Angestellt", value: 'academic' },
+        { label: "Gast", value: 'guest' }
     ];
 
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
@@ -48,15 +48,13 @@ export default function WelcomePage(): ReactElement {
             <header>
                 <img src={logo} className="food-craft-icon" alt="( )" />
                 <h1 className="heading">MealCraft</h1>
-                <h2 className="sub-heading">Welcome</h2>
+                <h2 className="sub-heading">Willkommen</h2>
             </header>
-            <div className="welcome-paragraph">
-                <p>
-                    <u><b>New here?</b></u><br />
-                    Give us some information about you<br />
-                    so that we can tailor the app to you.
-                </p>
-            </div>
+            <span className="welcome-paragraph">
+                <u><b>Neu hier?</b></u><br />
+                Gib uns einige Informationen über dich<br />
+                damit wir die App für dich personalisieren können.
+            </span>
             <div className="dropdown-box">
                 <DropdownBox
                     name="roles"
@@ -66,7 +64,7 @@ export default function WelcomePage(): ReactElement {
                 />
             </div>
             <div className="button-container">
-                <button className="continue-button" onClick={navigateToUniversitySelection}>Continue</button>
+                <button className="continue-button" onClick={navigateToUniversitySelection}>Weiter</button>
             </div>
         </div>
     );

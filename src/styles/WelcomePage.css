@@ -1,16 +1,10 @@
 .welcome-page-top-margin {
     margin-top: 105px;
 }
-
-.welcome-paragraph {
-    text-align: center;
-}
-
-.welcome-paragraph p {
-    display: inline-block;
+.welcome-paragraph{
+    margin: 40px 10vw 50px 10vw;
     text-align: left;
-    margin-top: 40px;
-    margin-bottom: 50px;
+    font-size: 1.8vh;
 }
 
 .dropdown-box {

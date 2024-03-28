@@ -21,7 +21,7 @@ export default function SettingsPage(): ReactElement {
         <div className="homepage">
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Settings</p>
+                    <p className="speiseplan-tag">Einstellungen</p>
                 </div>
             </header>
             <div className="homebody">
@@ -30,16 +30,16 @@ export default function SettingsPage(): ReactElement {
                 <div className="footer-div">
                     <button className="footer-button" onClick={navigateToHomePage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
-                        <p>Homepage</p>
+                        <p>Speiseplan</p>
                     </button>
                     <button className="footer-button selected">
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
-                        <p>Settings</p>
+                        <p>Einstellungen</p>
                     </button>
                     <button className="footer-button" onClick={navigateToSavedMealsPage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
                              alt="bookmarkIcon"/>
-                        <p>Saved Meals</p>
+                        <p>Gespeichert</p>
                     </button>
                 </div>
             </footer>

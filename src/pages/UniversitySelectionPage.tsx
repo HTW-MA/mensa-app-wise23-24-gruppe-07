@@ -35,23 +35,23 @@ export default function WelcomePage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/> Back</button>
+                <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
                 <div className="university-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
-                <h2 className="sub-heading">Select University</h2>
+                <h2 className="sub-heading">Uni auswählen</h2>
             </header>
             <div className="dropdown-box">
                 <DropdownBox
                     name="cars"
                     options={universities}
                     defaultValue="student"
-                    label="University"
+                    label="Universität"
                     onChange={handleUniversityChange}
                 />
             </div>
 
-            <button className="continue-button" onClick={navigateToCampusSelection}>Continue</button>
+            <button className="continue-button" onClick={navigateToCampusSelection}>Weiter</button>
 
         </div>
     );
