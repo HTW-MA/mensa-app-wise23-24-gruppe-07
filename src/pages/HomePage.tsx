@@ -11,6 +11,8 @@ import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
 import DropdownBox from "../components/DropdownBox";
+import clockIcon from "../resources/clock.png";
+import bookmarkIcon from "../resources/bookmark.png";
 
 export default function HomePage(): ReactElement {
     const mealTypes = [
@@ -151,8 +153,20 @@ export default function HomePage(): ReactElement {
         return (
             <div className="infoModal">
                 <div className="infoModalContent">
-                    <h2>Informationen</h2>
-                    <p>Nach 18 Uhr wird dir automatisch der Speiseplan für morgen angezeigt.</p>
+                    <div className="infoHeader">
+                        <h2>Informationen</h2>
+                        <button className="closeButton" onClick={() => setShowInfoModal(false)}><img
+                            src={`${process.env.PUBLIC_URL}/no-menu.png`} alt="noMenuIcon" className="closeImg"/>
+                        </button>
+                    </div>
+                    <div className="infoDiv">
+                    <img src={clockIcon} alt="Uhr" className="badgeImg"/>
+                        <p>Nach 18 Uhr wird dir automatisch der Speiseplan für morgen angezeigt.</p>
+                    </div>
+                    <div className="infoDiv">
+                        <img src={bookmarkIcon} alt="Uhr" className="badgeImg"/>
+                        <p>Tippe auf ein Gericht um es zu speichern und werde benachrichtigt, wenn das Gericht am nächsten Tag verfügbar ist.</p>
+                    </div>
                     <div>
                         <img src={climateIcon} alt="Klimaessen" className="badgeImg"/>
                         <img src={co2AIcon} alt="co2A" className="badgeImg"/>
@@ -165,7 +179,6 @@ export default function HomePage(): ReactElement {
                         <img src={veganIcon} alt="h2oC" className="badgeImg"/>
                         <img src={meatIcon} alt="h2oC" className="badgeImg"/>
                     </div>
-                    <button onClick={() => setShowInfoModal(false)}>Schließen</button>
                 </div>
             </div>
         );
@@ -176,7 +189,7 @@ export default function HomePage(): ReactElement {
             {showInfoModal && infoModal()}
             <header className="header">
                 <div className="speiseplan-div">
-                    <p className="speiseplan-tag">Speiseplan</p>
+                <p className="speiseplan-tag">Speiseplan</p>
                     <button className="infoButton" onClick={() => setShowInfoModal(true)}><img src={infoIcon} className="infoIcon" alt="infoIcon"></img></button>
                 </div>
                 <div className="weekdays-buttons">

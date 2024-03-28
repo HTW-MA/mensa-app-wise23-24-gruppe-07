@@ -199,6 +199,34 @@
     max-height: 80%;
     overflow: scroll;
 }
+.infoDiv{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 4vw;
+    margin: 3vh 0 2vh 0;
+}
+.infoDiv p {
+    margin: 0;
+    font-size: 1.7vh;
+}
+.infoHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.infoHeader h2{
+    margin: 0;
+    font-size: 2.5vh;
+}
+.closeButton{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.closeImg{
+    height: 2vh;
+    width: 2vh;
+}
 footer{
     position: fixed;
     bottom: 0;
