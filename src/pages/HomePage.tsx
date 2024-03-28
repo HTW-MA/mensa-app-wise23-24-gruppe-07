@@ -6,6 +6,7 @@ import rightArrow from "../resources/right-arrow.png";
 import leftArrow from "../resources/left-arrow.png";
 import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
 import deactivatedRightArrow from "../resources/right-arrow-deactivated.png";
+import infoIcon from "../resources/info.png";
 import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
 import {Canteen, Menu} from "./Interfaces";
@@ -138,6 +139,7 @@ export default function HomePage(): ReactElement {
             <header className="header">
                 <div className="speiseplan-div">
                     <p className="speiseplan-tag">Meal Plan</p>
+                    <img src={infoIcon} className="infoIcon"></img>
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
@@ -183,7 +185,9 @@ export default function HomePage(): ReactElement {
                             menuItem.meals
                                 .filter((meal) => meal.category === mealType)
                                 .map((meal) => {
-                                    const badgeName = meal.badges[1].name;
+                                    let badgeName;
+                                    if (meal.badges.length === 1) badgeName = meal.badges[0].name;
+                                    else badgeName = meal.badges[1].name;
                                     const iconFileName = badgeIconMapping[badgeName];
                                     const iconSrc = iconFileName ? `${process.env.PUBLIC_URL}/${iconFileName}` : `${process.env.PUBLIC_URL}/fleisch.png`;
 
