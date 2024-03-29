@@ -2,11 +2,9 @@ import React, {ReactElement, useState} from "react";
 import "../styles/GeneralStylesheet.css";
 import "../styles/UniversitySelectionPage.css"
 import logo from "../resources/FoodCraft-Icon-transparent.png";
-import googleMapsSearchIcon from "../resources/GoogleMaps-search-Icon.png";
 import DropdownBox from "../components/DropdownBox";
 import {useNavigate} from "react-router-dom";
 import leftArrow from "../resources/left-arrow2.png";
-import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
 
 export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
