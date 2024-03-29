@@ -33,11 +33,17 @@ export default function WelcomePage(): ReactElement {
 
     const DesktopModal = () => (
         <div className="desktop-modal">
-            <div>
-                <p>For the best user experience <br/> please visit MealCraft on a mobile device.</p>
-                <button className="continue-desktop-button" onClick={() => setShowModal(false)}>Continue with Desktop Browser</button>
+            <div className="ModalContent">
+                <img className="qrCodeImg" src={qrCode} alt="qrCode"/>
+                <div className="modalText">
+                    <p>Für die beste Benutzererfahrung <br/> besuche MealCraft gerne auf deinem Handy. <br/> Scanne
+                        hierbei den
+                        QR-Code. :)</p>
+                    <button className="continue-desktop-button" onClick={() => setShowModal(false)}>Im Desktop Browser
+                        fortfahren
+                    </button>
+                </div>
             </div>
-            <img className="qrCodeImg" src={qrCode} alt="qrCode"/>
         </div>
     );
 
@@ -46,7 +52,7 @@ export default function WelcomePage(): ReactElement {
             {showModal && <DesktopModal/>}
             <div className="welcome-page-top-margin"></div>
             <header>
-                <img src={logo} className="food-craft-icon" alt="( )" />
+                <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Willkommen</h2>
             </header>
@@ -60,7 +66,7 @@ export default function WelcomePage(): ReactElement {
                     name="roles"
                     options={roles}
                     defaultValue="student"
-                    label="Role"
+                    label="Rolle"
                 />
             </div>
             <div className="button-container">

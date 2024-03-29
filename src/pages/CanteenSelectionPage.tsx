@@ -20,7 +20,7 @@ export default function CanteenSelectionPage(): ReactElement {
     };
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
-        navigate('/homepage', {state: {canteen: selectedCanteen}});
+        navigate('/homepage', {state: {canteen: selectedCanteen, university: university}});
     };
 
     useEffect( () => {
@@ -56,7 +56,7 @@ export default function CanteenSelectionPage(): ReactElement {
                     </button>
                 ))}
             </div>
-            <button className="continue-button" onClick={navigateToHomepage}>Weiter</button>
+            <button className={selectedCanteen == null ? "continue-button-deactivated" : "continue-button" } onClick={navigateToHomepage}>Weiter</button>
         </div>
     );
 }

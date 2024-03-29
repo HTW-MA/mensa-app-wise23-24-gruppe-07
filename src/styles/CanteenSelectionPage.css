@@ -42,6 +42,20 @@
     color: white;
     background-color: rgb(120, 174, 86);
 }
+.continue-button-deactivated{
+    width: 80%;
+    height: 50px;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 18px;
+    color: white;
+    background-color: #a6a6a6;
+    position: fixed;
+    bottom: 13vh;
+    left: 10%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
 .university{
     font-weight: bold;
 }

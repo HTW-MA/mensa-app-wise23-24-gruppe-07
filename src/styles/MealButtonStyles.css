@@ -23,6 +23,7 @@
 .mealPrice{
     font-family: 'Poppins', system-ui;
     font-size: 14px;
+    margin-left: 18px;
 }
 .mealButton-active{
     background-color: var(--green-light);
@@ -34,7 +35,6 @@
     align-items: flex-start;
     justify-content: center;
     margin-left: 18px;
-    margin-right: 18px;
 }
 .badgeImg{
     width: 20px;
