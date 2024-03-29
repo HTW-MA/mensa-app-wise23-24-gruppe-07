@@ -15,12 +15,17 @@ export default function WelcomePage(): ReactElement {
 
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const [showModal, setShowModal] = useState(isDesktop);
+    const [selectedRole, setSelectedRole] = useState('Student');
+
+    const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRole(event.target.value);
+    };
 
     useEffect(() => {
         const handleResize = () => {
             const isNowDesktop = window.innerWidth > 768;
             setIsDesktop(isNowDesktop);
-            setShowModal(isNowDesktop); // Show modal only on desktop
+            setShowModal(isNowDesktop);
         };
 
         window.addEventListener('resize', handleResize);
@@ -65,8 +70,9 @@ export default function WelcomePage(): ReactElement {
                 <DropdownBox
                     name="roles"
                     options={roles}
-                    defaultValue="student"
+                    value={selectedRole}
                     label="Rolle"
+                    onChange={handleRoleChange}
                 />
             </div>
             <div className="button-container">

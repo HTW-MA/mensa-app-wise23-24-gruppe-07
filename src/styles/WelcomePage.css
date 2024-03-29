@@ -7,12 +7,14 @@
     font-size: 1.8vh;
 }
 
-.dropdown-box {
-    display: inline-block;
+.dropdown-box{
     text-align: left;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     position: fixed;
     bottom: 26vh;
+    width: 90%;
 }
 
 .button-container {

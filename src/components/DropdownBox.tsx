@@ -9,16 +9,16 @@ interface DropdownBoxOptions {
 interface DropdownBoxProperties {
     options: DropdownBoxOptions[];
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    defaultValue?: string;
+    value?: string;
     label?: string;
     name?: string;
 }
 
 function DropdownBox(properties: DropdownBoxProperties) {
-    const { options, onChange, defaultValue, label, name } = properties;
+    const { options, onChange, value, label, name } = properties;
 
     return (
-        <div>
+        <div className="dropdown-box-default">
             {label &&
                 <label className="label" htmlFor={name}>
                 {label}
@@ -27,7 +27,7 @@ function DropdownBox(properties: DropdownBoxProperties) {
                 className="select"
                 name={name}
                 onChange={onChange}
-                defaultValue={defaultValue}>
+                value={value}>
                 {options.map(option => (
                     <option key={option.value} value={option.value}>
                         {option.label}

@@ -27,10 +27,11 @@ export default function HomePage(): ReactElement {
 
     const location = useLocation();
     const { canteen } = location.state as {canteen: Canteen };
+    const { university } = location.state as { university: string };
 
     const navigate = useNavigate();
     const navigateToSettingsPage = () => {
-        navigate('/settings', {state: {canteen: canteen}});
+        navigate('/settings', {state: {university: university, canteen: canteen}});
     };
     const navigateToSavedMealsPage = () => {
         navigate('/saved-meals', {state: {canteen: canteen}});
@@ -226,7 +227,7 @@ export default function HomePage(): ReactElement {
                         name="Art"
                         options={mealTypes}
                         label="Kategorie"
-                        defaultValue="Essen"
+                        value="Essen"
                         onChange={handleMealTypeChange}
                     />
                 </div>

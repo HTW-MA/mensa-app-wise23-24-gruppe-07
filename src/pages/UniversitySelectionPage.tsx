@@ -43,7 +43,7 @@ export default function WelcomePage(): ReactElement {
                 <DropdownBox
                     name="cars"
                     options={universities}
-                    defaultValue="student"
+                    value={selectedUniversity}
                     label="Universität"
                     onChange={handleUniversityChange}
                 />

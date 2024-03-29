@@ -8,13 +8,14 @@ import {Canteen, Menu} from "./Interfaces";
 export default function SavedMealsPage(): ReactElement {
 
     const location = useLocation();
-    const { canteen } = location.state as {canteen: Canteen };
     const navigate = useNavigate();
+    const { university } = location.state as { university: string };
+    const { canteen } = location.state as { canteen: Canteen };
     const navigateToHomePage = () => {
-        navigate('/homepage', {state: {canteen: canteen}});
+        navigate('/homepage', {state: {university: university, canteen: canteen}});
     };
     const navigateToSettingsPage = () => {
-        navigate('/settings', {state: {canteen: canteen}});
+        navigate('/settings', {state: {university: university, canteen: canteen}});
     }
 
     return (
