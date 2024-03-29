@@ -18,10 +18,14 @@ export default function WelcomePage(): ReactElement {
 
     const universities = [
         { label: "HTW", value: 'HTW'},
+        { label: "TU", value: 'TU'},
         { label: "FU", value: 'FU'},
         { label: "HU", value: 'HU'},
         { label: "BHT", value: 'BHT'},
-        { label: "HWR", value: 'HWR'}
+        { label: "HWR", value: 'HWR'},
+        { label: "ASH", value: 'ASH'},
+        { label: "Charité", value: 'Charité'},
+        { label: "HfM", value: 'HfM'},
     ]
 
     const [selectedUniversity, setSelectedUniversity] = useState('HTW');
