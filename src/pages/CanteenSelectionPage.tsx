@@ -38,7 +38,6 @@ export default function CanteenSelectionPage(): ReactElement {
         <div className="page">
             <header>
                 <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
-                <div className="canteen-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Mensa auswählen</h2>

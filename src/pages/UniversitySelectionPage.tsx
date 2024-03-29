@@ -26,6 +26,7 @@ export default function WelcomePage(): ReactElement {
         { label: "ASH", value: 'ASH'},
         { label: "Charité", value: 'Charité'},
         { label: "HfM", value: 'HfM'},
+        { label: "EHB", value: 'EHB'}
     ]
 
     const [selectedUniversity, setSelectedUniversity] = useState('HTW');
@@ -38,7 +39,6 @@ export default function WelcomePage(): ReactElement {
         <div className="page">
             <header>
                 <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
-                <div className="university-selection-top-margin"></div>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Uni auswählen</h2>
