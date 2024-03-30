@@ -95,7 +95,6 @@ export default function SettingsPage(): ReactElement {
                         onChange={handleCanteenChange}
                     />
                 </div>
-                <button className="saveSettingsButton">Einstellungen speichern</button>
             </div>
             <footer>
                 <div className="footer-div">

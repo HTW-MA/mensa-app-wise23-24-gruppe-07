@@ -4,17 +4,6 @@
 .dropdown-box-canteen{
     width: 90%;
 }
-.saveSettingsButton{
-    position: fixed;
-    bottom: 14vh;
-    background-color: var(--rose-five);
-    color: white;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    width: 90%;
-    height: 5vh;
-    border-radius: 6px;
-}
 .homebody-settings{
     display: flex;
     flex-direction: column;
