@@ -69,3 +69,6 @@ footer {
     align-items: center;
     column-gap: 6px;
 }
+root{
+    overflow: hidden;
+}
