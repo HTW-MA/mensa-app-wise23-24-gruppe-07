@@ -34,4 +34,4 @@ https://mensa.gregorflachs.de/swaggerdoku#/
 # Deployment
 https://mealcraft.onrender.com
 
-![speiseplanImg](https://cdn.discordapp.com/attachments/530350274884272128/1223625368129376276/Bildschirmfoto_2024-03-30_um_14.30.08.jpg?ex=661a88ed&is=660813ed&hm=c3dfd6d39085ab00f86981a572e02ba03d36961a1b35d7ba41d48b7c74cf498b&)
+![speiseplanImg](https://cdn.discordapp.com/attachments/530350274884272128/1223625960222363698/Bildschirmfoto_2024-03-30_um_14.30.08.jpg?ex=661a897a&is=6608147a&hm=09c12805df6de37ca32d9f28783cd4c4cfcef10c89d58ef6c8d0177232405123&)
