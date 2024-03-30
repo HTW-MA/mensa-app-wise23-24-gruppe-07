@@ -10,21 +10,26 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 0;
+    height: 71.6vh;
+}
+.userSettingsDiv{
+    width: 90%;
+    margin-top: 2vh;
 }
 .dropBox{
-    width: 90%;
+    width: 100%;
     margin-top: 2vh;
 }
 .dropBox2{
-    width: 90%;
+    width: 100%;
     margin-top: 2vh;
 }
 .dropBox3{
-    width: 90%;
+    width: 100%;
     margin-top: 2vh;
 }
 .guthaben-Div{
-    margin-top: 21vh;
+    margin: 0 0 3vh 0;
     width: 90%;
 }
 .guthaben-tag{

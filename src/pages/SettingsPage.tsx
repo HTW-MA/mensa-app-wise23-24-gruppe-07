@@ -93,33 +93,34 @@ export default function SettingsPage(): ReactElement {
                 </div>
             </header>
             <div className="homebody-settings">
-                <div className="dropBox3">
-                    <DropdownBox
-                        name="rollen"
-                        options={roles}
-                        value={selectedRole}
-                        label="Rolle"
-                        onChange={handleRoleChange}
-                    />
-                </div>
-                <div className="dropBox">
-                    <DropdownBox
-                        name="uni"
-                        options={universities}
-                        value={selectedUniversity}
-                        label="Universität"
-                        onChange={handleUniversityChange}
-                    />
-                </div>
-
-                <div className="dropBox2">
-                    <DropdownBox
-                        name="mensa"
-                        options={canteenOptions}
-                        value={selectedCanteenName}
-                        label="Mensa"
-                        onChange={handleCanteenChange}
-                    />
+                <div className="userSettingsDiv">
+                    <div className="dropBox3">
+                        <DropdownBox
+                            name="rollen"
+                            options={roles}
+                            value={selectedRole}
+                            label="Rolle"
+                            onChange={handleRoleChange}
+                        />
+                    </div>
+                    <div className="dropBox">
+                        <DropdownBox
+                            name="uni"
+                            options={universities}
+                            value={selectedUniversity}
+                            label="Universität"
+                            onChange={handleUniversityChange}
+                        />
+                    </div>
+                    <div className="dropBox2">
+                        <DropdownBox
+                            name="mensa"
+                            options={canteenOptions}
+                            value={selectedCanteenName}
+                            label="Mensa"
+                            onChange={handleCanteenChange}
+                        />
+                    </div>
                 </div>
                 <div className="guthaben-Div">
                     <p className="guthaben-tag">Guthaben der Mensakarte überprüfen</p>
@@ -129,7 +130,7 @@ export default function SettingsPage(): ReactElement {
             </div>
             <footer>
                 <div className="footer-div">
-                <button className="footer-button" onClick={navigateToHomePage}>
+                    <button className="footer-button" onClick={navigateToHomePage}>
                         <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/heim.png`} alt="settingsIcon"/>
                         <p>Speiseplan</p>
                     </button>
