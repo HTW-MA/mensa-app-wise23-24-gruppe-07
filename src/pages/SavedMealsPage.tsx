@@ -11,11 +11,12 @@ export default function SavedMealsPage(): ReactElement {
     const navigate = useNavigate();
     const { university } = location.state as { university: string };
     const { canteen } = location.state as { canteen: Canteen };
+    const { role } = location.state as { role: string };
     const navigateToHomePage = () => {
-        navigate('/homepage', {state: {university: university, canteen: canteen}});
+        navigate('/homepage', {state: {university: university, canteen: canteen, role: role}});
     };
     const navigateToSettingsPage = () => {
-        navigate('/settings', {state: {university: university, canteen: canteen}});
+        navigate('/settings', {state: {university: university, canteen: canteen, role: role}});
     }
 
     return (

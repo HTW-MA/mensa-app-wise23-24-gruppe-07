@@ -29,14 +29,15 @@ export default function HomePage(): ReactElement {
     const { canteen } = location.state as {canteen: Canteen };
     const { university } = location.state as { university: string };
     const role = location.state?.role as string;
+    const [userRole, setUserRole] = useState(role);
     console.log("homepage role: " +role);
 
     const navigate = useNavigate();
     const navigateToSettingsPage = () => {
-        navigate('/settings', {state: {university: university, canteen: canteen, role: role}});
+        navigate('/settings', {state: {university: university, canteen: canteen, role: userRole}});
     };
     const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {canteen: canteen, university: university, role: role}});
+        navigate('/saved-meals', {state: {canteen: canteen, university: university, role: userRole}});
     }
 
     const [mealType, setMealType] = useState("Essen");

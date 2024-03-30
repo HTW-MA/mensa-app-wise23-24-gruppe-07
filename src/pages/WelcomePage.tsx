@@ -61,8 +61,8 @@ export default function WelcomePage(): ReactElement {
                 <h2 className="sub-heading">Willkommen</h2>
             </header>
             <span className="welcome-paragraph">
-                <u><b>Neu hier?</b></u><br />
-                Gib uns einige Informationen über dich<br />
+                <u><b>Neu hier?</b></u><br/>
+                Gib uns einige Informationen über dich<br/>
                 damit wir die App für dich personalisieren können.
             </span>
             <div className="dropdown-box">
