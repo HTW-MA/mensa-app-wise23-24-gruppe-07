@@ -39,7 +39,7 @@ export default function SavedMealsPage(): ReactElement {
                         <p>Einstellungen</p>
                     </button>
                     <button className="footer-button selected">
-                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen.png`}
+                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/lesezeichen-selected.png`}
                              alt="bookmarkIcon"/>
                         <p>Gespeichert</p>
                     </button>

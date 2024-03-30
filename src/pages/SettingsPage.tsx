@@ -135,7 +135,7 @@ export default function SettingsPage(): ReactElement {
                         <p>Speiseplan</p>
                     </button>
                     <button className="footer-button selected">
-                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings.png`} alt="settingsIcon"/>
+                        <img className="buttonIcon" src={`${process.env.PUBLIC_URL}/settings-selected.png`} alt="settingsIcon"/>
                         <p>Einstellungen</p>
                     </button>
                     <button className="footer-button" onClick={navigateToSavedMealsPage}>
