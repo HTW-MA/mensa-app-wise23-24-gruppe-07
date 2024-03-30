@@ -268,7 +268,6 @@ export default function HomePage(): ReactElement {
                                     let price = "";
 
                                     try {
-                                        console.log(meal.prices)
                                         if (role === "Student") price = meal.prices[0].price + "€"
                                         else if (role === "Angestellt") price = meal.prices[1].price + "€"
                                         else price = meal.prices[2].price + "€"
@@ -296,7 +295,7 @@ export default function HomePage(): ReactElement {
                     ) : (
                         <div className="no-menu-div">
                             <img src={`${process.env.PUBLIC_URL}/no-menu.png`} alt="noMenuIcon" className="no-menu-icon"/>
-                            <p className="no-menu-message">No menu for this day</p>
+                            <p className="no-menu-message">Für diesen Tag gibt es keinen Speiseplan.</p>
                         </div>
                     )}
                 </div>
