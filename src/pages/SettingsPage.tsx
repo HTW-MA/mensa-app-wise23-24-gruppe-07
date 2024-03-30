@@ -121,6 +121,11 @@ export default function SettingsPage(): ReactElement {
                         onChange={handleCanteenChange}
                     />
                 </div>
+                <div className="guthaben-Div">
+                    <p className="guthaben-tag">Guthaben der Mensakarte überprüfen</p>
+                    <p className="guthaben">0.00€</p>
+                    <button className="guthaben-button">Mensakarte lesen</button>
+                </div>
             </div>
             <footer>
                 <div className="footer-div">

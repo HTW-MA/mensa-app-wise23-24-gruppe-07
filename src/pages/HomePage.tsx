@@ -3,9 +3,13 @@ import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import rightArrow from "../resources/right-arrow.png";
+import rightArrow2 from "../resources/right-arrow2.png";
 import leftArrow from "../resources/left-arrow.png";
+import leftArrow3 from "../resources/left-arrow3.png";
 import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
+import deactivatedLeftArrow2 from "../resources/left-arrow-deactivated2.png";
 import deactivatedRightArrow from "../resources/right-arrow-deactivated.png";
+import deactivatedRightArrow2 from "../resources/right-arrow-deactivated2.png";
 import infoIcon from "../resources/info.png";
 import axios from "axios";
 import "../pages/CanteenSelectionPage.tsx"
@@ -198,7 +202,7 @@ export default function HomePage(): ReactElement {
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
-                        <img className="arrow" src={weekOffset === 0 ? deactivatedLeftArrow : leftArrow} alt="arrow"/>
+                        <img className="arrow" src={weekOffset === 0 ? deactivatedLeftArrow2 : leftArrow3} alt="arrow"/>
                     </button>
                     {currentWeek.map((day, index) => (
                         <button
@@ -216,7 +220,7 @@ export default function HomePage(): ReactElement {
                         </button>
                     ))}
                     <button onClick={loadNextWeek} className="changeWeekButton">
-                        <img className="arrow" src={weekOffset === 1 ? deactivatedRightArrow : rightArrow}  alt="arrow"/>
+                        <img className="arrow" src={weekOffset === 1 ? deactivatedRightArrow2 : rightArrow2}  alt="arrow"/>
                     </button>
                 </div>
             </header>

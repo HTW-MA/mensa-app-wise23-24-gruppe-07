@@ -18,7 +18,7 @@
 }
 .header{
     font-family: 'Poppins', sans-serif;
-    background-color: var(--green-light);
+    background-color: var(--green-dark);
     height: 14vh;
     display: flex;
     flex-direction: column;
@@ -143,7 +143,7 @@
     background-color: var(--green-medium);
 }
 .weekday-button.selected {
-    background-color: var(--green-dark);
+    background-color: var(--green-selected);
 }
 .changeWeekButton{
     background-color: transparent;

@@ -9,7 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin-top: 4vh;
+    margin-top: 0;
 }
 .dropBox{
     width: 90%;
@@ -22,4 +22,27 @@
 .dropBox3{
     width: 90%;
     margin-top: 2vh;
+}
+.guthaben-Div{
+    margin-top: 21vh;
+    width: 90%;
+}
+.guthaben-tag{
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 0 1.5vh 0;
+}
+.guthaben{
+    font-size: 4vh;
+    margin: 0 0 1.5vh 0;
+}
+.guthaben-button{
+    width: 100%;
+    margin: 0;
+    background-color: var(--rose-five);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    height: 5vh;
+    border-radius: 6px;
 }
