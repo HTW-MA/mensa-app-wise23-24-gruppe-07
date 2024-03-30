@@ -9,6 +9,7 @@ import leftArrow from "../resources/left-arrow2.png";
 export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
     const location = useLocation();
+    const university = location.state?.university as string ?? "HTW";
     const role = location.state?.role as string;
     console.log(role);
     const navigateToCampusSelection = () => {
@@ -32,7 +33,7 @@ export default function WelcomePage(): ReactElement {
         { label: "EHB", value: 'EHB'}
     ]
 
-    const [selectedUniversity, setSelectedUniversity] = useState('HTW');
+    const [selectedUniversity, setSelectedUniversity] = useState(university);
 
     const handleUniversityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedUniversity(event.target.value);

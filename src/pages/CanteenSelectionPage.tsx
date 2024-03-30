@@ -17,7 +17,7 @@ export default function CanteenSelectionPage(): ReactElement {
 
     const navigate = useNavigate();
     const navigateToUniversitySelection = () => {
-        navigate('/university-selection');
+        navigate('/university-selection', {state: {role: role, university: university}});
     };
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
