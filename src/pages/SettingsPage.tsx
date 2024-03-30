@@ -14,6 +14,7 @@ export default function SettingsPage(): ReactElement {
 
     const [selectedUniversity, setSelectedUniversity] = useState(initialUniversity);
     const [selectedCanteenName, setSelectedCanteenName] = useState(initialCanteen.name);
+    const [selectedRole, setSelectedRole] = useState(initialRole);
     const [canteenOptions, setCanteenOptions] = useState([{ label: "", value: "" }]);
     const [canteens, setCanteens] = useState<Canteen[]>([]);
 
@@ -25,10 +26,10 @@ export default function SettingsPage(): ReactElement {
             savedCanteen = initialCanteen;
         }
         console.log(savedCanteen);
-        navigate('/homepage', {state: {university: selectedUniversity, canteen: savedCanteen}});
+        navigate('/homepage', {state: {university: selectedUniversity, canteen: savedCanteen, role: selectedRole}});
     };
     const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {university: selectedUniversity, canteen: initialCanteen}});
+        navigate('/saved-meals', {state: {university: selectedUniversity, canteen: initialCanteen, role: selectedRole}});
     }
 
     const handleUniversityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,6 +40,7 @@ export default function SettingsPage(): ReactElement {
     }
 
     const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRole(event.target.value);
         console.log(event.target.value);
     }
     const universities = [
@@ -95,7 +97,7 @@ export default function SettingsPage(): ReactElement {
                     <DropdownBox
                         name="rollen"
                         options={roles}
-                        value="Angestellt"
+                        value={selectedRole}
                         label="Rolle"
                         onChange={handleRoleChange}
                     />
