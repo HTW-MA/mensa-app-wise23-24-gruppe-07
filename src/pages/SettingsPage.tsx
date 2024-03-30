@@ -62,6 +62,11 @@ export default function SettingsPage(): ReactElement {
                 setCanteens(response.data);
                 console.log(canteens);
                 setCanteenOptions(fetchedCanteens);
+                const canteenExists = fetchedCanteens.some((canteen: { value: string; }) => canteen.value === selectedCanteenName);
+                if (!canteenExists && fetchedCanteens.length > 0) {
+                    // If it doesn't exist, update the selected canteen name to the first in the new list
+                    setSelectedCanteenName(fetchedCanteens[0].value);
+                }
             } catch (error) {
                 console.log(error);
             }
