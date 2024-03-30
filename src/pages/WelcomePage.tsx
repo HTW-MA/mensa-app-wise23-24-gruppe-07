@@ -41,8 +41,8 @@ export default function WelcomePage(): ReactElement {
             <div className="ModalContent">
                 <img className="qrCodeImg" src={qrCode} alt="qrCode"/>
                 <div className="modalText">
-                    <p>Für die beste Benutzererfahrung <br/> besuche MealCraft gerne auf deinem Handy. <br/> Scanne
-                        hierbei den
+                    <p>Für die beste Benutzererfahrung <br/> besuche MealCraft gerne auf deinem Handy und <br/> füge die Website zum Homebildschirm hinzu. <br/> Scanne
+                        hierfür den
                         QR-Code. :)</p>
                     <button className="continue-desktop-button" onClick={() => setShowModal(false)}>Im Desktop Browser
                         fortfahren
