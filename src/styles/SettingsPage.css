@@ -2,7 +2,7 @@
     width: 100%;
 }
 .dropdown-box-canteen{
-    width: 80%;
+    width: 90%;
 }
 .saveSettingsButton{
     position: fixed;
@@ -11,7 +11,7 @@
     color: white;
     border: none;
     font-family: 'Poppins', sans-serif;
-    width: 80%;
+    width: 90%;
     height: 5vh;
     border-radius: 6px;
 }
@@ -23,8 +23,10 @@
     margin-top: 4vh;
 }
 .dropBox{
-    width: 80%;
+    width: 90%;
+    margin-top: 2vh;
 }
 .dropBox2{
-    width: 80%;
+    width: 90%;
+    margin-top: 4vh;
 }

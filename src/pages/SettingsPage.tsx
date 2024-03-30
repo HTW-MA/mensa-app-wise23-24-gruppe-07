@@ -8,39 +8,45 @@ import axios from "axios";
 export default function SettingsPage(): ReactElement {
 
     const location = useLocation();
-    const { university } = location.state as { university: string };
-    const { canteen } = location.state as { canteen: Canteen };
-
     const initialUniversity = location.state?.university as string;
     const initialCanteen = location.state?.canteen as Canteen;
-    console.log("initial uni: " + initialUniversity);
-    console.log("initial canteen: " + initialCanteen.name);
     const [selectedUniversity, setSelectedUniversity] = useState(initialUniversity);
-    const [selectedCanteen, setSelectedCanteen] = useState(initialCanteen.name);
-    const [canteens, setCanteens] = useState([{ label: "", value: "" }]);
+    const [selectedCanteenName, setSelectedCanteenName] = useState(initialCanteen.name);
+    const [canteenOptions, setCanteenOptions] = useState([{ label: "", value: "" }]);
+    const [canteens, setCanteens] = useState<Canteen[]>([]);
 
     const navigate = useNavigate();
     const navigateToHomePage = () => {
-        navigate('/homepage', {state: {university: university, canteen: canteen}});
+        let savedCanteen:any = canteens.find(canteen => canteen.name === selectedCanteenName);
+        console.log(canteens);
+        if(savedCanteen === undefined) {
+            savedCanteen = initialCanteen;
+        }
+        console.log(savedCanteen);
+        navigate('/homepage', {state: {university: selectedUniversity, canteen: savedCanteen}});
     };
     const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {university: university, canteen: canteen}});
+        navigate('/saved-meals', {state: {university: selectedUniversity, canteen: initialCanteen}});
     }
 
     const handleUniversityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedUniversity(event.target.value); // Update the selectedUniversity state
+        setSelectedUniversity(event.target.value);
     };
     const handleCanteenChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCanteen(event.target.value);
-        console.log("canteen: " + selectedCanteen);
+        setSelectedCanteenName(event.target.value);
     }
 
     const universities = [
         { label: "HTW", value: 'HTW'},
+        { label: "TU", value: 'TU'},
         { label: "FU", value: 'FU'},
         { label: "HU", value: 'HU'},
         { label: "BHT", value: 'BHT'},
-        { label: "HWR", value: 'HWR'}
+        { label: "HWR", value: 'HWR'},
+        { label: "ASH", value: 'ASH'},
+        { label: "Charité", value: 'Charité'},
+        { label: "HfM", value: 'HfM'},
+        { label: "EHB", value: 'EHB'}
     ]
     useEffect( () => {
         const fetchCanteens = async () => {
@@ -53,7 +59,9 @@ export default function SettingsPage(): ReactElement {
                     label: canteen.name,
                     value: canteen.name
                 }));
-                setCanteens(fetchedCanteens);
+                setCanteens(response.data);
+                console.log(canteens);
+                setCanteenOptions(fetchedCanteens);
             } catch (error) {
                 console.log(error);
             }
@@ -72,7 +80,7 @@ export default function SettingsPage(): ReactElement {
                     <DropdownBox
                         name="uni"
                         options={universities}
-                        value={university}
+                        value={selectedUniversity}
                         label="Universität"
                         onChange={handleUniversityChange}
                     />
@@ -81,8 +89,8 @@ export default function SettingsPage(): ReactElement {
                 <div className="dropBox2">
                     <DropdownBox
                         name="mensa"
-                        options={canteens}
-                        value={selectedCanteen}
+                        options={canteenOptions}
+                        value={selectedCanteenName}
                         label="Mensa"
                         onChange={handleCanteenChange}
                     />
