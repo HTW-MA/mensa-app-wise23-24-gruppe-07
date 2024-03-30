@@ -156,6 +156,9 @@ export default function HomePage(): ReactElement {
     const vegetarianIcon = `${process.env.PUBLIC_URL}/vegetarisch.png`;
     const veganIcon = `${process.env.PUBLIC_URL}/vegan.png`;
     const meatIcon = `${process.env.PUBLIC_URL}/fleisch.png`;
+    const greenIcon = `${process.env.PUBLIC_URL}/Grüner Ampelpunkt.png`;
+    const yellowIcon = `${process.env.PUBLIC_URL}/Gelber Ampelpunkt.png`;
+    const redIcon = `${process.env.PUBLIC_URL}/Roter Ampelpunkt.png`;
 
     const infoModal = () => {
         return (
@@ -167,25 +170,29 @@ export default function HomePage(): ReactElement {
                             src={`${process.env.PUBLIC_URL}/no-menu.png`} alt="noMenuIcon" className="closeImg"/>
                         </button>
                     </div>
+                    <div className="badgeInfoDiv">
+                        <button className="badgeButton"><img src={climateIcon} alt="Klimaessen" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={co2AIcon} alt="co2A" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={co2BIcon} alt="co2B" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={co2CIcon} alt="co2C" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={h2oAIcon} alt="h2oA" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={h2oBIcon} alt="h2oB" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={h2oCIcon} alt="h2oC" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={vegetarianIcon} alt="Vegetarian" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={veganIcon} alt="Vegan" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={meatIcon} alt="Meat" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={greenIcon} alt="Green" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={yellowIcon} alt="Yellow" className="badgeImg2"/></button>
+                        <button className="badgeButton"><img src={redIcon} alt="Red" className="badgeImg2"/></button>
+                    </div>
                     <div className="infoDiv">
-                    <img src={clockIcon} alt="Uhr" className="badgeImg"/>
+                        <img src={clockIcon} alt="Uhr" className="badgeImg"/>
                         <p>Nach 18 Uhr wird dir automatisch der Speiseplan für morgen angezeigt.</p>
                     </div>
                     <div className="infoDiv">
                         <img src={bookmarkIcon} alt="Uhr" className="badgeImg"/>
-                        <p>Tippe auf ein Gericht um es zu speichern und werde benachrichtigt, wenn das Gericht am nächsten Tag verfügbar ist.</p>
-                    </div>
-                    <div>
-                        <img src={climateIcon} alt="Klimaessen" className="badgeImg"/>
-                        <img src={co2AIcon} alt="co2A" className="badgeImg"/>
-                        <img src={co2BIcon} alt="co2B" className="badgeImg"/>
-                        <img src={co2CIcon} alt="co2C" className="badgeImg"/>
-                        <img src={h2oAIcon} alt="h2oA" className="badgeImg"/>
-                        <img src={h2oBIcon} alt="h2oB" className="badgeImg"/>
-                        <img src={h2oCIcon} alt="h2oC" className="badgeImg"/>
-                        <img src={vegetarianIcon} alt="h2oC" className="badgeImg"/>
-                        <img src={veganIcon} alt="h2oC" className="badgeImg"/>
-                        <img src={meatIcon} alt="h2oC" className="badgeImg"/>
+                        <p>Tippe auf ein Gericht um es zu speichern und werde benachrichtigt, wenn das Gericht am
+                            nächsten Tag verfügbar ist.</p>
                     </div>
                 </div>
             </div>
@@ -197,8 +204,11 @@ export default function HomePage(): ReactElement {
             {showInfoModal && infoModal()}
             <header className="header">
                 <div className="speiseplan-div">
-                <p className="speiseplan-tag">Speiseplan</p>
-                    <button className="infoButton" onClick={() => setShowInfoModal(true)}><img src={infoIcon} className="infoIcon" alt="infoIcon"></img></button>
+                    <p className="speiseplan-tag">Speiseplan</p>
+                    <button className="infoButton" onClick={() => setShowInfoModal(true)}><img src={infoIcon}
+                                                                                               className="infoIcon"
+                                                                                               alt="infoIcon"></img>
+                    </button>
                 </div>
                 <div className="weekdays-buttons">
                     <button onClick={loadPreviousWeek} className="changeWeekButton">
@@ -220,7 +230,8 @@ export default function HomePage(): ReactElement {
                         </button>
                     ))}
                     <button onClick={loadNextWeek} className="changeWeekButton">
-                        <img className="arrow" src={weekOffset === 1 ? deactivatedRightArrow2 : rightArrow2}  alt="arrow"/>
+                        <img className="arrow" src={weekOffset === 1 ? deactivatedRightArrow2 : rightArrow2}
+                             alt="arrow"/>
                     </button>
                 </div>
             </header>
