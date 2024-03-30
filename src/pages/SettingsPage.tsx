@@ -125,7 +125,7 @@ export default function SettingsPage(): ReactElement {
                 <div className="guthaben-Div">
                     <p className="guthaben-tag">Guthaben der Mensakarte überprüfen</p>
                     <p className="guthaben">0.00€</p>
-                    <button className="guthaben-button">Mensakarte lesen</button>
+                    <button className="guthaben-button">Mensakarte scannen</button>
                 </div>
             </div>
             <footer>

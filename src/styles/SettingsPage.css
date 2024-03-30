@@ -46,6 +46,7 @@
     background-color: var(--rose-five);
     color: white;
     font-family: 'Poppins', sans-serif;
+    font-size: 2vh;
     border: none;
     height: 5vh;
     border-radius: 6px;
