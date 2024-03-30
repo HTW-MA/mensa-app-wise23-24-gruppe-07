@@ -22,7 +22,7 @@
     height: 14vh;
     display: flex;
     flex-direction: column;
-    padding: 2vh 2.5vh 0 2.5vh;
+    padding: 1.8vh 2.5vh 0 2.5vh;
     z-index: 10;
 }
 .speiseplan-div{
