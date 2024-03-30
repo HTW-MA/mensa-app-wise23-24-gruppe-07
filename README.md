@@ -1,4 +1,4 @@
-![plot](/public/mealcraft167.png)
+![plot](/public/mealcraft167.jpg)
 # MealCraft
 
 A canteen App developed by:
@@ -10,3 +10,5 @@ Marvin Petsch, Andy Thieu, Khanh Le Dang
 ### REACT_APP_API_KEY=[hier euren API Key eintragen]
 
 https://mensa.gregorflachs.de/swaggerdoku#/
+
+https://mealcraft.onrender.com
