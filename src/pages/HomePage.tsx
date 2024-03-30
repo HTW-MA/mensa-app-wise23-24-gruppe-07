@@ -28,13 +28,15 @@ export default function HomePage(): ReactElement {
     const location = useLocation();
     const { canteen } = location.state as {canteen: Canteen };
     const { university } = location.state as { university: string };
+    const role = location.state?.role as string;
+    console.log("homepage role: " +role);
 
     const navigate = useNavigate();
     const navigateToSettingsPage = () => {
-        navigate('/settings', {state: {university: university, canteen: canteen}});
+        navigate('/settings', {state: {university: university, canteen: canteen, role: role}});
     };
     const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {canteen: canteen}});
+        navigate('/saved-meals', {state: {canteen: canteen, university: university, role: role}});
     }
 
     const [mealType, setMealType] = useState("Essen");
@@ -266,7 +268,10 @@ export default function HomePage(): ReactElement {
                                     let price = "";
 
                                     try {
-                                        price = meal.prices[0].price + "€";
+                                        console.log(meal.prices)
+                                        if (role === "Student") price = meal.prices[0].price + "€"
+                                        else if (role === "Angestellt") price = meal.prices[1].price + "€"
+                                        else price = meal.prices[2].price + "€"
                                     } catch (error) { }
 
                                     return (

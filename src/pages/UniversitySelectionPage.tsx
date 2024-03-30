@@ -3,14 +3,17 @@ import "../styles/GeneralStylesheet.css";
 import "../styles/UniversitySelectionPage.css"
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import DropdownBox from "../components/DropdownBox";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import leftArrow from "../resources/left-arrow2.png";
 
 export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
+    const location = useLocation();
+    const role = location.state?.role as string;
+    console.log(role);
     const navigateToCampusSelection = () => {
         console.log(selectedUniversity)
-        navigate('/campus-selection', {state: {university: selectedUniversity}});
+        navigate('/campus-selection', {state: {university: selectedUniversity, role: role}});
     };
     const navigateToHome = () => {
         navigate('/');

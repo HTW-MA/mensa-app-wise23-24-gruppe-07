@@ -10,6 +10,8 @@ export default function SettingsPage(): ReactElement {
     const location = useLocation();
     const initialUniversity = location.state?.university as string;
     const initialCanteen = location.state?.canteen as Canteen;
+    const initialRole = location.state?.role as string;
+
     const [selectedUniversity, setSelectedUniversity] = useState(initialUniversity);
     const [selectedCanteenName, setSelectedCanteenName] = useState(initialCanteen.name);
     const [canteenOptions, setCanteenOptions] = useState([{ label: "", value: "" }]);
@@ -36,6 +38,9 @@ export default function SettingsPage(): ReactElement {
         setSelectedCanteenName(event.target.value);
     }
 
+    const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log(event.target.value);
+    }
     const universities = [
         { label: "HTW", value: 'HTW'},
         { label: "TU", value: 'TU'},
@@ -48,6 +53,11 @@ export default function SettingsPage(): ReactElement {
         { label: "HfM", value: 'HfM'},
         { label: "EHB", value: 'EHB'}
     ]
+    const roles = [
+        { label: "Student", value: 'Student' },
+        { label: "Angestellt", value: 'Angestellt' },
+        { label: "Gast", value: 'Gast' }
+    ];
     useEffect( () => {
         const fetchCanteens = async () => {
             try {
@@ -81,6 +91,15 @@ export default function SettingsPage(): ReactElement {
                 </div>
             </header>
             <div className="homebody-settings">
+                <div className="dropBox3">
+                    <DropdownBox
+                        name="rollen"
+                        options={roles}
+                        value="Angestellt"
+                        label="Rolle"
+                        onChange={handleRoleChange}
+                    />
+                </div>
                 <div className="dropBox">
                     <DropdownBox
                         name="uni"

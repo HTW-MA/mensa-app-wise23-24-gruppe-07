@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function WelcomePage(): ReactElement {
     const roles = [
-        { label: "Student", value: 'student' },
-        { label: "Angestellt", value: 'academic' },
-        { label: "Gast", value: 'guest' }
+        { label: "Student", value: 'Student' },
+        { label: "Angestellt", value: 'Angestellt' },
+        { label: "Gast", value: 'Gast' }
     ];
 
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
@@ -34,7 +34,7 @@ export default function WelcomePage(): ReactElement {
 
     const navigate = useNavigate();
 
-    const navigateToUniversitySelection = () => { navigate('/university-selection'); };
+    const navigateToUniversitySelection = () => { navigate('/university-selection', {state: {role: selectedRole}}); };
 
     const DesktopModal = () => (
         <div className="desktop-modal">

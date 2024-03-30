@@ -10,6 +10,7 @@ import leftArrow from "../resources/left-arrow2.png";
 export default function CanteenSelectionPage(): ReactElement {
     const location = useLocation();
     const { university } = location.state as { university: string};
+    const role = location.state?.role as string;
 
     const [canteens, setCanteens] = React.useState<Canteen[]>([]);
     const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
@@ -20,7 +21,7 @@ export default function CanteenSelectionPage(): ReactElement {
     };
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
-        navigate('/homepage', {state: {canteen: selectedCanteen, university: university}});
+        navigate('/homepage', {state: {canteen: selectedCanteen, university: university, role: role}});
     };
 
     useEffect( () => {
