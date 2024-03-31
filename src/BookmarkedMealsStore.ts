@@ -3,19 +3,23 @@ const STORE_NAME = 'bookmarked-meals';
 
 export const openDatabase = (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
+        if(!indexedDB) {
+            reject(new Error('IndexedDB is not supported'));
+        }
+
         const request = indexedDB.open(DB_NAME, 1);
 
         request.onerror = () => {
             reject(new Error('Failed to open database'));
         };
 
-        request.onsuccess = () => {
-            resolve(request.result);
-        };
-
         request.onupgradeneeded = (event: any) => {
             const db = event.target.result;
             db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+        };
+
+        request.onsuccess = () => {
+            resolve(request.result);
         };
     });
 };
