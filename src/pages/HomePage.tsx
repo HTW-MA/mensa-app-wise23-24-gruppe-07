@@ -303,7 +303,14 @@ export default function HomePage(): ReactElement {
                                                              alt="Klimaessen"></img>
                                                     </div>
                                                 </div>
-                                                <span className="mealPrice">{price}</span>
+                                                <div className="bookmarkAndPriceDiv">
+                                                    <button className="bookmarkButton">
+                                                        <img className="bookmarkImg"
+                                                             src={bookmarkIcon}
+                                                             alt="Merken"></img>
+                                                    </button>
+                                                    <span className="mealPrice">{price}</span>
+                                                </div>
                                             </button>)
                                     }
                                 )
