@@ -1,84 +1,82 @@
-@import url('Colors.css');
+@import url("Colors.css");
 
-.mealName{
-    font-family: 'Poppins', system-ui;
-    font-weight: bold;
-    font-size: 14px;
-
+.mealName {
+  font-family: "Poppins", system-ui;
+  font-weight: bold;
+  font-size: 14px;
 }
-.mealButton{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    padding: 10px 20px 10px 20px;
-    background-color: white;
-    border-radius: 4px;
-    border-width: 2px;
-    border-style: solid;
-    color: black;
-    font-family: 'Poppins', system-ui;
-    border-color: var(--green-medium);
+.mealButton {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 10px 20px 10px 20px;
+  background-color: white;
+  border-radius: 4px;
+  border-width: 2px;
+  border-style: solid;
+  color: black;
+  font-family: "Poppins", system-ui;
+  border-color: var(--green-medium);
 }
-.mealPrice{
-    font-family: 'Poppins', system-ui;
-    font-size: 14px;
-    margin-left: 18px;
+.mealPrice {
+  font-family: "Poppins", system-ui;
+  font-size: 14px;
+  margin-left: 18px;
 }
-.mealButton-active{
-    background-color: var(--green-light);
-    color: white;
+.mealButton-active {
+  background-color: var(--green-light);
+  color: white;
 }
-.mealNameCo2Div{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-left: 18px;
+.mealNameCo2Div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 18px;
 }
-.badgeImg{
-    width: 20px;
-    height: 20px;
-    margin: 2px 4px 0 0;
+.badgeImg {
+  width: 20px;
+  height: 20px;
+  margin: 2px 4px 0 0;
 }
-.badgeImg2{
-    width: 20px;
-    height: 20px;
-    margin: 0;
+.badgeImg2 {
+  width: 20px;
+  height: 20px;
+  margin: 0;
 }
-.badgeButton{
-    background-color: transparent;
-    border: none;
+.badgeButton {
+  background-color: transparent;
+  border: none;
 }
-.badgeInfoDiv{
-    margin-top: 2vh;
+.badgeInfoDiv {
+  margin-top: 2vh;
 }
 .bookmarkAndPriceDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: auto;
 }
 .bookmarkButton {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    padding: 10px 20px 10px 20px;
-    background-color: white;
-    border-width: 2px;
-    border-color: transparent;
-    color: black;
-    font-family: 'Poppins', system-ui;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  padding: 10px 20px 10px 20px;
+  background-color: white;
+  border-width: 2px;
+  border-color: transparent;
+  color: black;
+  font-family: "Poppins", system-ui;
 }
-.bookmarkImg{
-    width: 20px;
-    height: 20px;
-    margin: 2px 4px 0 0;
+.bookmarkImg {
+  width: 20px;
+  height: 20px;
+  margin: 2px 4px 0 0;
 }
-button{
-    -webkit-appearance: none;
+button {
+  -webkit-appearance: none;
 }
 
 /*
