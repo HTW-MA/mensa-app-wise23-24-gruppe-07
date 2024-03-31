@@ -17,8 +17,19 @@ import { Canteen, Menu } from "./Interfaces";
 import DropdownBox from "../components/DropdownBox";
 import clockIcon from "../resources/clock.png";
 import bookmarkIcon from "../resources/bookmark.png";
+import { addMealIdToBookmarkedMealIds } from "../BookmarkedMealsStore";
 
 export default function HomePage(): ReactElement {
+
+  const handleBookmarkMeal = async (mealId: string) => {
+    try {
+      await addMealIdToBookmarkedMealIds(mealId);
+      alert(`Meal ${mealId} bookmarked successfully!`);
+    } catch (error) {
+      console.error("Error bookmarking meal:", error);
+    }
+  };
+
   const mealTypes = [
     { label: "Essen", value: "Essen" },
     { label: "Suppen", value: "Suppen" },
@@ -398,7 +409,7 @@ export default function HomePage(): ReactElement {
                         </div>
                       </div>
                       <div className="bookmarkAndPriceDiv">
-                        <button className="bookmarkButton">
+                        <button className="bookmarkButton" onClick={() =>handleBookmarkMeal(meal.id)}>
                           <img
                             className="bookmarkImg"
                             src={bookmarkIcon}

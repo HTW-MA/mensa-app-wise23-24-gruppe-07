@@ -24,7 +24,7 @@ export const openDatabase = (): Promise<IDBDatabase> => {
     });
 };
 
-export const addMealIdToBookmarkedMealIds = async (mealId: number): Promise<void> => {
+export const addMealIdToBookmarkedMealIds = async (mealId: string): Promise<void> => {
     const db = await openDatabase();
     const transaction = db.transaction(STORE_NAME, 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
