@@ -24,11 +24,11 @@ export const openDatabase = (): Promise<IDBDatabase> => {
     });
 };
 
-export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: string, price:string): Promise<void> => {
+export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: string, price:string, iconSrc:string): Promise<void> => {
     const db = await openDatabase();
     const transaction = db.transaction(STORE_NAME, 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
-    store.add({ id: mealId, name: mealName, price: price});
+    store.add({ id: mealId, name: mealName, price: price, iconSrc: iconSrc});
 };
 
 export const removeMealIdFromBookmarkedMealIds = async (mealId: string): Promise<void> => {

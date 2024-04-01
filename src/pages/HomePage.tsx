@@ -21,7 +21,7 @@ import {
 
 export default function HomePage(): ReactElement {
 
-  const handleBookmarkMeal = async (mealId: string, mealName: string, price:string) => {
+  const handleBookmarkMeal = async (mealId: string, mealName: string, price:string, iconSrc:string) => {
     try {
       const isCurrentlyBookmarked = bookmarkedMeals.includes(mealId);
 
@@ -29,7 +29,7 @@ export default function HomePage(): ReactElement {
         await removeMealIdFromBookmarkedMealIds(mealId);
         setBookmarkedMeals((prevBookmarkedMeals) => prevBookmarkedMeals.filter(id => id !== mealId));
       } else {
-        await addMealIdToBookmarkedMealIds(mealId, mealName, price);
+        await addMealIdToBookmarkedMealIds(mealId, mealName, price, iconSrc);
         setBookmarkedMeals((prevBookmarkedMeals) => [...prevBookmarkedMeals, mealId]);
       }
     } catch (error) {
@@ -420,9 +420,9 @@ export default function HomePage(): ReactElement {
                       <div className="bookmarkAndPriceDiv">
                         {
                           isBookmarked ?
-                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name, price)}><img className="bookmarkImg" src={`${process.env.PUBLIC_URL}/saved.png`} alt="Bookmark"/></button>
+                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name, price, iconSrc)}><img className="bookmarkImg" src={`${process.env.PUBLIC_URL}/saved.png`} alt="Bookmark"/></button>
                               :
-                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name, price)}><img className="bookmarkImg" src={bookmarkIcon} alt="Bookmark"/></button>
+                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name, price, iconSrc)}><img className="bookmarkImg" src={bookmarkIcon} alt="Bookmark"/></button>
                         }
                         <span className="mealPrice">{price}</span>
                       </div>

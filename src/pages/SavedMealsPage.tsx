@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import "../pages/CanteenSelectionPage.tsx"
-import {Canteen, Meal} from "./Interfaces";
+import {Canteen} from "./Interfaces";
 import {readAllBookmarkedMealIdsFromStore, removeMealIdFromBookmarkedMealIds, getAllBookmarkedMeals} from "../BookmarkedMealsStore";
 
 export default function SavedMealsPage(): ReactElement {
@@ -25,7 +25,6 @@ export default function SavedMealsPage(): ReactElement {
                 console.error("Error fetching saved meal IDs:", error);
             }
         };
-
         fetchSavedMealIds();
     }, []);
 
@@ -50,8 +49,9 @@ export default function SavedMealsPage(): ReactElement {
                         return (
                             <div className="meal-list">
                                 <div key={meal.id} className="mealButton">
-                                    <p className="meal-name">{meal.name}</p>
-                                    <p className="meal-price">{meal.price}</p>
+                                    <img className="veganIcon" src={meal.iconSrc} alt="img"/>
+                                    <p className="mealName">{meal.name}</p>
+                                    <p className="mealPrice">{meal.price}</p>
                                 </div>
                             </div>
                         );
