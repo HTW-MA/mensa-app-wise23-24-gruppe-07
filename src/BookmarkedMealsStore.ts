@@ -31,7 +31,7 @@ export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: str
     store.add({ id: mealId, name: mealName });
 };
 
-export const readAllBookmarkedMealIdsFromStore = async (): Promise<number[]> => {
+export const readAllBookmarkedMealIdsFromStore = async (): Promise<string[]> => {
     const db = await openDatabase();
     const transaction = db.transaction(STORE_NAME, 'readonly');
     const store = transaction.objectStore(STORE_NAME);
@@ -39,7 +39,7 @@ export const readAllBookmarkedMealIdsFromStore = async (): Promise<number[]> => 
 
     return new Promise((resolve, reject) => {
         request.onsuccess = () => {
-            resolve(request.result.map((item: { value: number }) => item.value));
+            resolve(request.result.map((item: { id: string }) => item.id));
         };
 
         request.onerror = () => {

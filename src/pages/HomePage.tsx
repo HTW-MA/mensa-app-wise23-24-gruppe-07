@@ -2,13 +2,9 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
-import rightArrow from "../resources/right-arrow.png";
 import rightArrow2 from "../resources/right-arrow2.png";
-import leftArrow from "../resources/left-arrow.png";
 import leftArrow3 from "../resources/left-arrow3.png";
-import deactivatedLeftArrow from "../resources/left-arrow-deactivated.png";
 import deactivatedLeftArrow2 from "../resources/left-arrow-deactivated2.png";
-import deactivatedRightArrow from "../resources/right-arrow-deactivated.png";
 import deactivatedRightArrow2 from "../resources/right-arrow-deactivated2.png";
 import infoIcon from "../resources/info.png";
 import axios from "axios";
@@ -18,6 +14,7 @@ import DropdownBox from "../components/DropdownBox";
 import clockIcon from "../resources/clock.png";
 import bookmarkIcon from "../resources/bookmark.png";
 import { addMealIdToBookmarkedMealIds } from "../BookmarkedMealsStore";
+import { readAllBookmarkedMealIdsFromStore } from "../BookmarkedMealsStore";
 
 export default function HomePage(): ReactElement {
 
@@ -75,6 +72,7 @@ export default function HomePage(): ReactElement {
   let currentWeek: string[] = getWeekdaysFor(new Date(date));
 
   const [useEffectHookTrigger, setUseEffectHookTrigger] = useState(0);
+  const [bookmarkedMeals, setBookmarkedMeals] = useState<string[]>([]);
 
   useEffect(() => {
     axios
@@ -93,6 +91,18 @@ export default function HomePage(): ReactElement {
       });
   }, [useEffectHookTrigger, date, canteen.id]);
 
+  useEffect(() => {
+    const fetchBookmarkedMeals = async () => {
+      try {
+        const mealIds = await readAllBookmarkedMealIdsFromStore();
+        console.log(mealIds);
+        setBookmarkedMeals(mealIds);
+      } catch (error) {
+        console.error("Error fetching bookmarked meals:", error);
+      }
+    };
+    fetchBookmarkedMeals().then(r => console.log("Bookmarked meals fetched!"));
+  }, []);
   const loadPreviousWeek = () => {
     if (weekOffset === 0) return;
     currentWeek = offsetWeekBy(-1);
@@ -382,7 +392,8 @@ export default function HomePage(): ReactElement {
                     console.error("Error getting price:", error);
                   }
 
-
+                  const isBookmarked = bookmarkedMeals.includes(meal.id);
+                  console.log(isBookmarked)
 
                   return (
                     <button className="mealButton" key={meal.id}>
@@ -412,13 +423,22 @@ export default function HomePage(): ReactElement {
                         </div>
                       </div>
                       <div className="bookmarkAndPriceDiv">
-                        <button className="bookmarkButton" onClick={() =>handleBookmarkMeal(meal.id, meal.name)}>
-                          <img
-                            className="bookmarkImg"
-                            src={bookmarkIcon}
-                            alt="Merken"
-                          ></img>
-                        </button>
+                        {
+                          isBookmarked ?
+                              <img
+                                  className="bookmarkImg"
+                                  src={`${process.env.PUBLIC_URL}/saved.png`}
+                                  alt="Bookmarked"
+                              />
+                              :
+                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name)}>
+                                <img
+                                    className="bookmarkImg"
+                                    src={bookmarkIcon}
+                                    alt="Bookmark"
+                                />
+                              </button>
+                        }
                         <span className="mealPrice">{price}</span>
                       </div>
                     </button>
