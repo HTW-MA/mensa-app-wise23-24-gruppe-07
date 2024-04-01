@@ -21,9 +21,9 @@ import { addMealIdToBookmarkedMealIds } from "../BookmarkedMealsStore";
 
 export default function HomePage(): ReactElement {
 
-  const handleBookmarkMeal = async (mealId: string) => {
+  const handleBookmarkMeal = async (mealId: string, mealName: string) => {
     try {
-      await addMealIdToBookmarkedMealIds(mealId);
+      await addMealIdToBookmarkedMealIds(mealId, mealName);
       alert(`Meal ${mealId} bookmarked successfully!`);
     } catch (error) {
       console.error("Error bookmarking meal:", error);
@@ -375,11 +375,14 @@ export default function HomePage(): ReactElement {
                   let price = "";
 
                   try {
-                    if (role === "Student") price = meal.prices[0].price + "€";
-                    else if (role === "Angestellt")
-                      price = meal.prices[1].price + "€";
-                    else price = meal.prices[2].price + "€";
-                  } catch (error) {}
+                    if (role === "Student") price = parseFloat(String(meal.prices[0].price)).toFixed(2) + "€";
+                    else if (role === "Angestellt") price = parseFloat(String(meal.prices[1].price)).toFixed(2) + "€";
+                    else price = parseFloat(String(meal.prices[2].price)).toFixed(2) + "€";
+                  } catch (error) {
+                    console.error("Error getting price:", error);
+                  }
+
+
 
                   return (
                     <button className="mealButton" key={meal.id}>
@@ -409,7 +412,7 @@ export default function HomePage(): ReactElement {
                         </div>
                       </div>
                       <div className="bookmarkAndPriceDiv">
-                        <button className="bookmarkButton" onClick={() =>handleBookmarkMeal(meal.id)}>
+                        <button className="bookmarkButton" onClick={() =>handleBookmarkMeal(meal.id, meal.name)}>
                           <img
                             className="bookmarkImg"
                             src={bookmarkIcon}

@@ -21,7 +21,7 @@
 .mealPrice {
   font-family: "Poppins", system-ui;
   font-size: 14px;
-  margin-left: 18px;
+  margin-top: 1vh;
 }
 .mealButton-active {
   background-color: var(--green-light);
@@ -56,14 +56,13 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-left: auto;
+  margin-left: 3.5vw;
 }
 .bookmarkButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: left;
-  padding: 10px 20px 10px 20px;
   background-color: white;
   border-width: 2px;
   border-color: transparent;
@@ -73,19 +72,7 @@
 .bookmarkImg {
   width: 20px;
   height: 20px;
-  margin: 2px 4px 0 0;
 }
 button {
   -webkit-appearance: none;
 }
-
-/*
-.mealButton{
-    height: 100px;
-    background-color: white;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-*/
