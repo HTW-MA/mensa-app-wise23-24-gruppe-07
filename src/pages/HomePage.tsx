@@ -393,7 +393,6 @@ export default function HomePage(): ReactElement {
                   }
 
                   const isBookmarked = bookmarkedMeals.includes(meal.id);
-                  console.log(isBookmarked)
 
                   return (
                     <button className="mealButton" key={meal.id}>
@@ -425,11 +424,13 @@ export default function HomePage(): ReactElement {
                       <div className="bookmarkAndPriceDiv">
                         {
                           isBookmarked ?
-                              <img
-                                  className="bookmarkImg"
-                                  src={`${process.env.PUBLIC_URL}/saved.png`}
-                                  alt="Bookmarked"
-                              />
+                              <button className="bookmarkButton">
+                                <img
+                                    className="bookmarkImg"
+                                    src={`${process.env.PUBLIC_URL}/saved.png`}
+                                    alt="Bookmark"
+                                />
+                              </button>
                               :
                               <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name)}>
                                 <img
