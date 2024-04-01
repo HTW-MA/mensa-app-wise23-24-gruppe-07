@@ -4,6 +4,7 @@
   font-family: "Poppins", system-ui;
   font-weight: bold;
   font-size: 14px;
+  width: 100%;
 }
 .mealButton {
   display: flex;
@@ -33,7 +34,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 18px;
+  width: 100%;
 }
 .badgeImg {
   width: 20px;
