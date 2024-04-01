@@ -48,9 +48,11 @@ export default function SavedMealsPage(): ReactElement {
                 {
                     savedMeals.map((meal:any) => {
                         return (
-                            <div key={meal.id} className="meal-button">
-                                <p className="meal-name">{meal.name}</p>
-                                <p className="meal-price">{meal.price}</p>
+                            <div className="meal-list">
+                                <div key={meal.id} className="mealButton">
+                                    <p className="meal-name">{meal.name}</p>
+                                    <p className="meal-price">{meal.price}</p>
+                                </div>
                             </div>
                         );
                     })
