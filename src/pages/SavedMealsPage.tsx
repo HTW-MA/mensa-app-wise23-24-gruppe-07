@@ -3,7 +3,8 @@ import {useLocation, useNavigate} from "react-router-dom";
 import "../styles/HomePage.css";
 import "../styles/MealButtonStyles.css";
 import "../pages/CanteenSelectionPage.tsx"
-import {Canteen, Menu} from "./Interfaces";
+import {Canteen, Meal} from "./Interfaces";
+import {readAllBookmarkedMealIdsFromStore, removeMealIdFromBookmarkedMealIds, getAllBookmarkedMeals} from "../BookmarkedMealsStore";
 
 export default function SavedMealsPage(): ReactElement {
 
@@ -12,6 +13,23 @@ export default function SavedMealsPage(): ReactElement {
     const { university } = location.state as { university: string };
     const { canteen } = location.state as { canteen: Canteen };
     const { role } = location.state as { role: string };
+    const [savedMeals, setSavedMeals] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchSavedMealIds = async () => {
+            try {
+                const meals = await getAllBookmarkedMeals();
+                setSavedMeals(meals);
+                console.log("Saved meals: ", meals);
+            } catch (error) {
+                console.error("Error fetching saved meal IDs:", error);
+            }
+        };
+
+        fetchSavedMealIds();
+    }, []);
+
+
     const navigateToHomePage = () => {
         navigate('/homepage', {state: {university: university, canteen: canteen, role: role}});
     };
@@ -27,6 +45,16 @@ export default function SavedMealsPage(): ReactElement {
                 </div>
             </header>
             <div className="homebody">
+                {
+                    savedMeals.map((meal:any) => {
+                        return (
+                            <div key={meal.id} className="meal-button">
+                                <p className="meal-name">{meal.name}</p>
+                                <p className="meal-price">{meal.price}</p>
+                            </div>
+                        );
+                    })
+                }
             </div>
             <footer>
                 <div className="footer-div">

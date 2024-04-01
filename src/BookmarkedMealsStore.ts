@@ -24,11 +24,11 @@ export const openDatabase = (): Promise<IDBDatabase> => {
     });
 };
 
-export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: string): Promise<void> => {
+export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: string, price:string): Promise<void> => {
     const db = await openDatabase();
     const transaction = db.transaction(STORE_NAME, 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
-    store.add({ id: mealId, name: mealName });
+    store.add({ id: mealId, name: mealName, price: price});
 };
 
 export const removeMealIdFromBookmarkedMealIds = async (mealId: string): Promise<void> => {
@@ -54,3 +54,20 @@ export const readAllBookmarkedMealIdsFromStore = async (): Promise<string[]> => 
         };
     });
 };
+
+export const getAllBookmarkedMeals = async (): Promise<any[]> => {
+    const db = await openDatabase();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.getAll();
+
+    return new Promise((resolve, reject) => {
+        request.onsuccess = () => {
+            resolve(request.result);
+        };
+
+        request.onerror = () => {
+            reject(new Error('Failed to read numbers from store'));
+        };
+    });
+}
