@@ -24,6 +24,7 @@
   font-family: "Poppins", system-ui;
   font-size: 14px;
   margin-top: 1vh;
+  margin-bottom: 0;
 }
 .mealButton-active {
   background-color: var(--green-light);

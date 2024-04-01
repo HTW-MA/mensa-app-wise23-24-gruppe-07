@@ -15,6 +15,15 @@ export default function SavedMealsPage(): ReactElement {
     const { role } = location.state as { role: string };
     const [savedMeals, setSavedMeals] = useState<any[]>([]);
 
+    const removeMeal = async (mealId: string) => {
+        try {
+            await removeMealIdFromBookmarkedMealIds(mealId);
+            setSavedMeals(savedMeals.filter((meal) => meal.id !== mealId));
+        } catch (error) {
+            console.error("Error removing meal from saved meals:", error);
+        }
+    }
+
     useEffect(() => {
         const fetchSavedMealIds = async () => {
             try {
@@ -51,7 +60,10 @@ export default function SavedMealsPage(): ReactElement {
                                 <div key={meal.id} className="mealButton">
                                     <img className="veganIcon" src={meal.iconSrc} alt="img"/>
                                     <p className="mealName">{meal.name}</p>
-                                    <p className="mealPrice">{meal.price}</p>
+                                    <div className="bookmarkAndPriceDiv">
+                                        <button className="bookmarkButton" onClick={() => removeMeal(meal.id)}><img className="bookmarkImg" src={`${process.env.PUBLIC_URL}/no-menu.png`} alt="Bookmark"/></button>
+                                        <p className="mealPrice">{meal.price}</p>
+                                    </div>
                                 </div>
                             </div>
                         );

@@ -36,6 +36,7 @@ export const removeMealIdFromBookmarkedMealIds = async (mealId: string): Promise
     const transaction = db.transaction(STORE_NAME, 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
     store.delete(mealId);
+    console.log("Deleted meal with id: ", mealId);
 };
 
 export const readAllBookmarkedMealIdsFromStore = async (): Promise<string[]> => {
