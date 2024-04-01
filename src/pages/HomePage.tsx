@@ -13,19 +13,30 @@ import { Canteen, Menu } from "./Interfaces";
 import DropdownBox from "../components/DropdownBox";
 import clockIcon from "../resources/clock.png";
 import bookmarkIcon from "../resources/bookmark.png";
-import { addMealIdToBookmarkedMealIds } from "../BookmarkedMealsStore";
-import { readAllBookmarkedMealIdsFromStore } from "../BookmarkedMealsStore";
+import {
+  addMealIdToBookmarkedMealIds,
+  readAllBookmarkedMealIdsFromStore,
+  removeMealIdFromBookmarkedMealIds
+} from "../BookmarkedMealsStore";
 
 export default function HomePage(): ReactElement {
 
   const handleBookmarkMeal = async (mealId: string, mealName: string) => {
     try {
-      await addMealIdToBookmarkedMealIds(mealId, mealName);
-      alert(`Meal ${mealId} bookmarked successfully!`);
+      const isCurrentlyBookmarked = bookmarkedMeals.includes(mealId);
+
+      if (isCurrentlyBookmarked) {
+        await removeMealIdFromBookmarkedMealIds(mealId);
+        setBookmarkedMeals((prevBookmarkedMeals) => prevBookmarkedMeals.filter(id => id !== mealId));
+      } else {
+        await addMealIdToBookmarkedMealIds(mealId, mealName);
+        setBookmarkedMeals((prevBookmarkedMeals) => [...prevBookmarkedMeals, mealId]);
+      }
     } catch (error) {
-      console.error("Error bookmarking meal:", error);
+      console.error("Error toggling bookmark:", error);
     }
   };
+
 
   const mealTypes = [
     { label: "Essen", value: "Essen" },
@@ -103,6 +114,7 @@ export default function HomePage(): ReactElement {
     };
     fetchBookmarkedMeals().then(r => console.log("Bookmarked meals fetched!"));
   }, []);
+
   const loadPreviousWeek = () => {
     if (weekOffset === 0) return;
     currentWeek = offsetWeekBy(-1);
@@ -396,49 +408,21 @@ export default function HomePage(): ReactElement {
 
                   return (
                     <button className="mealButton" key={meal.id}>
-                      <img
-                        className="veganIcon"
-                        src={iconSrc}
-                        alt={badgeName}
-                      />
+                      <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                       <div className="mealNameCo2Div">
                         <span className="mealName">{meal.name}</span>
                         <div className="badgeDiv">
-                          <img
-                            className="badgeImg"
-                            src={co2Src}
-                            alt="CO2_bewertung"
-                          ></img>
-                          <img
-                            className="badgeImg"
-                            src={h2oSrc}
-                            alt="H2O_bewertung"
-                          ></img>
-                          <img
-                            className="badgeImg"
-                            src={climateIconSrc}
-                            alt="Klimaessen"
-                          ></img>
+                          <img className="badgeImg" src={co2Src} alt="CO2_bewertung"></img>
+                          <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
+                          <img className="badgeImg" src={climateIconSrc} alt="Klimaessen"></img>
                         </div>
                       </div>
                       <div className="bookmarkAndPriceDiv">
                         {
                           isBookmarked ?
-                              <button className="bookmarkButton">
-                                <img
-                                    className="bookmarkImg"
-                                    src={`${process.env.PUBLIC_URL}/saved.png`}
-                                    alt="Bookmark"
-                                />
-                              </button>
+                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name)}><img className="bookmarkImg" src={`${process.env.PUBLIC_URL}/saved.png`} alt="Bookmark"/></button>
                               :
-                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name)}>
-                                <img
-                                    className="bookmarkImg"
-                                    src={bookmarkIcon}
-                                    alt="Bookmark"
-                                />
-                              </button>
+                              <button className="bookmarkButton" onClick={() => handleBookmarkMeal(meal.id, meal.name)}><img className="bookmarkImg" src={bookmarkIcon} alt="Bookmark"/></button>
                         }
                         <span className="mealPrice">{price}</span>
                       </div>

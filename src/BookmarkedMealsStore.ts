@@ -31,6 +31,13 @@ export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: str
     store.add({ id: mealId, name: mealName });
 };
 
+export const removeMealIdFromBookmarkedMealIds = async (mealId: string): Promise<void> => {
+    const db = await openDatabase();
+    const transaction = db.transaction(STORE_NAME, 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+    store.delete(mealId);
+};
+
 export const readAllBookmarkedMealIdsFromStore = async (): Promise<string[]> => {
     const db = await openDatabase();
     const transaction = db.transaction(STORE_NAME, 'readonly');
