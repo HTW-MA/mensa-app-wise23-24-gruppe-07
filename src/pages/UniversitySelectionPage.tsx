@@ -9,7 +9,7 @@ import leftArrow from "../resources/left-arrow2.png";
 export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
     const location = useLocation();
-    const university = location.state?.university as string ?? "HTW";
+    const university = location.state?.university as string ?? "Hochschule für Technik und Wirtschaft Berlin";
     const role = location.state?.role as string;
     console.log(role);
     const navigateToCampusSelection = () => {
@@ -21,16 +21,16 @@ export default function WelcomePage(): ReactElement {
     };
 
     const universities = [
-        { label: "HTW", value: 'HTW'},
-        { label: "TU", value: 'TU'},
-        { label: "FU", value: 'FU'},
-        { label: "HU", value: 'HU'},
-        { label: "BHT", value: 'BHT'},
-        { label: "HWR", value: 'HWR'},
-        { label: "ASH", value: 'ASH'},
-        { label: "Charité", value: 'Charité'},
-        { label: "HfM", value: 'HfM'},
-        { label: "EHB", value: 'EHB'}
+        { label: "HTW", value: 'Hochschule für Technik und Wirtschaft Berlin'},
+        { label: "TU", value: 'Technische Universität Berlin'},
+        { label: "FU", value: 'Freie Universität Berlin'},
+        { label: "HU", value: 'Humboldt-Universität zu Berlin'},
+        { label: "BHT", value: 'Berliner Hochschule für Technik '},
+        { label: "HWR", value: 'Hochschule für Wirtschaft und Recht Berlin'},
+        { label: "ASH", value: 'Alice Salomon Hochschule Berlin'},
+        { label: "Charité", value: 'Charité - Universitätsmedizin Berlin'},
+        { label: "HfM", value: 'Hochschule für Musik Hanns Eisler Berlin'},
+        { label: "EHB", value: 'Evangelische Hochschule Berlin'}
     ]
 
     const [selectedUniversity, setSelectedUniversity] = useState(university);

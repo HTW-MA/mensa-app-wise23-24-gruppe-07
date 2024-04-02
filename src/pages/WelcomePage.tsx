@@ -5,6 +5,8 @@ import logo from "../resources/FoodCraft-Icon-transparent.png";
 import qrCode from "../resources/qr-code.png";
 import DropdownBox from "../components/DropdownBox";
 import { useNavigate } from "react-router-dom";
+import {checkAndAddCanteens} from "../canteenStore";
+import axios from "axios";
 
 export default function WelcomePage(): ReactElement {
     const roles = [
@@ -31,6 +33,20 @@ export default function WelcomePage(): ReactElement {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    useEffect(() => {
+        axios.get("https://mensa.gregorflachs.de/api/v1/canteen?loadingtype=lazy", {
+            headers: {
+                "X-API-KEY": process.env.REACT_APP_API_KEY
+            }
+        }).then((response) => {
+            console.log('Canteens fetched from API');
+            checkAndAddCanteens(response.data);
+        }).catch(error => {
+            console.error('Error fetching canteens:', error);
+        });
+    }, []); // Empty dependency array to ensure it runs only once on component mount
+
 
     const navigate = useNavigate();
 

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import {Canteen} from "./Interfaces";
 import leftArrow from "../resources/left-arrow2.png";
+import { getCanteensByUniversity } from '../canteenStore';
 
 export default function CanteenSelectionPage(): ReactElement {
     const location = useLocation();
@@ -24,16 +25,13 @@ export default function CanteenSelectionPage(): ReactElement {
         navigate('/homepage', {state: {canteen: selectedCanteen, university: university, role: role}});
     };
 
-    useEffect( () => {
-        axios
-            .get("https://mensa.gregorflachs.de/api/v1/canteen?name=" + university, {
-                headers: {
-                    "X-API-KEY": process.env.REACT_APP_API_KEY}
-            })
-            .then(response => {
-                setCanteens(response.data);
-            });
-    }, [])
+    useEffect(() => {
+        getCanteensByUniversity(university).then(fetchedCanteens => {
+            setCanteens(fetchedCanteens);
+        }).catch(error => {
+            console.error("Failed to fetch canteens from IndexedDB:", error);
+        });
+    }, []);
 
     return (
         <div className="page">
@@ -43,7 +41,7 @@ export default function CanteenSelectionPage(): ReactElement {
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Mensa auswählen</h2>
             </header>
-            <p>Ausgewählte Uni: <span className="university">{university}</span></p>
+            <p className="selected-uni">Ausgewählte Uni: <br/> <span className="university">{university}</span></p>
             <div className="canteen-list">
                 {canteens.map((canteen) => (
                     <button
