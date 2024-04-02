@@ -19,6 +19,8 @@ import {
   removeMealIdFromBookmarkedMealIds
 } from "../BookmarkedMealsStore";
 
+import { addUserPreferences } from "../userPreferencesStore";
+
 export default function HomePage(): ReactElement {
 
   const handleBookmarkMeal = async (mealId: string, mealName: string, price:string, iconSrc:string) => {
@@ -75,7 +77,6 @@ export default function HomePage(): ReactElement {
   const { university } = location.state as { university: string };
   const role = location.state?.role as string;
   const [userRole, setUserRole] = useState(role);
-  console.log("homepage role: " + role);
 
   const navigate = useNavigate();
   const navigateToSettingsPage = () => {
@@ -135,6 +136,13 @@ export default function HomePage(): ReactElement {
       }
     };
     fetchBookmarkedMeals().then(r => console.log("Bookmarked meals fetched!"));
+  }, []);
+
+  useEffect(() => {
+    console.log("homepage role: " + role);
+    addUserPreferences(userRole, university, canteen)
+        .then(() => console.log("User preferences added or updated!"))
+        .catch(error => console.error("Failed to add or update user preferences:", error));
   }, []);
 
   const loadPreviousWeek = () => {
@@ -429,7 +437,7 @@ export default function HomePage(): ReactElement {
                   const isBookmarked = bookmarkedMeals.includes(meal.id);
 
                   return (
-                    <button className="mealButton" key={meal.id}>
+                    <div className="mealButton" key={meal.id}>
                       <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                       <div className="mealNameCo2Div">
                         <span className="mealName">{meal.name}</span>
@@ -448,7 +456,7 @@ export default function HomePage(): ReactElement {
                         }
                         <span className="mealPrice">{price}</span>
                       </div>
-                    </button>
+                    </div>
                   );
                 }),
             )
