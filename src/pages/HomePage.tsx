@@ -35,6 +35,22 @@ export default function HomePage(): ReactElement {
     } catch (error) {
       console.error("Error toggling bookmark:", error);
     }
+
+    if (Notification.permission == "granted") {
+      new Notification("Test");
+    } else if (Notification.permission == "denied") {
+      console.log("Notifications denied")
+    } else if (Notification.permission == "default") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission == "granted") {
+          new Notification("Test")
+        } else if (permission == "denied") {
+          console.log("Notifications denied")
+        } else if (permission == "default") {
+          console.log("Notifications can't be send, but can ask for permission again")
+        }
+      });
+    }
   };
 
 
