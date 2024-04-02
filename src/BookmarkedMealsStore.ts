@@ -7,7 +7,7 @@ export const openDatabase = (): Promise<IDBDatabase> => {
             reject(new Error('IndexedDB is not supported'));
         }
 
-        const request = indexedDB.open(DB_NAME, 1);
+        const request = indexedDB.open(DB_NAME, 12);
 
         request.onerror = () => {
             reject(new Error('Failed to open database'));
