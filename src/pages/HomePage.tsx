@@ -54,6 +54,15 @@ export default function HomePage(): ReactElement {
   };
 
   const showNotification = () => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.ts")
+          .then(function (registration) {
+            console.log("...")
+          })
+          .catch(function (error) {
+            console.log("...")
+          });
+    }
     navigator.serviceWorker.ready.then(function (registration) {
       registration.showNotification("Test");
     });
