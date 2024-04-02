@@ -35,7 +35,29 @@ export default function HomePage(): ReactElement {
     } catch (error) {
       console.error("Error toggling bookmark:", error);
     }
+
+    if (Notification.permission == "granted") {
+      showNotification()
+    } else if (Notification.permission == "denied") {
+      console.log("Notifications denied")
+    } else if (Notification.permission == "default") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission == "granted") {
+          showNotification()
+        } else if (permission == "denied") {
+          console.log("Notifications denied")
+        } else if (permission == "default") {
+          console.log("Notifications can't be send, but can ask for permission again")
+        }
+      });
+    }
   };
+
+  const showNotification = () => {
+    navigator.serviceWorker.ready.then(function (registration) {
+      registration.showNotification("Test");
+    });
+  }
 
 
   const mealTypes = [
