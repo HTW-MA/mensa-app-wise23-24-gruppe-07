@@ -22,6 +22,7 @@ export default function CanteenSelectionPage(): ReactElement {
     };
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
+        localStorage.setItem('preferencesSaved', 'true');
         navigate('/homepage', {state: {canteen: selectedCanteen, university: university, role: role}});
     };
 
