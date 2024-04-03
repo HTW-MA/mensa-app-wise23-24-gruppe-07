@@ -1,39 +1,8 @@
 import {Canteen} from "./pages/Interfaces";
+import {openDatabase} from "./openDBStore";
 
-const DB_NAME = 'meal-craft-database';
 const STORE_NAME = 'user-preferences';
 const PREFERENCE_KEY = 'user-preference';
-
-export const openDatabase = (): Promise<IDBDatabase> => {
-    return new Promise((resolve, reject) => {
-        if(!indexedDB) {
-            reject(new Error('IndexedDB is not supported'));
-        }
-
-        const request = indexedDB.open(DB_NAME, 19);
-
-        request.onerror = () => {
-            reject(new Error('Failed to open database'));
-        };
-
-        request.onupgradeneeded = (event: any) => {
-            console.log('Upgrading or creating database');
-            const db = event.target.result;
-            console.log(`Creating object store with keyPath: 'ID'`);
-            // Check if the object store already exists before creating it
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-                console.log(`Creating object store: ${STORE_NAME}`);
-                db.createObjectStore(STORE_NAME, { keyPath: 'ID' });
-            } else {
-                console.log(`Object store ${STORE_NAME} already exists.`);
-            }
-        };
-
-        request.onsuccess = () => {
-            resolve(request.result);
-        };
-    });
-};
 
 export const addUserPreferences = async (role: string, university: string, canteen: object): Promise<void> => {
     console.log('Saving user preferences:', role, university, canteen);
@@ -41,7 +10,12 @@ export const addUserPreferences = async (role: string, university: string, cante
     const transaction = db.transaction(STORE_NAME, 'readwrite');
     const store = transaction.objectStore(STORE_NAME);
 
-    store.put({ role, university, canteen }, PREFERENCE_KEY);
+    store.put({
+        id: PREFERENCE_KEY,
+        role,
+        university,
+        canteen
+    });
     return new Promise((resolve, reject) => {
         transaction.oncomplete = () => {
             console.log('User preferences saved!');

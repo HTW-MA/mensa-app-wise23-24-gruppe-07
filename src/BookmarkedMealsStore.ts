@@ -1,34 +1,6 @@
-const DB_NAME = 'meal-craft-database';
+import {openDatabase} from "./openDBStore";
+
 const STORE_NAME = 'bookmarked-meals';
-
-export const openDatabase = (): Promise<IDBDatabase> => {
-    return new Promise((resolve, reject) => {
-        if(!indexedDB) {
-            reject(new Error('IndexedDB is not supported'));
-        }
-
-        const request = indexedDB.open(DB_NAME, 19);
-
-        request.onerror = () => {
-            reject(new Error('Failed to open database'));
-        };
-
-        request.onupgradeneeded = (event: any) => {
-            const db = event.target.result;
-            // Check if the object store already exists before creating it
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-                console.log(`Creating object store: ${STORE_NAME}`);
-                db.createObjectStore(STORE_NAME, { keyPath: 'ID' });
-            } else {
-                console.log(`Object store ${STORE_NAME} already exists.`);
-            }
-        };
-
-        request.onsuccess = () => {
-            resolve(request.result);
-        };
-    });
-};
 
 export const addMealIdToBookmarkedMealIds = async (mealId: string, mealName: string, price:string, iconSrc:string): Promise<void> => {
     const db = await openDatabase();

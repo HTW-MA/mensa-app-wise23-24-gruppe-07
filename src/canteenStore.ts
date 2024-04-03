@@ -1,36 +1,6 @@
-const DB_NAME = 'meal-craft-database';
+import {openDatabase} from "./openDBStore";
+
 const STORE_NAME = 'canteen-list';
-
-export const openDatabase = (): Promise<IDBDatabase> => {
-    return new Promise((resolve, reject) => {
-        if(!indexedDB) {
-            reject(new Error('IndexedDB is not supported'));
-        }
-
-        const request = indexedDB.open(DB_NAME, 19);
-
-        request.onerror = () => {
-            reject(new Error('Failed to open database'));
-        };
-
-        request.onupgradeneeded = (event: any) => {
-            console.log('Upgrading or creating database');
-            const db = event.target.result;
-            console.log(`Creating object store with keyPath: 'ID'`);
-            // Check if the object store already exists before creating it
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-                console.log(`Creating object store: ${STORE_NAME}`);
-                db.createObjectStore(STORE_NAME, { keyPath: 'ID' });
-            } else {
-                console.log(`Object store ${STORE_NAME} already exists.`);
-            }
-        };
-
-        request.onsuccess = () => {
-            resolve(request.result);
-        };
-    });
-};
 
 export const checkAndAddCanteens = async (canteens: any[]): Promise<void> => {
     const db = await openDatabase();
@@ -74,11 +44,11 @@ export const getCanteensByUniversity = async (university: string): Promise<any[]
         const store = transaction.objectStore(STORE_NAME);
         const request = store.getAll();
 
-        request.onerror = (event) => {
+        request.onerror = (event:any) => {
             reject(`Database error: ${request.error?.message}`);
         };
 
-        request.onsuccess = (event) => {
+        request.onsuccess = (event:any) => {
             const allCanteens = request.result as any[];
 
             const filteredCanteens = allCanteens.filter(canteen =>

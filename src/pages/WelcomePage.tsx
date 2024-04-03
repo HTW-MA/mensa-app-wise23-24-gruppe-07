@@ -6,7 +6,6 @@ import qrCode from "../resources/qr-code.png";
 import DropdownBox from "../components/DropdownBox";
 import { useNavigate } from "react-router-dom";
 import {checkAndAddCanteens} from "../canteenStore";
-import {openDatabase} from "../userPreferencesStore";
 import axios from "axios";
 
 export default function WelcomePage(): ReactElement {
@@ -42,11 +41,12 @@ export default function WelcomePage(): ReactElement {
             }
         }).then((response) => {
             console.log('Canteens fetched from API');
-            checkAndAddCanteens(response.data);
+            checkAndAddCanteens(response.data).then(r => {
+                console.log('Canteens saved to DB');
+            });
         }).catch(error => {
             console.error('Error fetching canteens:', error);
         });
-        openDatabase();
     }, []); // Empty dependency array to ensure it runs only once on component mount
 
     //useEffect(() => {
