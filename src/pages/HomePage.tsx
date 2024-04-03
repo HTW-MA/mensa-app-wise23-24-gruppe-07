@@ -19,7 +19,7 @@ import {
   removeMealIdFromBookmarkedMealIds
 } from "../BookmarkedMealsStore";
 
-import { addUserPreferences } from "../userPreferencesStore";
+import { getCanteenFromPreferences } from "../userPreferencesStore";
 import {register} from "../serviceWorkerRegistration";
 
 export default function HomePage(): ReactElement {
@@ -85,20 +85,20 @@ export default function HomePage(): ReactElement {
   const [weekOffset, setWeekOffset] = useState<number>(0);
 
   const location = useLocation();
-  const { canteen } = location.state as { canteen: Canteen };
   const { university } = location.state as { university: string };
   const role = location.state?.role as string;
   const [userRole, setUserRole] = useState(role);
+  const [userCanteen, setUserCanteen] = React.useState<Canteen>();
 
   const navigate = useNavigate();
   const navigateToSettingsPage = () => {
     navigate("/settings", {
-      state: { university: university, canteen: canteen, role: userRole },
+      state: { university: university, canteen: userCanteen, role: userRole },
     });
   };
   const navigateToSavedMealsPage = () => {
     navigate("/saved-meals", {
-      state: { canteen: canteen, university: university, role: userRole },
+      state: { canteen: userCanteen, university: university, role: userRole },
     });
   };
 
@@ -124,7 +124,7 @@ export default function HomePage(): ReactElement {
     axios
       .get(
         "https://mensa.gregorflachs.de/api/v1/menue?canteenId=" +
-          canteen.id +
+          userCanteen?.id +
           "&startdate=" +
           date +
           "&enddate=" +
@@ -135,7 +135,7 @@ export default function HomePage(): ReactElement {
         setMenu(response.data);
         console.log(response.data);
       });
-  }, [useEffectHookTrigger, date, canteen.id]);
+  }, [useEffectHookTrigger, date, userCanteen?.id]);
 
   useEffect(() => {
     const fetchBookmarkedMeals = async () => {
@@ -151,10 +151,9 @@ export default function HomePage(): ReactElement {
   }, []);
 
   useEffect(() => {
-    console.log("homepage role: " + role);
-    addUserPreferences(userRole, university, canteen)
-        .then(() => console.log("User preferences added or updated!"))
-        .catch(error => console.error("Failed to add or update user preferences:", error));
+    getCanteenFromPreferences().then(canteen => {
+      setUserCanteen(canteen);
+    });
   }, []);
 
   const loadPreviousWeek = () => {
@@ -377,7 +376,7 @@ export default function HomePage(): ReactElement {
       </header>
       <div className="homebody">
         <div className="nameDiv">
-          <p className="canteenName">{canteen.name}</p>
+          <p className="canteenName">{userCanteen?.name}</p>
           <p className="date">{getReformattedDate(date)}</p>
         </div>
         <div className="meal-type-selection">

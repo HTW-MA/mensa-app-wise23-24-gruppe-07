@@ -1,3 +1,5 @@
+import {Canteen} from "./pages/Interfaces";
+
 const DB_NAME = 'meal-craft-database';
 const STORE_NAME = 'user-preferences';
 const PREFERENCE_KEY = 'user-preference';
@@ -49,3 +51,21 @@ export const addUserPreferences = async (role: string, university: string, cante
         };
     });
 };
+
+export const getCanteenFromPreferences = async (): Promise<Canteen> => {
+    const db = await openDatabase();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+
+    let request = store.get(PREFERENCE_KEY);
+    return new Promise((resolve, reject) => {
+        request.onsuccess = () => {
+            console.log('User canteen preferences fetched:', request.result.canteen);
+            resolve(request.result.canteen);
+        };
+        request.onerror = () => {
+            console.error('Error fetching user preferences:', request.error);
+            reject(request.error);
+        };
+    });
+}

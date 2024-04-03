@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import {Canteen} from "./Interfaces";
 import leftArrow from "../resources/left-arrow2.png";
 import { getCanteensByUniversity } from '../canteenStore';
+import { addUserPreferences} from "../userPreferencesStore";
 
 export default function CanteenSelectionPage(): ReactElement {
     const location = useLocation();
@@ -23,6 +24,9 @@ export default function CanteenSelectionPage(): ReactElement {
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
         //localStorage.setItem('preferencesSaved', 'true');
+        addUserPreferences(role, university, selectedCanteen)
+            .then(() => console.log("User preferences added or updated!"))
+            .catch(error => console.error("Failed to add or update user preferences:", error));
         navigate('/homepage', {state: {canteen: selectedCanteen, university: university, role: role}});
     };
 
