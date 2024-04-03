@@ -59,13 +59,15 @@ export default function HomePage(): ReactElement {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/service-worker.ts")
           .then(function (registration) {
-            console.log("...")
+            console.log("Registered service worker.")
+            registration.showNotification("Test");
           })
           .catch(function (error) {
-            console.log("...")
+            console.log("Registration of service worker failed.")
           });
     }
     navigator.serviceWorker.ready.then(function (registration) {
+      console.log("Service worker was found to be ready.")
       registration.showNotification("Test");
     });
   }
