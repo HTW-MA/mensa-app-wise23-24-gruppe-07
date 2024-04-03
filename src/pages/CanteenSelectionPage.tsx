@@ -2,7 +2,6 @@ import React, {ReactElement, useEffect, useState} from "react";
 import "../styles/CanteenSelectionPage.css";
 import logo from "../resources/FoodCraft-Icon-transparent.png";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import {Canteen} from "./Interfaces";
 import leftArrow from "../resources/left-arrow2.png";

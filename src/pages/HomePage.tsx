@@ -20,8 +20,6 @@ import {
 } from "../BookmarkedMealsStore";
 
 import { getCanteenFromPreferences, getUniversityFromPreferences } from "../userPreferencesStore";
-import {register} from "../serviceWorkerRegistration";
-import {pushNotification} from "../push-notifications";
 
 export default function HomePage(): ReactElement {
 
@@ -39,8 +37,6 @@ export default function HomePage(): ReactElement {
     } catch (error) {
       console.error("Error toggling bookmark:", error);
     }
-
-    pushNotification();
   };
 
   const mealTypes = [
@@ -60,7 +56,7 @@ export default function HomePage(): ReactElement {
   const [userCanteen, setUserCanteen] = React.useState<Canteen>();
 
   const navigate = useNavigate();
-  const navigateToSettingsPage = () => {
+  const navigateToSettingsPage = async () => {
     navigate("/settings", {
       state: { university: university, canteen: userCanteen, role: userRole },
     });

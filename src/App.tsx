@@ -5,7 +5,6 @@ import CanteenSelectionPage from "./pages/CanteenSelectionPage";
 import HomePage from "./pages/HomePage";
 import SettingsPage from "./pages/SettingsPage";
 import SavedMealsPage from "./pages/SavedMealsPage";
-import {useEffect} from "react";
 
 export default function App() {
   let pathOfFirstPage = "/";
