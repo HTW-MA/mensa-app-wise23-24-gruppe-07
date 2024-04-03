@@ -25,3 +25,7 @@ yarn-error.log*
 
 .idea
 
+src/push-keys.ts
+
+food-craft
+
