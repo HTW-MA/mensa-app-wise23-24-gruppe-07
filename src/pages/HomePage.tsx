@@ -19,7 +19,7 @@ import {
   removeMealIdFromBookmarkedMealIds
 } from "../BookmarkedMealsStore";
 
-import { getCanteenFromPreferences } from "../userPreferencesStore";
+import { getCanteenFromPreferences, getUniversityFromPreferences } from "../userPreferencesStore";
 import {register} from "../serviceWorkerRegistration";
 
 export default function HomePage(): ReactElement {
@@ -85,7 +85,7 @@ export default function HomePage(): ReactElement {
   const [weekOffset, setWeekOffset] = useState<number>(0);
 
   const location = useLocation();
-  const { university } = location.state as { university: string };
+  const [university, setUniversity] = useState("");
   const role = location.state?.role as string;
   const [userRole, setUserRole] = useState(role);
   const [userCanteen, setUserCanteen] = React.useState<Canteen>();
@@ -153,6 +153,9 @@ export default function HomePage(): ReactElement {
   useEffect(() => {
     getCanteenFromPreferences().then(canteen => {
       setUserCanteen(canteen);
+    });
+    getUniversityFromPreferences().then(university => {
+        setUniversity(university);
     });
   }, []);
 

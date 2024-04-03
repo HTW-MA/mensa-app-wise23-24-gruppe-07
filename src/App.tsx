@@ -10,14 +10,6 @@ import {useEffect} from "react";
 export default function App() {
   let pathOfFirstPage = "/";
 
-    //useEffect(() => {
-    //    const preferencesSaved = localStorage.getItem('preferencesSaved');
-
-    //    if (preferencesSaved) {
-    //        window.location.href = '/homepage';
-    //    }
-    //}, []);
-
   return (
       <Router>
         <Routes>

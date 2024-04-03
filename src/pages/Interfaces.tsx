@@ -2,6 +2,7 @@ export interface Canteen {
     name: string;
     address: Address;
     id: string;
+    businessDays:[object];
 }
 
 export interface Address {

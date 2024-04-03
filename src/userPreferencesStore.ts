@@ -58,10 +58,28 @@ export const getCanteenFromPreferences = async (): Promise<Canteen> => {
     const store = transaction.objectStore(STORE_NAME);
 
     let request = store.get(PREFERENCE_KEY);
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
         request.onsuccess = () => {
             console.log('User canteen preferences fetched:', request.result.canteen);
             resolve(request.result.canteen);
+        };
+        request.onerror = () => {
+            console.error('Error fetching user preferences:', request.error);
+            reject(request.error);
+        };
+    });
+}
+
+export const getUniversityFromPreferences = async (): Promise<string> => {
+    const db = await openDatabase();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+
+    let request = store.get(PREFERENCE_KEY);
+    return await new Promise((resolve, reject) => {
+        request.onsuccess = () => {
+            console.log('User university preferences fetched:', request.result.university);
+            resolve(request.result.university);
         };
         request.onerror = () => {
             console.error('Error fetching user preferences:', request.error);

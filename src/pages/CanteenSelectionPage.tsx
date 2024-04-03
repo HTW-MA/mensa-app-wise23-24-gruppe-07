@@ -23,7 +23,7 @@ export default function CanteenSelectionPage(): ReactElement {
     };
     const navigateToHomepage = () => {
         if (selectedCanteen == null) return;
-        //localStorage.setItem('preferencesSaved', 'true');
+        localStorage.setItem('preferencesSaved', 'true');
         addUserPreferences(role, university, selectedCanteen)
             .then(() => console.log("User preferences added or updated!"))
             .catch(error => console.error("Failed to add or update user preferences:", error));
