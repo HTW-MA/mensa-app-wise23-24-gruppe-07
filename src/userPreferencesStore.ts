@@ -19,10 +19,6 @@ export const openDatabase = (): Promise<IDBDatabase> => {
         request.onupgradeneeded = (event: any) => {
             console.log('Upgrading or creating database');
             const db = event.target.result;
-            if (db.objectStoreNames.contains(STORE_NAME)) {
-                console.log(`Deleting existing store: ${STORE_NAME}`);
-                db.deleteObjectStore(STORE_NAME);
-            }
             console.log(`Creating object store with keyPath: 'ID'`);
             db.createObjectStore(STORE_NAME);
         };
