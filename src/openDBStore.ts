@@ -1,5 +1,5 @@
 const DB_NAME = 'meal-craft-database';
-const DB_VERSION = 29;
+const DB_VERSION = 30;
 
 export const openDatabase = (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
