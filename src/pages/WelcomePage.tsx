@@ -49,13 +49,13 @@ export default function WelcomePage(): ReactElement {
         });
     }, []); // Empty dependency array to ensure it runs only once on component mount
 
-    //useEffect(() => {
-    //    const preferencesSaved = localStorage.getItem('preferencesSaved');
+    useEffect(() => {
+        const preferencesSaved = localStorage.getItem('preferencesSaved');
 
-    //    if (preferencesSaved) {
-    //        window.location.href = '/homepage';
-    //    }
-    //}, []);
+        if (preferencesSaved) {
+            window.location.href = '/homepage';
+        }
+    }, []);
 
 
     const navigate = useNavigate();
