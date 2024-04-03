@@ -20,6 +20,7 @@ import {
 } from "../BookmarkedMealsStore";
 
 import { addUserPreferences } from "../userPreferencesStore";
+import {register} from "../serviceWorkerRegistration";
 
 export default function HomePage(): ReactElement {
 
@@ -56,16 +57,27 @@ export default function HomePage(): ReactElement {
   };
 
   const showNotification = () => {
+    register({
+      onSuccess: (registration) => {
+        console.log('Service worker registration successful!', registration);
+        registration.showNotification("Test");
+      },
+      onUpdate: (registration) => {
+        console.log('Service worker updated!', registration);
+      }
+    });
+
+    /*
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/service-worker.ts")
+      navigator.serviceWorker.register("/src/service-worker.ts")
           .then(function (registration) {
             console.log("Registered service worker.")
-            registration.showNotification("Test");
           })
           .catch(function (error) {
             console.log("Registration of service worker failed.")
           });
     }
+     */
     navigator.serviceWorker.ready.then(function (registration) {
       console.log("Service worker was found to be ready.")
       registration.showNotification("Test");
