@@ -153,6 +153,20 @@ export default function HomePage(): ReactElement {
   useEffect(() => {
     getCanteenFromPreferences().then(canteen => {
       setUserCanteen(canteen);
+      axios
+          .get(
+              "https://mensa.gregorflachs.de/api/v1/menue?canteenId=" +
+              canteen.id +
+              "&startdate=" +
+              date +
+              "&enddate=" +
+              date,
+              { headers: { "X-API-KEY": process.env.REACT_APP_API_KEY } },
+          )
+          .then((response) => {
+            setMenu(response.data);
+            console.log(response.data);
+          });
     });
     getUniversityFromPreferences().then(university => {
         setUniversity(university);
