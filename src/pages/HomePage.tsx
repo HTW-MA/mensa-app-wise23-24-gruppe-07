@@ -57,17 +57,6 @@ export default function HomePage(): ReactElement {
   };
 
   const showNotification = () => {
-    register({
-      onSuccess: (registration) => {
-        console.log('Service worker registration successful!', registration);
-        registration.showNotification("Test");
-      },
-      onUpdate: (registration) => {
-        console.log('Service worker updated!', registration);
-      }
-    });
-
-    /*
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/src/service-worker.ts")
           .then(function (registration) {
@@ -77,7 +66,7 @@ export default function HomePage(): ReactElement {
             console.log("Registration of service worker failed.")
           });
     }
-     */
+
     navigator.serviceWorker.ready.then(function (registration) {
       console.log("Service worker was found to be ready.")
       registration.showNotification("Test");
