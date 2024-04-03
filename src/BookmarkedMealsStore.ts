@@ -7,7 +7,7 @@ export const openDatabase = (): Promise<IDBDatabase> => {
             reject(new Error('IndexedDB is not supported'));
         }
 
-        const request = indexedDB.open(DB_NAME, 16);
+        const request = indexedDB.open(DB_NAME, 19);
 
         request.onerror = () => {
             reject(new Error('Failed to open database'));
@@ -15,7 +15,13 @@ export const openDatabase = (): Promise<IDBDatabase> => {
 
         request.onupgradeneeded = (event: any) => {
             const db = event.target.result;
-            db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+            // Check if the object store already exists before creating it
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                console.log(`Creating object store: ${STORE_NAME}`);
+                db.createObjectStore(STORE_NAME, { keyPath: 'ID' });
+            } else {
+                console.log(`Object store ${STORE_NAME} already exists.`);
+            }
         };
 
         request.onsuccess = () => {
