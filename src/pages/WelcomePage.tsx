@@ -78,6 +78,13 @@ export default function WelcomePage(): ReactElement {
     }, []);
 
     useEffect(() => {
+        const preferencesSaved = localStorage.getItem('preferencesSaved')
+        if (preferencesSaved) {
+            navigateToHomePage();
+        }
+    }, []);
+
+    useEffect(() => {
         axios.get("https://mensa.gregorflachs.de/api/v1/canteen?loadingtype=lazy", {
             headers: {
                 "X-API-KEY": process.env.REACT_APP_API_KEY
@@ -96,6 +103,7 @@ export default function WelcomePage(): ReactElement {
     const navigate = useNavigate();
 
     const navigateToUniversitySelection = () => { navigate('/university-selection', {state: {role: selectedRole}}); };
+    const navigateToHomePage = () => { navigate('/homepage'); };
 
     const DesktopModal = () => (
         <div className="desktop-modal">
