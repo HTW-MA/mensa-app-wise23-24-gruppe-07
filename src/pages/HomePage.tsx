@@ -233,95 +233,17 @@ export default function HomePage(): ReactElement {
   const yellowIcon = `${process.env.PUBLIC_URL}/Gelber Ampelpunkt.png`;
   const redIcon = `${process.env.PUBLIC_URL}/Roter Ampelpunkt.png`;
 
-  const infoModal = () => {
-    return (
-      <div className="infoModal">
-        <div className="infoModalContent">
-          <div className="infoHeader">
-            <h2>Informationen</h2>
-            <button
-              className="closeButton"
-              onClick={() => setShowInfoModal(false)}
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/no-menu.png`}
-                alt="noMenuIcon"
-                className="closeImg"
-              />
-            </button>
-          </div>
-          <div className="badgeInfoDiv">
-            <button className="badgeButton">
-              <img src={climateIcon} alt="Klimaessen" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={co2AIcon} alt="co2A" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={co2BIcon} alt="co2B" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={co2CIcon} alt="co2C" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={h2oAIcon} alt="h2oA" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={h2oBIcon} alt="h2oB" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={h2oCIcon} alt="h2oC" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img
-                src={vegetarianIcon}
-                alt="Vegetarian"
-                className="badgeImg2"
-              />
-            </button>
-            <button className="badgeButton">
-              <img src={veganIcon} alt="Vegan" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={meatIcon} alt="Meat" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={greenIcon} alt="Green" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={yellowIcon} alt="Yellow" className="badgeImg2" />
-            </button>
-            <button className="badgeButton">
-              <img src={redIcon} alt="Red" className="badgeImg2" />
-            </button>
-          </div>
-          <div className="infoDiv">
-            <img src={clockIcon} alt="Uhr" className="badgeImg" />
-            <p>
-              Nach 18 Uhr wird dir automatisch der Speiseplan für morgen
-              angezeigt.
-            </p>
-          </div>
-          <div className="infoDiv">
-            <img src={bookmarkIcon} alt="Uhr" className="badgeImg" />
-            <p>
-              Tippe auf ein Gericht um es zu speichern und werde benachrichtigt,
-              wenn das Gericht am nächsten Tag verfügbar ist.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  const handleAdditivesClick = (meal:any) => {
+    let additives = meal.additives.map((additive:any) => (additive.referenceid + ": " + additive.text)).join(", ");
+    alert("Zusatzstoffe: " + additives);
+  }
 
   return (
     <div className="homepage">
-      {showInfoModal && infoModal()}
       <header className="header">
         <div className="speiseplan-div">
           <p className="speiseplan-tag">Speiseplan</p>
           <button className="infoButton" onClick={() => setShowInfoModal(true)}>
-            <img src={infoIcon} className="infoIcon" alt="infoIcon"></img>
           </button>
         </div>
         <div className="weekdays-buttons">
@@ -429,6 +351,8 @@ export default function HomePage(): ReactElement {
 
                   const isBookmarked = bookmarkedMeals.includes(meal.id);
 
+                  const additiv = meal.additives.map((additive) => additive.referenceid).join(", ");
+
                   return (
                     <div className="mealButton" key={meal.id}>
                       <img className="veganIcon" src={iconSrc} alt={badgeName}/>
@@ -439,6 +363,7 @@ export default function HomePage(): ReactElement {
                           <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
                           <img className="badgeImg" src={climateIconSrc} alt="Klimaessen"></img>
                         </div>
+                        <button className="additives" onClick={() => handleAdditivesClick(meal)}>{additiv}</button>
                       </div>
                       <div className="bookmarkAndPriceDiv">
                         {

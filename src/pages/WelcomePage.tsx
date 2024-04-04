@@ -39,8 +39,6 @@ export default function WelcomePage(): ReactElement {
                 if (currentToken) {
                     console.log("Device token:", currentToken);
                     setDeviceToken(currentToken);
-                    // Here, you might want to send the token to your server or store it for later use
-                    // Since you're operating without a backend, you could store it in the client or ignore if you're only doing broad notifications
                 } else {
                     console.log("No registration token available. Request permission to generate one.");
                 }
@@ -98,7 +96,7 @@ export default function WelcomePage(): ReactElement {
             console.error('Error fetching canteens:', error);
         });
         requestPermission();
-    }, []); // Empty dependency array to ensure it runs only once on component mount
+    }, []);
 
     const navigate = useNavigate();
 

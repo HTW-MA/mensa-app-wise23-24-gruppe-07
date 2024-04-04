@@ -42,7 +42,7 @@ export interface Price {
 export interface Additive {
     id: string;
     text: string;
-    referenceId: string;
+    referenceid: string;
 }
 
 export interface Badge {

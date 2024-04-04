@@ -230,6 +230,13 @@
     height: 2vh;
     width: 2vh;
 }
+.additives{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5vh;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
 footer{
     position: fixed;
     bottom: 0;
