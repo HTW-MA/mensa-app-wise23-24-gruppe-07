@@ -63,3 +63,21 @@ export const getUniversityFromPreferences = async (): Promise<string> => {
         };
     });
 }
+
+export const getRoleFromPreferences = async (): Promise<string> => {
+    const db = await openDatabase();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+
+    let request = store.get(PREFERENCE_KEY);
+    return await new Promise((resolve, reject) => {
+        request.onsuccess = () => {
+            console.log('User role preferences fetched:', request.result.role);
+            resolve(request.result.role);
+        };
+        request.onerror = () => {
+            console.error('Error fetching user preferences:', request.error);
+            reject(request.error);
+        };
+    });
+}

@@ -4,17 +4,16 @@ import "../styles/SettingsPage.css";
 import {Canteen, Menu} from "./Interfaces";
 import DropdownBox from "../components/DropdownBox";
 import axios from "axios";
+import {getRoleFromPreferences, getUniversityFromPreferences} from "../userPreferencesStore";
 
 export default function SettingsPage(): ReactElement {
 
     const location = useLocation();
-    const initialUniversity = location.state?.university as string;
     const initialCanteen = location.state?.canteen as Canteen;
-    const initialRole = location.state?.role as string;
 
-    const [selectedUniversity, setSelectedUniversity] = useState(initialUniversity);
+    const [selectedUniversity, setSelectedUniversity] = useState<string>();
     const [selectedCanteenName, setSelectedCanteenName] = useState(initialCanteen.name);
-    const [selectedRole, setSelectedRole] = useState(initialRole);
+    const [selectedRole, setSelectedRole] = useState<string>();
     const [canteenOptions, setCanteenOptions] = useState([{ label: "", value: "" }]);
     const [canteens, setCanteens] = useState<Canteen[]>([]);
 
@@ -43,23 +42,31 @@ export default function SettingsPage(): ReactElement {
         setSelectedRole(event.target.value);
         console.log(event.target.value);
     }
-    const universities = [
-        { label: "HTW", value: 'HTW'},
-        { label: "TU", value: 'TU'},
-        { label: "FU", value: 'FU'},
-        { label: "HU", value: 'HU'},
-        { label: "BHT", value: 'BHT'},
-        { label: "HWR", value: 'HWR'},
-        { label: "ASH", value: 'ASH'},
-        { label: "Charité", value: 'Charité'},
-        { label: "HfM", value: 'HfM'},
-        { label: "EHB", value: 'EHB'}
+
+    const universitiesSelection = [
+        { label: "HTW", value: 'Hochschule für Technik und Wirtschaft Berlin'},
+        { label: "TU", value: 'Technische Universität Berlin'},
+        { label: "FU", value: 'Freie Universität Berlin'},
+        { label: "HU", value: 'Humboldt-Universität zu Berlin'},
+        { label: "BHT", value: 'Berliner Hochschule für Technik '},
+        { label: "HWR", value: 'Hochschule für Wirtschaft und Recht Berlin'},
+        { label: "ASH", value: 'Alice Salomon Hochschule Berlin'},
+        { label: "Charité", value: 'Charité - Universitätsmedizin Berlin'},
+        { label: "HfM", value: 'Hochschule für Musik Hanns Eisler Berlin'},
+        { label: "EHB", value: 'Evangelische Hochschule Berlin'}
     ]
+
+    const findLabelByValue = (value: string): string | undefined => {
+        const match = universitiesSelection.find(option => option.value === value);
+        return match ? match.label : undefined;
+    };
+
     const roles = [
         { label: "Student", value: 'Student' },
         { label: "Angestellt", value: 'Angestellt' },
         { label: "Gast", value: 'Gast' }
     ];
+    /*
     useEffect( () => {
         const fetchCanteens = async () => {
             try {
@@ -85,6 +92,23 @@ export default function SettingsPage(): ReactElement {
         }
         fetchCanteens().then(r => console.log("Canteens fetched"));
     }, [selectedUniversity])
+     */
+
+    useEffect(() => {
+        const setPreferences = async () => {
+            try {
+                const role = await getRoleFromPreferences();
+                setSelectedRole(role);
+                const universityValue = await getUniversityFromPreferences(); // This needs to return the full name (value)
+                setSelectedUniversity(universityValue);
+            } catch (error) {
+                console.error('Error setting preferences:', error);
+            }
+        };
+
+        setPreferences();
+    }, []);
+
     return (
         <div className="homepage">
             <header className="header">
@@ -106,7 +130,7 @@ export default function SettingsPage(): ReactElement {
                     <div className="dropBox">
                         <DropdownBox
                             name="uni"
-                            options={universities}
+                            options={universitiesSelection}
                             value={selectedUniversity}
                             label="Universität"
                             onChange={handleUniversityChange}
