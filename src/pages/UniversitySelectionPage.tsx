@@ -102,7 +102,7 @@ export default function WelcomePage(): ReactElement {
                     onChange={handleUniversityChange}
                 />
             </div>
-            <button className="" onClick={selectUniversityWithNearestCanteen}>Nächstgelegene</button>
+            <button className="selectNearestButton" onClick={selectUniversityWithNearestCanteen}>Nächstgelegene Mensa wählen</button>
             <button className="continue-button" onClick={navigateToCampusSelection}>Weiter</button>
 
         </div>

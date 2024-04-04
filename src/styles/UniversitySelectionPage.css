@@ -10,6 +10,20 @@
     margin-bottom: 20px;
     width: 80%;
 }
+.selectNearestButton{
+    width: 80%;
+    height: 5vh;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 18px;
+    color: white;
+    background-color: var(--rose-five);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    position: fixed;
+    bottom: 14vh;
+    left: 10%;
+}
 footer{
     margin-bottom: auto;
 }

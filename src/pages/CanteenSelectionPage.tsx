@@ -91,7 +91,8 @@ export default function CanteenSelectionPage(): ReactElement {
             </header>
             <p className="selected-uni">Ausgewählte Uni: <br/> <span className="university">{university}</span></p>
                 {nearestCanteen && (
-                    <p className={"selected-uni"}>Nächste Mensa: {nearestCanteen.name}</p>
+                    <p className="selected-uni">Nächste Mensa: <br/> <span className="university">{nearestCanteen.name}</span>
+                    </p>
                 )}
             <div className="canteen-list">
                 {canteens.map((canteen) => (
