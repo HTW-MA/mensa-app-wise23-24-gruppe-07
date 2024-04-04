@@ -1,34 +1,29 @@
 import React, {ReactElement, useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import "../styles/SettingsPage.css";
-import {Canteen, Menu} from "./Interfaces";
 import DropdownBox from "../components/DropdownBox";
 import axios from "axios";
-import {getRoleFromPreferences, getUniversityFromPreferences} from "../userPreferencesStore";
+import {
+    addUserPreferences,
+    getCanteenFromPreferences,
+    getRoleFromPreferences,
+    getUniversityFromPreferences
+} from "../userPreferencesStore";
+import {getCanteenByName, getCanteensByUniversity} from "../canteenStore";
 
 export default function SettingsPage(): ReactElement {
 
-    const location = useLocation();
-    const initialCanteen = location.state?.canteen as Canteen;
-
     const [selectedUniversity, setSelectedUniversity] = useState<string>();
-    const [selectedCanteenName, setSelectedCanteenName] = useState(initialCanteen.name);
+    const [selectedCanteenName, setSelectedCanteenName] = useState("");
     const [selectedRole, setSelectedRole] = useState<string>();
     const [canteenOptions, setCanteenOptions] = useState([{ label: "", value: "" }]);
-    const [canteens, setCanteens] = useState<Canteen[]>([]);
 
     const navigate = useNavigate();
     const navigateToHomePage = () => {
-        let savedCanteen:any = canteens.find(canteen => canteen.name === selectedCanteenName);
-        console.log(canteens);
-        if(savedCanteen === undefined) {
-            savedCanteen = initialCanteen;
-        }
-        console.log(savedCanteen);
-        navigate('/homepage', {state: {university: selectedUniversity, canteen: savedCanteen, role: selectedRole}});
+        navigate('/homepage', {state: {university: selectedUniversity, role: selectedRole}});
     };
     const navigateToSavedMealsPage = () => {
-        navigate('/saved-meals', {state: {university: selectedUniversity, canteen: initialCanteen, role: selectedRole}});
+        navigate('/saved-meals', {state: {university: selectedUniversity, role: selectedRole}});
     }
 
     const handleUniversityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -41,6 +36,14 @@ export default function SettingsPage(): ReactElement {
     const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedRole(event.target.value);
         console.log(event.target.value);
+    }
+
+    const handleSaveSettings = async () => {
+        let savedCanteen
+        await getCanteenByName(selectedCanteenName).then(canteen => {
+            savedCanteen = canteen;
+        });
+        if(selectedRole && selectedUniversity  && savedCanteen) await addUserPreferences(selectedRole, selectedUniversity, savedCanteen);
     }
 
     const universitiesSelection = [
@@ -81,7 +84,6 @@ export default function SettingsPage(): ReactElement {
                 }));
                 console.log(response.data);
                 console.log(fetchedCanteens);
-                setCanteens(response.data);
                 setCanteenOptions(fetchedCanteens);
                 const canteenExists = fetchedCanteens.some((canteen: { value: string; }) => canteen.value === selectedCanteenName);
                 if (!canteenExists && fetchedCanteens.length > 0) {
@@ -103,12 +105,17 @@ export default function SettingsPage(): ReactElement {
                 setSelectedRole(role);
                 const universityValue = await getUniversityFromPreferences();
                 setSelectedUniversity(universityValue);
+                const canteenOptions = await getCanteensByUniversity(universityValue);
+                setCanteenOptions(canteenOptions.map(canteen => ({ label: canteen.name, value: canteen.name })));
+                const canteen = await getCanteenFromPreferences();
+                setSelectedCanteenName(canteen.name);
+                console.log(canteen.name);
             } catch (error) {
                 console.error('Error setting preferences:', error);
             }
         };
 
-        setPreferences();
+        setPreferences().then(r => console.log("Settings loaded"));
     }, []);
 
     return (
@@ -147,6 +154,7 @@ export default function SettingsPage(): ReactElement {
                             onChange={handleCanteenChange}
                         />
                     </div>
+                    <button className="save-button" onClick={handleSaveSettings}>Speichern</button>
                 </div>
                 <div className="guthaben-Div">
                     <p className="guthaben-tag">Guthaben der Mensakarte überprüfen</p>

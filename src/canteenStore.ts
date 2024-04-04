@@ -60,3 +60,22 @@ export const getCanteensByUniversity = async (university: string): Promise<any[]
     });
 };
 
+export const getCanteenByName = async (name: string): Promise<any> => {
+    return new Promise(async (resolve, reject) => {
+        const db = await openDatabase();
+        const transaction = db.transaction(STORE_NAME, 'readonly');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.getAll();
+
+        request.onerror = (event:any) => {
+            reject(`Database error: ${request.error?.message}`);
+        };
+
+        request.onsuccess = (event:any) => {
+            const allCanteens = request.result as any[];
+            const canteen = allCanteens.find((canteen:any) => canteen.name === name);
+            resolve(canteen);
+        };
+    });
+}
+
