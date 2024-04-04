@@ -8,6 +8,11 @@ import leftArrow from "../resources/left-arrow2.png";
 import { getCanteensByUniversity } from '../canteenStore';
 import { addUserPreferences} from "../userPreferencesStore";
 
+interface Location {
+    latitude: number;
+    longitude: number;
+}
+
 export default function CanteenSelectionPage(): ReactElement {
     const location = useLocation();
     const { university } = location.state as { university: string};
@@ -15,6 +20,9 @@ export default function CanteenSelectionPage(): ReactElement {
 
     const [canteens, setCanteens] = React.useState<Canteen[]>([]);
     const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
+
+    const [userLocation, setUserLocation] = useState<Location | null>(null);
+    const [nearestLocation, setNearestCanteen] = useState<Canteen | null>(null);
 
     const navigate = useNavigate();
     const navigateToUniversitySelection = () => {
@@ -37,6 +45,52 @@ export default function CanteenSelectionPage(): ReactElement {
         });
     }, []);
 
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setUserLocation({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    });
+                },
+                (error) => {
+                    console.error(error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }, []);
+
+    useEffect(() => {
+        if (userLocation) {
+            console.log(userLocation);
+            let nearestDist = Infinity;
+            let nearest: Canteen | null = null;
+            canteens.forEach(canteen => {
+                const distance = calculateDistance(userLocation.latitude, userLocation.longitude, canteen.address.geoLocation.latitude, canteen.address.geoLocation.longitude);
+                if (distance < nearestDist) {
+                    nearestDist = distance;
+                    nearest = canteen;
+                }
+            });
+            setNearestCanteen(nearest);
+        }
+    }, [userLocation]); // Location Mensa Treskowallee: 52.49268133238914, 13.523785615343602
+
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+        const R = 6371; // Radius of the Earth in kilometers
+        const dLat = (lat2 - lat1) * (Math.PI / 180);
+        const dLon = (lon2 - lon1) * (Math.PI / 180);
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in kilometers
+    };
+
     return (
         <div className="page">
             <header>
@@ -45,6 +99,14 @@ export default function CanteenSelectionPage(): ReactElement {
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Mensa auswählen</h2>
             </header>
+            <div>
+                {/*{userLocation && (*/}
+                {/*    <p>User's Location: Latitude {userLocation.latitude}, Longitude {userLocation.longitude}</p>*/}
+                {/*)}*/}
+                {nearestLocation && (
+                    <p>Nearest Location: {nearestLocation.name}</p>
+                )}
+            </div>
             <p className="selected-uni">Ausgewählte Uni: <br/> <span className="university">{university}</span></p>
             <div className="canteen-list">
                 {canteens.map((canteen) => (
