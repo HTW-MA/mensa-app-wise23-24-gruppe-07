@@ -42,7 +42,7 @@ export default function WelcomePage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
+                <button className="back-button" onClick={navigateToHome}><img className="arrow" src={leftArrow} alt="arrow"/>Zurück</button>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Uni auswählen</h2>

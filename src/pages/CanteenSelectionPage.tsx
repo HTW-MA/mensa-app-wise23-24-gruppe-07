@@ -22,7 +22,7 @@ export default function CanteenSelectionPage(): ReactElement {
     const [selectedCanteen, setSelectedCanteen] = useState<Canteen | null>(null);
 
     const [userLocation, setUserLocation] = useState<Location | null>(null);
-    const [nearestLocation, setNearestCanteen] = useState<Canteen | null>(null);
+    const [nearestCanteen, setNearestCanteen] = useState<Canteen | null>(null);
 
     const navigate = useNavigate();
     const navigateToUniversitySelection = () => {
@@ -95,20 +95,15 @@ export default function CanteenSelectionPage(): ReactElement {
     return (
         <div className="page">
             <header>
-                <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/>zurück</button>
+                <button className="back-button" onClick={navigateToUniversitySelection}><img className="arrow" src={leftArrow} alt="arrow"/>Zurück</button>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Mensa auswählen</h2>
             </header>
-            <div>
-                {/*{userLocation && (*/}
-                {/*    <p>User's Location: Latitude {userLocation.latitude}, Longitude {userLocation.longitude}</p>*/}
-                {/*)}*/}
-                {nearestLocation && (
-                    <p>Nearest Location: {nearestLocation.name}</p>
-                )}
-            </div>
             <p className="selected-uni">Ausgewählte Uni: <br/> <span className="university">{university}</span></p>
+                {nearestCanteen && (
+                    <p className={"selected-uni"}>Nächste Mensa: {nearestCanteen.name}</p>
+                )}
             <div className="canteen-list">
                 {canteens.map((canteen) => (
                     <button
