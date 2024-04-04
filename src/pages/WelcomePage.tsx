@@ -7,7 +7,7 @@ import DropdownBox from "../components/DropdownBox";
 import { useNavigate } from "react-router-dom";
 import {checkAndAddCanteens} from "../canteenStore";
 import axios from "axios";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage  } from "firebase/messaging";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -19,10 +19,15 @@ const firebaseConfig = {
     appId: "1:135918648926:web:13a49b81f017bca2b07ecf",
     measurementId: "G-L339LKZKJ8"
 };
-
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 export default function WelcomePage(): ReactElement {
-    const app = initializeApp(firebaseConfig);
-    const messaging = getMessaging(app);
+    const [notificationMessage, setNotificationMessage] = useState();
+    onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        // @ts-ignore
+        setNotificationMessage(payload.notification.body);
+    });
     const requestPermission = async () => {
         const permission = await Notification.requestPermission();
 
@@ -117,6 +122,7 @@ export default function WelcomePage(): ReactElement {
                 <h2 className="sub-heading">Willkommen</h2>
             </header>
             <span className="deviceToken">{deviceToken}</span>
+            <span className="notificationMessage">{notificationMessage}</span>
             <span className="welcome-paragraph">
                 <u><b>Neu hier?</b></u><br/>
                 Gib uns einige Informationen über dich<br/>
