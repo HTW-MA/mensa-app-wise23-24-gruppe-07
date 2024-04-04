@@ -58,6 +58,7 @@ export default function WelcomePage(): ReactElement {
 
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const [showModal, setShowModal] = useState(isDesktop);
+    const [showTokenModal, setShowTokenModal] = useState(false);
     const [selectedRole, setSelectedRole] = useState('Student');
 
     const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -119,21 +120,29 @@ export default function WelcomePage(): ReactElement {
         </div>
     );
 
+    const TokenModal = () => (
+        <div className="TokenModal">
+            <p className="deviceToken">Dein Gerätetoken: <br/> {deviceToken}</p>
+            <button className="continue-desktop-button" onClick={() => setShowTokenModal(false)}>zurück</button>
+        </div>
+    );
+
     return (
         <div className="page">
             {showModal && <DesktopModal/>}
+            {showTokenModal && <TokenModal/>}
             <header>
                 <img src={logo} className="food-craft-icon" alt="( )"/>
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Willkommen</h2>
             </header>
-            <span className="deviceToken">{deviceToken}</span>
             <span className="notificationMessage">{notificationMessage}</span>
             <span className="welcome-paragraph">
                 <u><b>Neu hier?</b></u><br/>
                 Gib uns einige Informationen über dich<br/>
                 damit wir die App für dich personalisieren können.
             </span>
+
             <div className="dropdown-box">
                 <DropdownBox
                     name="roles"
@@ -143,6 +152,7 @@ export default function WelcomePage(): ReactElement {
                     onChange={handleRoleChange}
                 />
             </div>
+            <button className="tokenButton" onClick={() => setShowTokenModal(true)}>Device Token zeigen</button>
             <div className="button-container">
                 <button className="continue-button" onClick={navigateToUniversitySelection}>Weiter</button>
             </div>

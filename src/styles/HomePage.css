@@ -238,6 +238,7 @@
     padding: 0;
 }
 .badgeButton{
+    margin: 8vh 0 0 0;
     background-color: transparent;
     border: none;
     padding: 0;

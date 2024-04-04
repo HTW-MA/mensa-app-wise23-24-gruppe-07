@@ -66,4 +66,35 @@
 }
 .deviceToken{
     width: 80%;
+    white-space: pre-wrap; /* Allows the text to wrap and respects whitespace */
+    word-wrap: break-word; /* Ensures long words do not overflow */
+}
+.TokenModal{
+    background-color: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    z-index: 10;
+}
+.tokenButton{
+    width: 80%;
+    height: 5vh;
+    border-radius: 8px;
+    border-width: 0;
+    font-size: 2vh;
+    color: white;
+    background-color: var(--rose-five);
+    padding: 1vh 2vh 1vh 2vh;
+    position: fixed;
+    bottom: 14vh;
+    left: 10%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
