@@ -79,3 +79,20 @@ export const getCanteenByName = async (name: string): Promise<any> => {
     });
 }
 
+export const getAllCanteens = async (): Promise<any> => {
+    return new Promise(async (resolve, reject) => {
+        const db = await openDatabase();
+        const transaction = db.transaction(STORE_NAME, 'readonly');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.getAll();
+
+        request.onerror = (event:any) => {
+            reject(`Database error: ${request.error?.message}`);
+        };
+
+        request.onsuccess = (event:any) => {
+            resolve(request.result);
+        };
+    });
+}
+
