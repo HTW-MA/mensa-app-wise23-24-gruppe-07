@@ -84,6 +84,7 @@ export default function WelcomePage(): ReactElement {
     }, []);
 
     useEffect(() => {
+        requestPermission();
         axios.get("https://mensa.gregorflachs.de/api/v1/canteen?loadingtype=lazy", {
             headers: {
                 "X-API-KEY": process.env.REACT_APP_API_KEY
@@ -96,7 +97,6 @@ export default function WelcomePage(): ReactElement {
         }).catch(error => {
             console.error('Error fetching canteens:', error);
         });
-        requestPermission();
     }, []);
 
     const navigate = useNavigate();
