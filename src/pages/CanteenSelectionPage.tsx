@@ -19,7 +19,7 @@ export default function CanteenSelectionPage(): ReactElement {
     const role = location.state?.role as string;
 
     const [canteens, setCanteens] = React.useState<Canteen[]>([]);
-    const [selectedCanteen, setSelectedCanteen] = useState<Canteen>();
+    const [selectedCanteen, setSelectedCanteen] = useState<Canteen | null>(null);
 
     const [userLocation, setUserLocation] = useState<Location | null>(null);
     const [nearestLocation, setNearestCanteen] = useState<Canteen | null>(null);
@@ -76,6 +76,7 @@ export default function CanteenSelectionPage(): ReactElement {
                 }
             });
             setNearestCanteen(nearest);
+            setSelectedCanteen(nearest);
         }
     }, [userLocation]); // Location Mensa Treskowallee: 52.49268133238914, 13.523785615343602
 
