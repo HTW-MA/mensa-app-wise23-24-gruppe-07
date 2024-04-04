@@ -72,17 +72,14 @@ export default function SettingsPage(): ReactElement {
 
     useEffect( () => {
         if (!selectedUniversity) return;
+
         const fetchCanteens = async () => {
             try {
-                const response = await axios.get("https://mensa.gregorflachs.de/api/v1/canteen?name=" + findLabelByValue(selectedUniversity), {
-                    headers: {
-                        "X-API-KEY": process.env.REACT_APP_API_KEY}
-                });
-                const fetchedCanteens = response.data.map((canteen: { name: any; }) => ({
+                const response = await getCanteensByUniversity(selectedUniversity);
+                const fetchedCanteens = response.map((canteen: { name: any; }) => ({
                     label: canteen.name,
                     value: canteen.name
                 }));
-                console.log(response.data);
                 console.log(fetchedCanteens);
                 setCanteenOptions(fetchedCanteens);
                 const canteenExists = fetchedCanteens.some((canteen: { value: string; }) => canteen.value === selectedCanteenName);
