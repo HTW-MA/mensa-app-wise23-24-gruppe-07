@@ -20,33 +20,33 @@ const firebaseConfig = {
     measurementId: "G-L339LKZKJ8"
 };
 
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
-
-const requestPermission = async () => {
-    const permission = await Notification.requestPermission();
-
-    if (permission === "granted") {
-        console.log("Notification permission granted.");
-
-        try {
-            const currentToken = await getToken(messaging, { vapidKey: "BPxGiWSV4KsC-ewbD1GVAG5mghofW68z5K-ampw4Pv3qL4_m-Y50aa7uHK7pEl_GGsSb_YtnsTpBn8xZtxn02R0" });
-            if (currentToken) {
-                console.log("Device token:", currentToken);
-                // Here, you might want to send the token to your server or store it for later use
-                // Since you're operating without a backend, you could store it in the client or ignore if you're only doing broad notifications
-            } else {
-                console.log("No registration token available. Request permission to generate one.");
-            }
-        } catch (err) {
-            console.error("An error occurred while retrieving token. ", err);
-        }
-    } else {
-        console.log("User denied the notification permission.");
-    }
-};
-
 export default function WelcomePage(): ReactElement {
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+    const requestPermission = async () => {
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+            console.log("Notification permission granted.");
+
+            try {
+                const currentToken = await getToken(messaging, { vapidKey: "BPxGiWSV4KsC-ewbD1GVAG5mghofW68z5K-ampw4Pv3qL4_m-Y50aa7uHK7pEl_GGsSb_YtnsTpBn8xZtxn02R0" });
+                if (currentToken) {
+                    console.log("Device token:", currentToken);
+                    setDeviceToken(currentToken);
+                    // Here, you might want to send the token to your server or store it for later use
+                    // Since you're operating without a backend, you could store it in the client or ignore if you're only doing broad notifications
+                } else {
+                    console.log("No registration token available. Request permission to generate one.");
+                }
+            } catch (err) {
+                console.error("An error occurred while retrieving token. ", err);
+            }
+        } else {
+            console.log("User denied the notification permission.");
+        }
+    };
+    const [deviceToken, setDeviceToken] = useState<string | null>(null);
     const roles = [
         { label: "Student", value: 'Student' },
         { label: "Angestellt", value: 'Angestellt' },
@@ -116,6 +116,7 @@ export default function WelcomePage(): ReactElement {
                 <h1 className="heading">MealCraft</h1>
                 <h2 className="sub-heading">Willkommen</h2>
             </header>
+            <span className="deviceToken">{deviceToken}</span>
             <span className="welcome-paragraph">
                 <u><b>Neu hier?</b></u><br/>
                 Gib uns einige Informationen über dich<br/>
