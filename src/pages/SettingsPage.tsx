@@ -56,7 +56,7 @@ export default function SettingsPage(): ReactElement {
         { label: "EHB", value: 'Evangelische Hochschule Berlin'}
     ]
 
-    const findLabelByValue = (value: string): string | undefined => {
+    const findLabelByValue = (value: string | undefined): string | undefined => {
         const match = universitiesSelection.find(option => option.value === value);
         return match ? match.label : undefined;
     };
@@ -66,11 +66,12 @@ export default function SettingsPage(): ReactElement {
         { label: "Angestellt", value: 'Angestellt' },
         { label: "Gast", value: 'Gast' }
     ];
-    /*
+
     useEffect( () => {
+        if (!selectedUniversity) return;
         const fetchCanteens = async () => {
             try {
-                const response = await axios.get("https://mensa.gregorflachs.de/api/v1/canteen?name=" + selectedUniversity, {
+                const response = await axios.get("https://mensa.gregorflachs.de/api/v1/canteen?name=" + findLabelByValue(selectedUniversity), {
                     headers: {
                         "X-API-KEY": process.env.REACT_APP_API_KEY}
                 });
@@ -78,8 +79,9 @@ export default function SettingsPage(): ReactElement {
                     label: canteen.name,
                     value: canteen.name
                 }));
+                console.log(response.data);
+                console.log(fetchedCanteens);
                 setCanteens(response.data);
-                console.log(canteens);
                 setCanteenOptions(fetchedCanteens);
                 const canteenExists = fetchedCanteens.some((canteen: { value: string; }) => canteen.value === selectedCanteenName);
                 if (!canteenExists && fetchedCanteens.length > 0) {
@@ -92,14 +94,14 @@ export default function SettingsPage(): ReactElement {
         }
         fetchCanteens().then(r => console.log("Canteens fetched"));
     }, [selectedUniversity])
-     */
+
 
     useEffect(() => {
         const setPreferences = async () => {
             try {
                 const role = await getRoleFromPreferences();
                 setSelectedRole(role);
-                const universityValue = await getUniversityFromPreferences(); // This needs to return the full name (value)
+                const universityValue = await getUniversityFromPreferences();
                 setSelectedUniversity(universityValue);
             } catch (error) {
                 console.error('Error setting preferences:', error);
