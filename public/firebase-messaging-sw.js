@@ -32,14 +32,14 @@ messaging.onBackgroundMessage((payload) => {
 
  */
 self.addEventListener('push', function(event) {
-    const options = {
-        body: event.data.text(),
+    //const options = {
+    //    body: event.data.text(),
         //icon: '/path/to/icon.png',
-        vibrate: [200, 100, 200, 100, 200, 100, 200],
+    //    vibrate: [200, 100, 200, 100, 200, 100, 200],
         //data: {
         //    url: 'https://example.com/page-to-open-on-click'
         //}
-    };
+    //};
     event.waitUntil(
         self.registration.showNotification('Notification Title', options)
     );
