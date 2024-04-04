@@ -1,8 +1,8 @@
 {
   "name": "MealCraft",
   "short_name": "MealCraft",
-  "gcm_sender_id": "666053372572",
   "description": "MealCraft is a canteen App for University meal plans.",
+  "gcm_sender_id": "135918648926",
   "icons": [
     {
       "src": "mealcraft_favicon.ico",
