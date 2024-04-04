@@ -237,6 +237,11 @@
     border: none;
     padding: 0;
 }
+.badgeButton{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
 footer{
     position: fixed;
     bottom: 0;

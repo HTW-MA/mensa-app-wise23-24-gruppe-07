@@ -75,6 +75,11 @@ export default function HomePage(): ReactElement {
     setMealType(event.target.value);
   };
 
+  const handleBadgeClick = (meal:any) => {
+    const badges = meal.badges.map((badge:any) => badge.name + ": " + badge.description + "\n").join("\n");
+    alert(badges);
+  }
+
   const [date, setDate] = useState(
     convertDateToString(getCurrentlyValidDate()),
   );
@@ -234,8 +239,8 @@ export default function HomePage(): ReactElement {
   const redIcon = `${process.env.PUBLIC_URL}/Roter Ampelpunkt.png`;
 
   const handleAdditivesClick = (meal:any) => {
-    let additives = meal.additives.map((additive:any) => (additive.referenceid + ": " + additive.text)).join(", ");
-    alert("Zusatzstoffe: " + additives);
+    let additives = meal.additives.map((additive:any) => (additive.referenceid + ": " + additive.text)).join("\n");
+    alert("Zusatzstoffe:\n" + additives);
   }
 
   return (
@@ -358,11 +363,11 @@ export default function HomePage(): ReactElement {
                       <img className="veganIcon" src={iconSrc} alt={badgeName}/>
                       <div className="mealNameCo2Div">
                         <span className="mealName">{meal.name}</span>
-                        <div className="badgeDiv">
+                        <button className="badgeButton" onClick={() => handleBadgeClick(meal)}>
                           <img className="badgeImg" src={co2Src} alt="CO2_bewertung"></img>
                           <img className="badgeImg" src={h2oSrc} alt="H2O_bewertung"></img>
                           <img className="badgeImg" src={climateIconSrc} alt="Klimaessen"></img>
-                        </div>
+                        </button>
                         <button className="additives" onClick={() => handleAdditivesClick(meal)}>{additiv}</button>
                       </div>
                       <div className="bookmarkAndPriceDiv">
