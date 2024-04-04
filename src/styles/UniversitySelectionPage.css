@@ -12,13 +12,14 @@
 }
 .selectNearestButton{
     width: 80%;
-    height: 5vh;
+    height: auto;
     border-radius: 8px;
     border-width: 0;
-    font-size: 18px;
+    font-size: 2vh;
     color: white;
     background-color: var(--rose-five);
     font-family: 'Poppins', sans-serif;
+    padding: 1vh 2vh 1vh 2vh;
     font-weight: 500;
     position: fixed;
     bottom: 14vh;

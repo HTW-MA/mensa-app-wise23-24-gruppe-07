@@ -45,9 +45,10 @@ footer {
     height: 5vh;
     border-radius: 8px;
     border-width: 0;
-    font-size: 18px;
+    font-size: 2vh;
     color: white;
     background-color: var(--rose-five);
+    padding: 1vh 2vh 1vh 2vh;
     position: fixed;
     bottom: 7vh;
     left: 10%;
